@@ -1,0 +1,30 @@
+package management;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class Token 
+{
+	private String token = "";
+	
+	public Token() throws FileNotFoundException
+	{
+		setToken();
+	}
+	
+	public void setToken() throws FileNotFoundException
+	{
+		File tokenFile = new File("C:\\Users\\Cain\\Documents\\javaDocs\\gaiza\\Token.txt");
+		Scanner getToken = new Scanner(tokenFile);
+		
+		token = getToken.nextLine();
+		
+		getToken.close();
+	}
+	
+	public String getToken()
+	{
+		return token;
+	}
+}
