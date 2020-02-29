@@ -2,16 +2,29 @@ package commands;
 
 import org.javacord.api.DiscordApi;
 
-public class Ping 
+import management.Keywords;
+
+public class Ping
 {
+	private String pingMsg = "ping";
 	public Ping(DiscordApi api)
 	{
+		DiscordApi holdPingApi = api;
+		Keywords holdKey = new Keywords();
+		
+		listenPing(api, holdKey.getKey());
 			
-		api.addMessageCreateListener(event ->{
+	}
+	
+	public void listenPing(DiscordApi pingApi, char keySymbol)
+	{
+		char myKey = keySymbol;
+		
+		pingApi.addMessageCreateListener(event ->{
 			
-			if (event.getMessageContent().equalsIgnoreCase("$ping"))
+			if (event.getMessageContent().equalsIgnoreCase(myKey + pingMsg) && event.getMessageAuthor().isUser())
 			{
-				event.getChannel().sendMessage("Oh boy my creator finally put a separate function into his program");
+				event.getChannel().sendMessage("<@" + event.getMessageAuthor().getIdAsString() + "> rules! ... well pong i guess");
 				
 			}
 		});

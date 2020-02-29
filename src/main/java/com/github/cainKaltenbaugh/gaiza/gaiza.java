@@ -24,9 +24,9 @@ public class gaiza
 
 	public static void main(String[] args) throws FileNotFoundException 
 	{
-		DiscordApi startUpApi = gaiza.startUp();
+		DiscordApi startUpApi = startUp();
 		
-		gaiza.commandInit(startUpApi);
+		commandInit(startUpApi);
 				
 		//System.out.println("invite" + api.createBotInvite());
 	}
