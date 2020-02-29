@@ -3,7 +3,7 @@ package com.github.cainKaltenbaugh.gaiza;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 
-import commands.Ping;
+import commands.*;
 import management.Token;
 
 import java.io.*;
@@ -36,5 +36,6 @@ public class gaiza
 		DiscordApi myApi = initApi;
 		
 		Ping pingInit = new Ping(initApi);
+		Invite inviteInit = new Invite(initApi);
 	}
 }
