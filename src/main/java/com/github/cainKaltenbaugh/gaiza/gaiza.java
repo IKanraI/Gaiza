@@ -3,13 +3,14 @@ package com.github.cainKaltenbaugh.gaiza;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 
+import commands.Ping;
 import management.Token;
 
 import java.io.*;
 
-public class gaiza {
-
-	public static void main(String[] args) throws FileNotFoundException 
+public class gaiza 
+{
+	static DiscordApi startUp() throws FileNotFoundException
 	{
 		String token = "";
 		Token gaizaToken = new Token();
@@ -17,16 +18,23 @@ public class gaiza {
 		token = gaizaToken.getToken();
 
 		DiscordApi api = new DiscordApiBuilder().setToken(token).login().join();
-				
-		api.addMessageCreateListener(event ->{
-			
-			if (event.getMessageContent().equalsIgnoreCase("$ping"))
-			{
-				event.getChannel().sendMessage("Oh boy can't wait to be abused while my new source code is written");
-			}
-		});
+		
+		return api;
+	}
+
+	public static void main(String[] args) throws FileNotFoundException 
+	{
+		DiscordApi startUpApi = gaiza.startUp();
+		
+		gaiza.commandInit(startUpApi);
 				
 		//System.out.println("invite" + api.createBotInvite());
 	}
-
+	
+	static void commandInit(DiscordApi initApi)
+	{
+		DiscordApi myApi = initApi;
+		
+		Ping pingInit = new Ping(initApi);
+	}
 }
