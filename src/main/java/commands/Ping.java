@@ -16,11 +16,13 @@ public class Ping
 			
 	}
 	
-	public void listenPing(DiscordApi pingApi, char keySymbol)
+	public void listenPing(DiscordApi pingApi, char commandKey)
 	{
-		char myKey = keySymbol;
+		DiscordApi sendPing = pingApi;
+		char myKey = commandKey;
 		
-		pingApi.addMessageCreateListener(event ->{
+		sendPing.addMessageCreateListener(event ->
+		{
 			
 			if (event.getMessageContent().equalsIgnoreCase(myKey + pingMsg) && event.getMessageAuthor().isUser())
 			{
