@@ -13,6 +13,8 @@ public class Ping
 		Keywords holdKey = new Keywords();
 		
 		listenPing(api, holdKey.getKey());
+		
+		System.out.println("Ping.java loaded!");
 			
 	}
 	
