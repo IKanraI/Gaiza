@@ -17,6 +17,8 @@ public class Invite
 		setInvite(inviteApi.createBotInvite());
 		sendInvite(inviteApi, holdKey.getKey());
 		
+		System.out.println("Invite.java loaded!");
+		
 	}
 	
 	public void setInvite(String inviteLink)
