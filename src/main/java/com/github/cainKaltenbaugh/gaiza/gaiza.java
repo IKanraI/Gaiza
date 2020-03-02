@@ -5,7 +5,7 @@ import org.javacord.api.DiscordApiBuilder;
 
 import commands.*;
 import listener.*;
-import management.Token;
+import management.*;
 
 import java.io.*;
 
@@ -34,6 +34,7 @@ public class gaiza
 	
 	static void commandInit(DiscordApi initApi)
 	{
+		//Initializes all the commands, listeners, and management
 		DiscordApi myApi = initApi;
 		
 		System.out.println("Bot command files loading... \n");
@@ -48,6 +49,12 @@ public class gaiza
 		
 		BoredResponse boredInit = new BoredResponse(initApi);
 		
-		System.out.println("\nBot listener files loaded! \n");
+		System.out.println("\nBot listener files loaded!");
+		System.out.println("---------------------------------");
+		System.out.println("Management files loading... \n");
+		
+		BotInfo bInfoInit = new BotInfo(initApi);
+		
+		System.out.println("\nManagmenet files loaded!");
 	}
 }
