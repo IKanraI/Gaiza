@@ -7,6 +7,7 @@ public class BotInfo
 {
 	private static String botName;
 	private static String botImageStr;
+	private static String botActivity;
 	private static Icon botImage;
 	
 	public BotInfo(DiscordApi getApi)
@@ -14,18 +15,28 @@ public class BotInfo
 		DiscordApi botApi = getApi;
 		String getBotName;
 		String getBotImageStr;
+		String standardActivity;
 		Icon getBotIcon;
 		
 		getBotName = botApi.getYourself().getName();
 		getBotImageStr = botApi.getYourself().getAvatar().getUrl().toString();
 		getBotIcon = botApi.getYourself().getAvatar();
+		standardActivity = "Moving to Java | Commands WIP";
 		
 		setBotName(getBotName);
 		setBotImageStr(getBotImageStr);
 		setBotImage(getBotIcon);
+		setBotActivity(standardActivity);
 		
 		System.out.println("BotInfo.java loaded!");
 		
+	}
+	
+	//Setters
+	
+	public void setBotActivity(String setActivity)
+	{
+		botActivity = setActivity;
 	}
 	
 	private void setBotImage(Icon iconImage)
@@ -41,6 +52,13 @@ public class BotInfo
 	private void setBotImageStr(String getString)
 	{
 		botImageStr = getString;
+	}
+	
+	//Getters
+	
+	public static String getBotActivity()
+	{
+		return botActivity;
 	}
 	
 	public static Icon getBotImage()
