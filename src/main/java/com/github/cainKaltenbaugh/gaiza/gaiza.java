@@ -4,7 +4,7 @@ import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 
 import commands.*;
-import listener.BoredResponse;
+import listener.*;
 import management.Token;
 
 import java.io.*;
@@ -36,16 +36,18 @@ public class gaiza
 	{
 		DiscordApi myApi = initApi;
 		
-		System.out.println("Bot command files loading...");
+		System.out.println("Bot command files loading... \n");
 		
 		Ping pingInit = new Ping(initApi);
 		Invite inviteInit = new Invite(initApi);
+		Avatar avatarInit = new Avatar(initApi);
 		
-		System.out.println("Commands finished loading!");
-		System.out.println("Bot listener files loading...");
+		System.out.println("\nCommands finished loading!");
+		System.out.println("--------------------------------");
+		System.out.println("Bot listener files loading... \n");
 		
 		BoredResponse boredInit = new BoredResponse(initApi);
 		
-		System.out.println("Bot listener files loaded!");
+		System.out.println("\nBot listener files loaded! \n");
 	}
 }

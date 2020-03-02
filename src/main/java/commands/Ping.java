@@ -7,6 +7,7 @@ import management.Keywords;
 public class Ping
 {
 	private String pingMsg = "ping";
+	
 	public Ping(DiscordApi api)
 	{
 		DiscordApi holdPingApi = api;
