@@ -1,7 +1,9 @@
 package listener;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 import org.javacord.api.DiscordApi;
 
@@ -86,15 +88,27 @@ public class BoredResponse
 
 	public void setupPhrases()
 	{
-		reprimandPhrases.add(", why don't you go fucking do something with your life you stupid piece of shit");
-		reprimandPhrases.add(", go outside.");
-		reprimandPhrases.add(", why don't you play a board game?");
-		reprimandPhrases.add(", have you tried making friends?");
-		reprimandPhrases.add(", so sad QQ ");
-		reprimandPhrases.add(", JUST DO SOMETHING YOU DUMB FUCK");
-		reprimandPhrases.add(", Sleever is so fucking stupid ping him and tell him he's dumb.");
-		reprimandPhrases.add(", try Minecraft");
-		reprimandPhrases.add(", don't try Terraria");		
+		File phraseFile;
+		Scanner phraseScan;
+		
+		try
+		{
+			phraseFile = new File("../gaiza/bin/Resource/boredPhrases.txt");
+			phraseScan = new Scanner(phraseFile);
+			
+			while(phraseScan.hasNextLine())
+			{
+				reprimandPhrases.add(phraseScan.nextLine());
+			}
+			
+			phraseScan.close();
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println("File not found");
+			e.printStackTrace();
+		}		
 	}
 	
 	
