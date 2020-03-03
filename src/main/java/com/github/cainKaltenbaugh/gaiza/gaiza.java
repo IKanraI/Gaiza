@@ -55,7 +55,7 @@ public class gaiza
 		
 		BotInfo bInfoInit = new BotInfo(initApi);
 		
-		System.out.println("\nManagmenet files loaded!");
+		System.out.println("\nManagement files loaded!");
 		
 		myApi.updateActivity(BotInfo.getBotActivity());
 	}
