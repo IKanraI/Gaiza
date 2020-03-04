@@ -93,7 +93,7 @@ public class BoredResponse
 		
 		try
 		{
-			phraseFile = new File("../gaiza/bin/Resource/boredPhrases.txt");
+			phraseFile = new File("C:\\Users\\Cain\\Documents\\javaDocs\\gaiza\\bin\\Resource\\boredPhrases.txt");
 			phraseScan = new Scanner(phraseFile);
 			
 			while(phraseScan.hasNextLine())
