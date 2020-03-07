@@ -53,6 +53,7 @@ public class Avatar
 					//Handles the command if there are no arguments
 					String imageStr = "";
 					String displayName = "";
+					String userImageUrl = "";
 					Icon userIcon;
 					
 					try
@@ -60,11 +61,12 @@ public class Avatar
 						//Makes sure that if this statement is executed and a bad value comes back that the program does not break entirely
 						imageStr = event.getMessageAuthor().getAvatar().getUrl().toString() + imageSize;
 						displayName = event.getMessageAuthor().getDisplayName();
-						userIcon = event.getMessageAuthor().getAvatar();																
+						userIcon = event.getMessageAuthor().getAvatar();	
+						userImageUrl = event.getMessageAuthor().getAvatar().getUrl().toString();
 						
 						//Embed the image with these properties
 						EmbedBuilder embed = new EmbedBuilder()
-								.setAuthor(displayName, BotInfo.getBotImageStr(), userIcon)
+								.setAuthor(displayName, userImageUrl, userIcon)
 								.setColor(Color.magenta)
 								.setImage(imageStr)
 								.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
@@ -86,6 +88,7 @@ public class Avatar
 					//Handles the command if there is one argument
 					String imageStr = "";
 					String displayName = "";
+					String userImageUrl = "";
 					Icon userIcon;
 					
 					try
@@ -94,10 +97,11 @@ public class Avatar
 						imageStr = event.getMessage().getMentionedUsers().get(0).getAvatar().getUrl().toString() + imageSize;
 						displayName = event.getMessage().getMentionedUsers().get(0).getName();
 						userIcon = event.getMessage().getMentionedUsers().get(0).getAvatar();
+						userImageUrl = event.getMessageAuthor().getAvatar().getUrl().toString();
 						
 						//Embed the image with these properties
 						EmbedBuilder embed = new EmbedBuilder()
-								.setAuthor(displayName, BotInfo.getBotImageStr(), userIcon)
+								.setAuthor(displayName, userImageUrl, userIcon)
 								.setColor(Color.magenta)
 								.setImage(imageStr)
 								.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
