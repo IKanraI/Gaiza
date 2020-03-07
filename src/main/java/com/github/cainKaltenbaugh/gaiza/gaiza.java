@@ -42,7 +42,7 @@ public class gaiza
 		Ping pingInit = new Ping(initApi);
 		Invite inviteInit = new Invite(initApi);
 		Avatar avatarInit = new Avatar(initApi);
-		//Help helpInit = new Help(initApi);
+		Help helpInit = new Help(initApi);
 		
 		System.out.println("\nCommands finished loading!");
 		System.out.println("--------------------------------");
