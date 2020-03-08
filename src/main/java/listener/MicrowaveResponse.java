@@ -26,6 +26,7 @@ public class MicrowaveResponse
 			String[] splitMessage;
 			
 			messageToSplit = event.getMessageContent();
+			messageToSplit = messageToSplit.toLowerCase();
 			splitMessage = messageToSplit.split(" ");
 			
 			for (int i = 0; i < splitMessage.length; ++i)
