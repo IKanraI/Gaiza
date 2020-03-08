@@ -50,6 +50,7 @@ public class gaiza
 		
 		BoredResponse boredInit = new BoredResponse(initApi);
 		MicrowaveResponse microInit = new MicrowaveResponse(initApi);
+		UwuResponse uwuInit = new UwuResponse(initApi);
 		
 		System.out.println("\nBot listener files loaded!");
 		System.out.println("---------------------------------");

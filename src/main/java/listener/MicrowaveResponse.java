@@ -25,15 +25,25 @@ public class MicrowaveResponse
 			String messageToSplit;
 			String[] splitMessage;
 			
-			messageToSplit = event.getMessageContent();
-			messageToSplit = messageToSplit.toLowerCase();
-			splitMessage = messageToSplit.split(" ");
-			
-			for (int i = 0; i < splitMessage.length; ++i)
+			if (event.getMessageAuthor().isUser())
 			{
-				if (splitMessage[i].equals(triggerPhrase))
+				try
 				{
-					event.getChannel().sendMessage(responseLink);
+					messageToSplit = event.getMessageContent();
+					messageToSplit = messageToSplit.toLowerCase();
+					splitMessage = messageToSplit.split(" ");
+					
+					for (int i = 0; i < splitMessage.length; ++i)
+					{
+						if (splitMessage[i].equals(triggerPhrase))
+						{
+							event.getChannel().sendMessage(responseLink);
+						}
+					}
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
 				}
 			}
 		});
