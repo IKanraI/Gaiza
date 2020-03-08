@@ -53,32 +53,36 @@ public class BoredResponse
 			
 			selectString = pickPhrase();
 			
-			if (event.getMessageContent().equalsIgnoreCase("im bored") || event.getMessageContent().equalsIgnoreCase("i'm bored") || event.getMessageContent().equalsIgnoreCase("bored"))
+			if (event.getMessageAuthor().isUser())
 			{
-				event.addReactionsToMessage("🚫");
-				
-				event.getChannel().sendMessage("Hi bored, I'm dad");
-				
-				try 
+			
+				if (event.getMessageContent().equalsIgnoreCase("im bored") || event.getMessageContent().equalsIgnoreCase("i'm bored") || event.getMessageContent().equalsIgnoreCase("bored"))
 				{
-					Thread.sleep(1000);
-				
-				
-					event.getChannel().sendMessage("<@" + event.getMessageAuthor().getIdAsString() + ">" + selectString);
-				
-				
-					Thread.sleep(1000);
-				
-				
-					event.getChannel().sendMessage("I'm going out to the store for some cigs and milk. Don't tell your mother");
-				
-				
-					Thread.sleep(1000);
-				
-				}
-				catch (InterruptedException e) 
-				{	
-					e.printStackTrace();
+					event.addReactionsToMessage("🚫");
+					
+					event.getChannel().sendMessage("Hi bored, I'm dad");
+					
+					try 
+					{
+						Thread.sleep(1000);
+					
+					
+						event.getChannel().sendMessage("<@" + event.getMessageAuthor().getIdAsString() + ">" + selectString);
+					
+					
+						Thread.sleep(1000);
+					
+					
+						event.getChannel().sendMessage("I'm going out to the store for some cigs and milk. Don't tell your mother");
+					
+					
+						Thread.sleep(1000);
+					
+					}
+					catch (InterruptedException e) 
+					{	
+						e.printStackTrace();
+					}
 				}
 			}
 				
