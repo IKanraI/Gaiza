@@ -1,5 +1,7 @@
 package listener;
 
+import java.util.ArrayList;
+
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 
@@ -24,7 +26,8 @@ public class UwuResponse
 		uwuApi.addMessageCreateListener(event ->
 		{
 			String getWholeMessage = "";
-			String[] splitMessage = null;
+			String splitMessage = null;
+			ArrayList<Character> charMessageArray = null;
 			int i = 0;
 			
 			try
@@ -34,7 +37,14 @@ public class UwuResponse
 				
 					getWholeMessage = event.getMessageContent();
 					getWholeMessage = getWholeMessage.toLowerCase();
-					splitMessage = getWholeMessage.split("");
+					splitMessage = getWholeMessage.replaceAll("\\s", "");
+					
+					charMessageArray = new ArrayList<Character>(splitMessage.length());
+					
+					for (i = 0; i < splitMessage.length(); ++i)
+					{
+						charMessageArray.add(splitMessage.charAt(i));
+					}
 				}
 			}
 			catch (Exception e)
@@ -45,21 +55,23 @@ public class UwuResponse
 
 			try
 			{
-				for (i = 0; i < splitMessage.length - 3; ++i)
+				for (i = 0; i < splitMessage.length(); ++i)
 				{
-					if (splitMessage[i].equals("u"))
+					if (charMessageArray.get(i).equals('u'))
 					{
-						if (splitMessage[i + 1].equals("w"))
+						if (charMessageArray.get(i + 1).equals('w'))
 						{
-							if (splitMessage[i + 2].equals("u"))
+							if (charMessageArray.get(i + 2).equals('u'))
 							{
 								EmbedBuilder embed = new EmbedBuilder()
-										.setTitle("Stop, you've violated the law for the last time")
+										.setTitle("Stop! you've violated the law for the last time")
 										.setImage(policeEnforcement)
 										.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
 										.setTimestampToNow();
 								
 								event.getChannel().sendMessage(embed);
+								
+								break;
 							} //end third if
 						} //end second if
 					} //end first if
