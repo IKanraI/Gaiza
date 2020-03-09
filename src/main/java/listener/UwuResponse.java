@@ -45,7 +45,7 @@ public class UwuResponse
 
 			try
 			{
-				for (i = 0; i < splitMessage.length - 2; ++i)
+				for (i = 0; i < splitMessage.length - 3; ++i)
 				{
 					if (splitMessage[i].equals("u"))
 					{
