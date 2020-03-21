@@ -9,6 +9,7 @@ public class BotInfo
 	private static String botImageStr;
 	private static String botActivity;
 	private static Icon botImage;
+	private static int serverCount;
 	
 	public BotInfo(DiscordApi getApi)
 	{
@@ -54,6 +55,11 @@ public class BotInfo
 		botImageStr = getString;
 	}
 	
+	public static void setServerCount(int noOfServers)
+	{
+		serverCount = noOfServers;
+	}
+	
 	//Getters
 	
 	public static String getBotActivity()
@@ -74,5 +80,10 @@ public class BotInfo
 	public static String getBotImageStr()
 	{
 		return botImageStr;
+	}
+	
+	public static int getServerCount()
+	{
+		return serverCount;
 	}
 }

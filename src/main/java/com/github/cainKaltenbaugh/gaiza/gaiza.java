@@ -4,6 +4,7 @@ import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 
 import commands.*;
+import jsonDatabase.*;
 import listener.*;
 import management.*;
 
@@ -23,7 +24,7 @@ public class gaiza
 		return api;
 	}
 
-	public static void main(String[] args) throws FileNotFoundException 
+	public static void main(String[] args) throws IOException 
 	{
 		DiscordApi startUpApi = startUp();
 		
@@ -32,11 +33,16 @@ public class gaiza
 		//System.out.println("invite" + api.createBotInvite());
 	}
 	
-	static void commandInit(DiscordApi initApi)
+	static void commandInit(DiscordApi initApi) throws IOException
 	{
 		//Initializes all the commands, listeners, and management
 		DiscordApi myApi = initApi;
 		
+		System.out.println("\nServer List");
+		
+		InitDatabase dbInit = new InitDatabase(initApi);
+		
+		System.out.println("\n--------------------------------");
 		System.out.println("Bot command files loading... \n");
 		
 		Ping pingInit = new Ping(initApi);
