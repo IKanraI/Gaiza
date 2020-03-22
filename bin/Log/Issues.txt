@@ -1,0 +1,3 @@
+UWUresponse throws an array out of bounds exception
+
+Avatar throws an exception when [command]avatar [message] is called and there is not a proper user mentioned
