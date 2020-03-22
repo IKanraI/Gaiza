@@ -80,9 +80,9 @@ public class Avatar
 						event.getChannel().sendMessage("Something went wrong");
 						
 						e.printStackTrace();
-					} //end try catch
+					}
 					
-				} //end if == 1
+				}
 				else if (checkMessage.equals(concatMessage) && splitMessage.length == 2)
 				{
 					//Handles the command if there is one argument
@@ -117,18 +117,18 @@ public class Avatar
 						event.getChannel().sendMessage("User mentioned either doesn't exist in the server or is not a user");
 						
 						e.printStackTrace();
-					} //end try catch
+					}
 					
-				} //end if == 2
+				}
 				else if (checkMessage.equals(concatMessage) && splitMessage.length > 2)
 				{
 					//Returns error if there are multiple arguments entered
 					event.getMessage().addReaction("‼");
 					event.getChannel().sendMessage("Please either invoke just the command: (" + myKey + avaCall + ") or the command with one user: (" + myKey + avaCall + " [username])");	
-				} //end if > 2
+				}
 				
-			} //end if user
+			}
 			
-		}); //end listener
+		});
 	}
 }

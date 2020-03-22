@@ -2,15 +2,20 @@ package jsonDatabase;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
 import org.javacord.api.DiscordApi;
+import org.json.simple.JSONObject;
 
 import management.BotInfo;
 
 public class InitDatabase
 {
 	private DatabaseLL serverLL = new DatabaseLL();
+	String dbPath = "C:\\Users\\Cain\\Documents\\javaDocs\\gaiza\\bin\\Storage\\";
 	
 	public InitDatabase(DiscordApi getApi) throws IOException
 	{
@@ -18,11 +23,11 @@ public class InitDatabase
 		
 		getServerList(initApi);
 		manageDbFiles();
+		saveDatabase();
 	}
 	
 	public void manageDbFiles() throws IOException
 	{	
-		String dbPath = "C:\\Users\\Cain\\Documents\\javaDocs\\gaiza\\bin\\Storage\\";
 		String tempPath;
 		String fileName;
 		File saveServerFiles;
@@ -76,6 +81,34 @@ public class InitDatabase
 		
 		splitServerInfo(serverList);
 		
+	}
+	
+	@SuppressWarnings("unchecked")
+	
+	public void saveDatabase()
+	{
+		JSONObject storageJSON = new JSONObject();
+		String getDB = dbPath;
+		String fullPath;
+		int i;
+		
+		
+		for (i = 0; i < BotInfo.getServerCount(); ++i)
+		{
+			storageJSON.put("ID:", serverLL.getCurrServerID(serverLL, i));
+			storageJSON.put("Server Name:", serverLL.getCurrServerName(serverLL, i));
+			
+			fullPath = getDB.concat(serverLL.getCurrServerID(serverLL, i) + ".json");
+			
+			try
+			{
+				Files.write(Paths.get(fullPath), storageJSON.toJSONString().getBytes());
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public void splitServerInfo(ArrayList<String> serverList)

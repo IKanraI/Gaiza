@@ -72,10 +72,10 @@ public class UwuResponse
 								event.getChannel().sendMessage(embed);
 								
 								break;
-							} //end third if
-						} //end second if
-					} //end first if
-				} //end for
+							}
+						}
+					}
+				}
 			}
 			catch (Exception e)
 			{
