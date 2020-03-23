@@ -42,6 +42,18 @@ public class DatabaseLL
 		}
 	}
 	
+	public void printLinkedList(DatabaseLL currLL)
+	{
+		Node currNode = currLL.head;
+		
+		while (currNode != null)
+		{
+			System.out.println("Server ID: " + currNode.serverID + " Server Name: " + currNode.serverName);
+			
+			currNode = currNode.next;
+		}
+	}
+	
 	public String getCurrServerID(DatabaseLL currList, int listPosition)
 	{
 		Node currNode = currList.head;
@@ -68,15 +80,20 @@ public class DatabaseLL
 		return currNode.serverName;
 	}
 	
-	public void printLinkedList(DatabaseLL currLL)
+	public int size(DatabaseLL currList)
 	{
-		Node currNode = currLL.head;
+		int sizeLL = 0;
+		Node currNode = currList.head;
 		
 		while (currNode != null)
 		{
-			System.out.println("Server ID: " + currNode.serverID + " Server Name: " + currNode.serverName);
+			++sizeLL;
 			
 			currNode = currNode.next;
 		}
+		
+		return sizeLL;
 	}
+	
+	
 }
