@@ -25,8 +25,11 @@ public class UwuResponse
 		
 		uwuApi.addMessageCreateListener(event ->
 		{
+			final int MAXLENGTH = 3;
+			final int PROTECTARRAYLENGTH = 2;
 			String getWholeMessage = "";
 			String splitMessage = null;
+			String messageToGet = "uwu";
 			ArrayList<Character> charMessageArray = null;
 			int i = 0;
 			
@@ -55,23 +58,39 @@ public class UwuResponse
 
 			try
 			{
-				for (i = 0; i < splitMessage.length(); ++i)
+				if (splitMessage.length() == MAXLENGTH)
 				{
-					if (charMessageArray.get(i).equals('u'))
+					if (getWholeMessage.equalsIgnoreCase(messageToGet));
 					{
-						if (charMessageArray.get(i + 1).equals('w'))
+						EmbedBuilder embed = new EmbedBuilder()
+								.setTitle("Stop! you've violated the law for the last time")
+								.setImage(policeEnforcement)
+								.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
+								.setTimestampToNow();
+						
+						event.getChannel().sendMessage(embed);
+					}
+				}
+				else
+				{
+					for (i = 0; i < splitMessage.length() - PROTECTARRAYLENGTH; ++i)
+					{
+						if (charMessageArray.get(i).equals('u'))
 						{
-							if (charMessageArray.get(i + 2).equals('u'))
+							if (charMessageArray.get(i + 1).equals('w'))
 							{
-								EmbedBuilder embed = new EmbedBuilder()
-										.setTitle("Stop! you've violated the law for the last time")
-										.setImage(policeEnforcement)
-										.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
-										.setTimestampToNow();
-								
-								event.getChannel().sendMessage(embed);
-								
-								break;
+								if (charMessageArray.get(i + 2).equals('u'))
+								{
+									EmbedBuilder embed = new EmbedBuilder()
+											.setTitle("Stop! you've violated the law for the last time")
+											.setImage(policeEnforcement)
+											.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
+											.setTimestampToNow();
+									
+									event.getChannel().sendMessage(embed);
+									
+									break;
+								}
 							}
 						}
 					}
