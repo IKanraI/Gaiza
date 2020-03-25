@@ -4,6 +4,7 @@ import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 
 import commands.*;
+import commandsAdmin.PrefixChange;
 import jsonDatabase.*;
 import listener.*;
 import management.*;
@@ -24,7 +25,7 @@ public class gaiza
 		return api;
 	}
 
-	public static void main(String[] args) throws IOException 
+	public static void main(String[] args) throws Exception 
 	{
 		DiscordApi startUpApi = startUp();
 		
@@ -33,7 +34,7 @@ public class gaiza
 		//System.out.println("invite" + api.createBotInvite());
 	}
 	
-	static void commandInit(DiscordApi initApi) throws IOException
+	static void commandInit(DiscordApi initApi) throws Exception
 	{
 		//Initializes all the commands, listeners, and management
 		DiscordApi myApi = initApi;
@@ -51,6 +52,12 @@ public class gaiza
 		Help helpInit = new Help(initApi);
 		
 		System.out.println("\nCommands finished loading!");
+		System.out.println("--------------------------------");
+		System.out.println("Admin commands loading...");
+		
+		PrefixChange initPChange = new PrefixChange(initApi);
+		
+		System.out.println("\nAdmin commands loaded!");
 		System.out.println("--------------------------------");
 		System.out.println("Bot listener files loading... \n");
 		

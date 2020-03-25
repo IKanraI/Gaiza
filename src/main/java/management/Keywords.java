@@ -1,16 +1,41 @@
 package management;
 
+import jsonDatabase.DatabaseLL;
+import jsonDatabase.InitDatabase;
+
 public class Keywords 
 {
-	private char commandKey = '$';
+	private static String defaultKey = "$";
 	
-	public void setKey(char newKey)
+	public void setDefaultKey(String newKey)
 	{
-		commandKey = newKey;
+		defaultKey = newKey;
 	}
 	
-	public char getKey()
+	public void setKey(DatabaseLL modifyData, String newKey, int selectServer)
 	{
-		return commandKey;
+		InitDatabase saveDB = new InitDatabase();
+		DatabaseLL getLLData = modifyData;
+		String getNewKey = newKey;
+		int serverSlot = selectServer;
+		getLLData.setServerPrefix(getLLData, getNewKey, serverSlot);
+		
+		saveDB.saveDatabase();
+	}
+	
+	public static String getDefaultKey()
+	{
+		return defaultKey;
+	}
+	
+	public String getKey(String serverID, int i)
+	{
+		DatabaseLL getDB = InitDatabase.getCurrLL();
+		String getPrefix = "";
+		int serverSlot = i;
+		
+		getPrefix = getDB.getServerPrefix(getDB, serverSlot);
+		
+		return getPrefix;
 	}
 }

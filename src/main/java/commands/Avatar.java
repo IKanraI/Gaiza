@@ -5,6 +5,8 @@ import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.Icon;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 
+import jsonDatabase.DatabaseLL;
+import jsonDatabase.InitDatabase;
 import management.BotInfo;
 import management.Keywords;
 
@@ -18,23 +20,37 @@ public class Avatar
 		DiscordApi avaApi = getApi;
 		Keywords holdKey = new Keywords();
 		
-		listenAvatar(avaApi, holdKey.getKey());
+		listenAvatar(avaApi);
 		
 		System.out.println("Avatar.java loaded!");		
 	}
 	
-	public void listenAvatar(DiscordApi getApi, char commandKey)
+	public void listenAvatar(DiscordApi getApi)
 	{
 		DiscordApi avaApi = getApi;
-		char myKey = commandKey;
+		DatabaseLL modifyData = InitDatabase.getCurrLL();
+		Keywords getServerKey = new Keywords();
 		
 		avaApi.addMessageCreateListener(event ->
 		{
-			
 			String messageString = "";
 			String checkMessage = "";
 			String concatMessage  = "";
 			String[] splitMessage = null;
+			String getServerAddress = "";
+			String myKey = "";
+						
+			int i;
+			
+			for (i = 0; i < BotInfo.getServerCount(); ++i)
+			{
+				getServerAddress = event.getServer().get().getIdAsString();
+				
+				if (getServerAddress.equals(modifyData.getCurrServerID(modifyData, i)))
+				{
+					myKey = getServerKey.getKey(getServerAddress, i);
+				}
+			}
 			
 			if (event.getMessageAuthor().isUser())
 			{

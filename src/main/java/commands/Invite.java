@@ -2,6 +2,9 @@ package commands;
 
 import org.javacord.api.DiscordApi;
 
+import jsonDatabase.DatabaseLL;
+import jsonDatabase.InitDatabase;
+import management.BotInfo;
 import management.Keywords;
 
 public class Invite 
@@ -12,10 +15,9 @@ public class Invite
 	public Invite(DiscordApi getApi)
 	{
 		DiscordApi inviteApi = getApi;
-		Keywords holdKey = new Keywords();
 		
 		setInvite(inviteApi.createBotInvite());
-		sendInvite(inviteApi, holdKey.getKey());
+		sendInvite(inviteApi);
 		
 		System.out.println("Invite.java loaded!");
 		
@@ -31,13 +33,28 @@ public class Invite
 		return botInvite;
 	}
 	
-	public void sendInvite(DiscordApi sendInviteApi, char commandKey)
+	public void sendInvite(DiscordApi sendInviteApi)
 	{
 		DiscordApi sendInv = sendInviteApi;
-		char myKey = commandKey;
+		DatabaseLL modifyData = InitDatabase.getCurrLL();
+		Keywords getServerKey = new Keywords();
 		
 		sendInv.addMessageCreateListener(event ->
 		{
+			String myKey = "";
+			String getServerAddress = "";
+			int i;
+			
+			for (i = 0; i < BotInfo.getServerCount(); ++i)
+			{
+				getServerAddress = event.getServer().get().getIdAsString();
+				
+				if (getServerAddress.equals(modifyData.getCurrServerID(modifyData, i)))
+				{
+					myKey = getServerKey.getKey(getServerAddress, i);
+				}
+			}
+				
 			if (event.getMessageContent().equalsIgnoreCase(myKey + invMsg))
 			{
 				event.getChannel().sendMessage("Here's your invite! " + sendInv.createBotInvite());

@@ -12,21 +12,28 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import management.BotInfo;
+import management.Keywords;
 
 public class InitDatabase
 {
-	private DatabaseLL serverLL = new DatabaseLL();
-	private String dbPath = "C:\\Users\\Cain\\Documents\\javaDocs\\gaiza\\bin\\Storage\\";
-	private String keyField1 = "Server Name";
-	private String keyField2 = "ID";
+	private static DatabaseLL serverLL = new DatabaseLL();
+	private final String dbPath = "C:\\Users\\Cain\\Documents\\javaDocs\\gaiza\\bin\\Storage\\";
+	private final String keyFieldServerName = "Server Name";
+	private final String keyFieldID = "ID";
+	private final String keyFieldPrefix = "Prefix";
 	
-	public InitDatabase(DiscordApi getApi) throws IOException
+	public InitDatabase()
+	{
+		
+	}
+	public InitDatabase(DiscordApi getApi) throws Exception
 	{
 		DiscordApi initApi = getApi;
 		
 		getServerList(initApi);
 		manageDbFiles();
 		saveDatabase();
+		listenForNewServer(initApi);
 	}
 	
 	public boolean checkForChanges(ArrayList<String> infoCheck, int serverSelect)
@@ -52,14 +59,27 @@ public class InitDatabase
 			return true;
 		}
 		
+		if (!getInfo.get(2).equals(serverLL.getServerPrefix(serverLL, getServerPos)))
+		{
+			return true;
+		}
+		
 		return false;
 	}
 	
+	public void listenForNewServer(DiscordApi getApi)
+	{
+		DiscordApi newServerApi = getApi;
+	}
+	
 	@SuppressWarnings("unchecked")
-	public void manageDbFiles() throws IOException
+	public void manageDbFiles() throws Exception
 	{	
 		//Handles checking to see if the files already exists or not and initializes the files with information
 		JSONObject initData = new JSONObject();
+		JSONObject getData;
+		JSONParser parsePrefix = new JSONParser();
+		Object dataManip;
 		
 		String tempPath;
 		String fileName;
@@ -96,8 +116,18 @@ public class InitDatabase
 					//File initialization
 					initData.put("ID", "");
 					initData.put("Server Name", "");
+					initData.put("Prefix", "\"" + Keywords.getDefaultKey() + "\"");
+					
+					serverLL.setServerPrefix(serverLL, Keywords.getDefaultKey(), trackList);
 					
 					Files.write(Paths.get(tempPath), initData.toJSONString().getBytes());
+				}
+				else
+				{
+					dataManip = parsePrefix.parse(new FileReader(tempPath));
+					getData = (JSONObject) dataManip;
+					
+					serverLL.setServerPrefix(serverLL, getData.get(keyFieldPrefix).toString(), trackList);	
 				}
 
 				++trackList;
@@ -171,14 +201,16 @@ public class InitDatabase
 				checkStorage = parseData.parse(new FileReader(fullPath));
 				storageGetJSON = (JSONObject) checkStorage;
 
-				tempCheck.add((String) storageGetJSON.get(keyField1));
-				tempCheck.add((String) storageGetJSON.get(keyField2));
+				tempCheck.add((String) storageGetJSON.get(keyFieldPrefix));
+				tempCheck.add((String) storageGetJSON.get(keyFieldID));
+				tempCheck.add((String) storageGetJSON.get(keyFieldServerName));
 				
 				if (checkForChanges(tempCheck, i))
 				{
 					//If there are changes made it will replace the current data with this data
-					saveData.put("ID", serverLL.getCurrServerID(serverLL, i));
-					saveData.put("Server Name", serverLL.getCurrServerName(serverLL, i));
+					saveData.put(keyFieldPrefix, serverLL.getServerPrefix(serverLL, i));
+					saveData.put(keyFieldID, serverLL.getCurrServerID(serverLL, i));
+					saveData.put(keyFieldServerName, serverLL.getCurrServerName(serverLL, i));
 					
 					Files.write(Paths.get(fullPath), saveData.toJSONString().getBytes());
 				}				
@@ -224,5 +256,10 @@ public class InitDatabase
 		
 		serverLL.printLinkedList(serverLL);
 		
+	}
+	
+	public static DatabaseLL getCurrLL()
+	{
+		return serverLL;
 	}
 }
