@@ -8,6 +8,7 @@ public class DatabaseLL
 	{
 		private String serverName;
 		private String serverID;
+		private String serverPrefix;
 		private Node next;
 
 		public Node(String currID, String currName)
@@ -23,6 +24,8 @@ public class DatabaseLL
 		String getName = currName;
 		
 		Node newNode = new Node(getID, getName);
+		Node insert;
+		
 		newNode.next = null;
 		
 		if (currLL.head == null)
@@ -31,7 +34,7 @@ public class DatabaseLL
 		}
 		else
 		{
-			Node insert = currLL.head;
+			insert = currLL.head;
 			
 			while (insert.next != null)
 			{
@@ -52,6 +55,25 @@ public class DatabaseLL
 			
 			currNode = currNode.next;
 		}
+	}
+	
+	
+	//Setters and Getters
+	//Need to add setters for the other variables despite how they are initially set
+	
+	public void setServerPrefix(DatabaseLL currLL, String newPrefix, int serverSelect)
+	{
+		Node currNode = currLL.head;
+		String getPrefix = newPrefix;
+		int getServer = serverSelect;
+		int i;
+		
+		for (i = 0; i < getServer; ++i)
+		{
+			currNode = currNode.next;
+		}
+		
+		currNode.serverPrefix = getPrefix;
 	}
 	
 	public String getCurrServerID(DatabaseLL currList, int listPosition)
@@ -78,6 +100,21 @@ public class DatabaseLL
 		}
 		
 		return currNode.serverName;
+	}
+	
+	public String getServerPrefix(DatabaseLL currLL, int serverSelect)
+	{
+		Node currNode = currLL.head;
+		int getServer = serverSelect;
+		int i;
+		
+		for (i = 0; i < getServer; ++i)
+		{
+			currNode = currNode.next;
+		}
+		
+		return currNode.serverPrefix;
+		
 	}
 	
 	public int size(DatabaseLL currList)

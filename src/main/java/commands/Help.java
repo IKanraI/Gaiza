@@ -6,6 +6,8 @@ import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.Icon;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 
+import jsonDatabase.DatabaseLL;
+import jsonDatabase.InitDatabase;
 import management.BotInfo;
 import management.Keywords;
 
@@ -18,27 +20,43 @@ public class Help
 		DiscordApi helpApi = getApi;
 		Keywords myKey = new Keywords();
 		
-		displayHelp(helpApi, myKey.getKey());
+		displayHelp(helpApi);
 		
 		System.out.println("Help.java loaded!");
 		
 		
 	}
 	
-	public void displayHelp(DiscordApi getApi, char getKey)
+	public void displayHelp(DiscordApi getApi)
 	{
 		DiscordApi helpApi = getApi;
-		char myKey = getKey;
+		DatabaseLL modifyData = InitDatabase.getCurrLL();
+		Keywords getServerKey = new Keywords();
 		
 		helpApi.addMessageCreateListener(event ->
 		{
+			String userWhoCalled;
+			String userCalledIconURL;
+			String myKey = "";
+			String getServerAddress = "";
+			Icon userIcon;
+			int i;
+			
+			for (i = 0; i < BotInfo.getServerCount(); ++i)
+			{
+				getServerAddress = event.getServer().get().getIdAsString();
+				
+				if (getServerAddress.equals(modifyData.getCurrServerID(modifyData, i)))
+				{
+					myKey = getServerKey.getKey(getServerAddress, i);
+				}
+			}
+			
 			try
 			{			
 				if (event.getMessageContent().equalsIgnoreCase(myKey + helpCommand) && event.getMessageAuthor().isUser())
 				{
-					String userWhoCalled;
-					String userCalledIconURL;
-					Icon userIcon;
+					
 					
 					userWhoCalled = event.getMessageAuthor().getDisplayName();
 					userCalledIconURL = event.getMessageAuthor().getAvatar().getUrl().toString();
