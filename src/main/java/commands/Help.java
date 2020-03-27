@@ -23,8 +23,6 @@ public class Help
 		displayHelp(helpApi);
 		
 		System.out.println("Help.java loaded!");
-		
-		
 	}
 	
 	public void displayHelp(DiscordApi getApi)
@@ -56,8 +54,6 @@ public class Help
 			{			
 				if (event.getMessageContent().equalsIgnoreCase(myKey + helpCommand) && event.getMessageAuthor().isUser())
 				{
-					
-					
 					userWhoCalled = event.getMessageAuthor().getDisplayName();
 					userCalledIconURL = event.getMessageAuthor().getAvatar().getUrl().toString();
 					userIcon = event.getMessageAuthor().getAvatar();
@@ -67,7 +63,7 @@ public class Help
 							.setColor(Color.magenta)
 							
 							.setTitle("Bot Help")
-							.setDescription("Commands are currently all prefixed by $")
+							.setDescription("Commands are currently all prefixed by: " + myKey)
 							
 							.addInlineField("Avatar", "Use either [prefix]avatar or [prefix]avatar @[user]")
 							.addInlineField("Invite", "Can be used to get an invite for the bot")

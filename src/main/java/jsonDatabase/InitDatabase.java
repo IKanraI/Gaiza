@@ -34,6 +34,7 @@ public class InitDatabase
 		manageDbFiles();
 		saveDatabase();
 		listenForNewServer(initApi);
+		listenForLeaveServer(initApi);
 	}
 	
 	public boolean checkForChanges(ArrayList<String> infoCheck, int serverSelect)
@@ -70,13 +71,106 @@ public class InitDatabase
 	public void listenForNewServer(DiscordApi getApi)
 	{
 		DiscordApi newServerApi = getApi;
+		
+		
+		newServerApi.addServerJoinListener(event ->
+		{
+			String serverName = "";
+			String serverID = "";
+			String filePath = "";
+			String finalPath = "";
+			
+			File saveNewServerFile;
+			boolean fileExists;
+			final int ADDSERVER = 1;
+			
+			JSONObject getPrefixJSON = null;
+			JSONParser prefixData = new JSONParser();
+			Object checkStorage;
+			
+			filePath = dbPath;
+			
+			serverID = event.getServer().getIdAsString();
+			serverName = event.getServer().getName();
+			
+			finalPath = filePath.concat(serverID + ".json");
+			
+			serverLL.insertNewServerInfo(serverLL, serverID, serverName);
+			
+			fileExists = new File(finalPath).exists();
+			
+			if (!fileExists)
+			{
+				try 
+				{
+					saveNewServerFile = new File(finalPath);
+					saveNewServerFile.createNewFile();
+					blankFileInit(finalPath);
+					
+					serverLL.setServerPrefix(serverLL, Keywords.getDefaultKey(), serverLL.size(serverLL) - ADDSERVER);
+				} 
+				catch (Exception e) 
+				{
+					e.printStackTrace();
+				}
+			}
+			else
+			{
+				try
+				{
+					checkStorage = prefixData.parse(new FileReader(finalPath));
+					getPrefixJSON = (JSONObject) checkStorage;
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+				
+				serverLL.setServerPrefix(serverLL, getPrefixJSON.get(keyFieldPrefix).toString(), serverLL.size(serverLL) - ADDSERVER);
+			}
+			
+			BotInfo.setServerCount(BotInfo.getServerCount() + ADDSERVER);
+			
+			System.out.println("The server " + serverName + " joined with ID of " + serverID + "!");
+			
+			saveDatabase();
+		});
 	}
 	
-	@SuppressWarnings("unchecked")
+	public void listenForLeaveServer(DiscordApi getApi)
+	{
+		final int REMOVESERVER = 1;
+		DiscordApi newServerApi = getApi;
+		
+		newServerApi.addServerLeaveListener(event ->
+		{
+			String serverID = "";
+			String serverName = "";
+			int i;
+			
+			serverID = event.getServer().getIdAsString();
+			serverName = event.getServer().getName();
+			
+			for(i = 0; i < BotInfo.getServerCount(); ++i)
+			{
+				if (serverID.equals(serverLL.getCurrServerID(serverLL, i)))
+				{
+					serverLL.removeNode(serverLL, i);
+					
+					BotInfo.setServerCount(BotInfo.getServerCount() - REMOVESERVER);
+					
+					System.out.println("The server " + serverName + " left with the ID of " + serverID + ".");
+					
+					break;
+				}
+			}
+			
+		});
+	}
+
 	public void manageDbFiles() throws Exception
 	{	
 		//Handles checking to see if the files already exists or not and initializes the files with information
-		JSONObject initData = new JSONObject();
 		JSONObject getData;
 		JSONParser parsePrefix = new JSONParser();
 		Object dataManip;
@@ -114,13 +208,10 @@ public class InitDatabase
 				if (checkLength.length() == 0)
 				{
 					//File initialization
-					initData.put("ID", "");
-					initData.put("Server Name", "");
-					initData.put("Prefix", "\"" + Keywords.getDefaultKey() + "\"");
+					blankFileInit(tempPath);
 					
 					serverLL.setServerPrefix(serverLL, Keywords.getDefaultKey(), trackList);
 					
-					Files.write(Paths.get(tempPath), initData.toJSONString().getBytes());
 				}
 				else
 				{
@@ -137,6 +228,27 @@ public class InitDatabase
 		{
 			throw e;
 		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void blankFileInit(String getServerPath)
+	{
+		JSONObject initData = new JSONObject();
+		String filePath = getServerPath;
+		
+		initData.put("ID", "");
+		initData.put("Server Name", "");
+		initData.put("Prefix", Keywords.getDefaultKey());
+		
+		try 
+		{
+			Files.write(Paths.get(filePath), initData.toJSONString().getBytes());
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public void getServerList(DiscordApi getApi)

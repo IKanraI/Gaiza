@@ -34,6 +34,7 @@ public class gaiza
 		//System.out.println("invite" + api.createBotInvite());
 	}
 	
+	@SuppressWarnings("unused")
 	static void commandInit(DiscordApi initApi) throws Exception
 	{
 		//Initializes all the commands, listeners, and management
@@ -53,7 +54,7 @@ public class gaiza
 		
 		System.out.println("\nCommands finished loading!");
 		System.out.println("--------------------------------");
-		System.out.println("Admin commands loading...");
+		System.out.println("Admin commands loading... \n");
 		
 		PrefixChange initPChange = new PrefixChange(initApi);
 		
@@ -71,7 +72,7 @@ public class gaiza
 		
 		BotInfo bInfoInit = new BotInfo(initApi);
 		
-		System.out.println("\nManagement files loaded!");
+		System.out.println("\nManagement files loaded!\n");
 		
 		myApi.updateActivity(BotInfo.getBotActivity());
 	}
