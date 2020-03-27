@@ -57,6 +57,25 @@ public class DatabaseLL
 		}
 	}
 	
+	public void removeNode(DatabaseLL currLL, int serverSelect)
+	{
+		Node currNode = currLL.head;
+		Node tempNode = currNode;
+		int serverToRemove = serverSelect;
+		int i;
+		
+		for (i = 0; i < serverToRemove; ++i)
+		{
+			tempNode = currNode;
+			currNode = currNode.next;
+		}
+		
+		if (!(tempNode == null))
+		{
+			tempNode.next = currNode.next;
+		}
+	}
+	
 	
 	//Setters and Getters
 	//Need to add setters for the other variables despite how they are initially set
@@ -131,6 +150,4 @@ public class DatabaseLL
 		
 		return sizeLL;
 	}
-	
-	
 }
