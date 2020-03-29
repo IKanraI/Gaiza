@@ -49,18 +49,17 @@ public class UwuResponse
 
 			try
 			{
-				if (splitMessage.length() == MAXLENGTH)
+				
+				if (messageToGet.equalsIgnoreCase(getWholeMessage))
 				{
-					if (getWholeMessage.equalsIgnoreCase(messageToGet));
-					{
-						EmbedBuilder embed = new EmbedBuilder()
-								.setTitle("Stop! you've violated the law for the last time")
-								.setImage(policeEnforcement)
-								.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
-								.setTimestampToNow();
-						
-						event.getChannel().sendMessage(embed);
-					}
+					System.out.println(getWholeMessage + " " + messageToGet);
+					EmbedBuilder embed = new EmbedBuilder()
+							.setTitle("Stop! you've violated the law for the last time")
+							.setImage(policeEnforcement)
+							.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
+							.setTimestampToNow();
+					
+					event.getChannel().sendMessage(embed);
 				}
 				else
 				{
@@ -68,6 +67,7 @@ public class UwuResponse
 					{
 						if (charMessageArray.get(i).equals('u') && charMessageArray.get(i + 1).equals('w') && charMessageArray.get(i + 2).equals('u'))
 						{
+							System.out.println("hasdfasdfasd");
 								EmbedBuilder embed = new EmbedBuilder()
 										.setTitle("Stop! you've violated the law for the last time")
 										.setImage(policeEnforcement)
