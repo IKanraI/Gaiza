@@ -65,9 +65,9 @@ public class Help
 							.setTitle("Bot Help")
 							.setDescription("Commands are currently all prefixed by: " + myKey)
 							
-							.addInlineField("Avatar", "Use either [prefix]avatar or [prefix]avatar @[user]")
-							.addInlineField("Invite", "Can be used to get an invite for the bot")
-							.addInlineField("Ping", "The most basic of commands")
+							.addInlineField(myKey + "Avatar", "Use either " + myKey + "avatar or " + myKey +  "avatar @[user]")
+							.addInlineField(myKey + "Invite", "Can be used to get an invite for the bot")
+							.addInlineField(myKey + "Ping", "The most basic of commands")
 							
 							.setThumbnail(BotInfo.getBotImageStr())
 							.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
