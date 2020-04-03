@@ -4,7 +4,7 @@ import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 
 import commands.*;
-import commandsAdmin.PrefixChange;
+import commandsAdmin.*;
 import jsonDatabase.*;
 import listener.*;
 import management.*;
@@ -57,6 +57,7 @@ public class gaiza
 		System.out.println("Admin commands loading... \n");
 		
 		PrefixChange initPChange = new PrefixChange(initApi);
+		AdminHelp initAdminHelp = new AdminHelp(initApi);
 		
 		System.out.println("\nAdmin commands loaded!");
 		System.out.println("--------------------------------");

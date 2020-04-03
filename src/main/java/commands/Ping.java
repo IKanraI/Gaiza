@@ -2,9 +2,6 @@ package commands;
 
 import org.javacord.api.DiscordApi;
 
-import jsonDatabase.DatabaseLL;
-import jsonDatabase.InitDatabase;
-import management.BotInfo;
 import management.Keywords;
 
 public class Ping
@@ -24,25 +21,15 @@ public class Ping
 	public void listenPing(DiscordApi pingApi)
 	{
 		DiscordApi sendPing = pingApi;
-		Keywords getServerKey = new Keywords();
-		DatabaseLL modifyData = InitDatabase.getCurrLL();
 		
 		sendPing.addMessageCreateListener(event ->
 		{
 			String getServerAddress = "";
-			String serverPrefix = "";
-			int i;
+			String serverPrefix = "";			
 			
-			for (i = 0; i < BotInfo.getServerCount(); ++i)
-			{
-				getServerAddress = event.getServer().get().getIdAsString();
+			getServerAddress = event.getServer().get().getIdAsString();
+			serverPrefix = Keywords.getKey(getServerAddress);
 				
-				if (getServerAddress.equals(modifyData.getCurrServerID(modifyData, i)))
-				{
-					serverPrefix = getServerKey.getKey(getServerAddress, i);
-				}
-			}
-			
 			if (event.getMessageContent().equalsIgnoreCase(serverPrefix + pingMsg) && event.getMessageAuthor().isUser())
 			{
 				event.getChannel().sendMessage("<@" + event.getMessageAuthor().getIdAsString() + "> rules! ... well pong i guess");

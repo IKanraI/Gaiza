@@ -9,14 +9,13 @@ import management.Keywords;
 
 public class PrefixChange 
 {
-	private String prefixChangeCommand = "pChange";
+	private String prefixChangeCommand = "prefix";
 	
 	public PrefixChange(DiscordApi getApi)
 	{
 		DiscordApi preChangeApi = getApi;
-		Keywords serverKey = new Keywords();	
 		
-		changePrefix(getApi);
+		changePrefix(preChangeApi);
 		
 		System.out.println("PrefixChange.java loaded!");
 	}
@@ -43,15 +42,8 @@ public class PrefixChange
 			
 			try
 			{
-				for (i = 0; i < BotInfo.getServerCount(); ++i)
-				{
-					getServerAddress = event.getServer().get().getIdAsString();
-					
-					if (getServerAddress.equals(modifyData.getCurrServerID(modifyData, i)))
-					{
-						serverPrefix = modifyKey.getKey(getServerAddress, i);
-					}
-				}
+				getServerAddress = event.getServer().get().getIdAsString();
+				serverPrefix = Keywords.getKey(getServerAddress);
 				
 				if (splitMessage[0].equalsIgnoreCase(serverPrefix + prefixChangeCommand) && splitMessage.length == MESSAGELENGTH)
 				{
