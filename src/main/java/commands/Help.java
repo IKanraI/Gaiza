@@ -6,8 +6,6 @@ import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.Icon;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 
-import jsonDatabase.DatabaseLL;
-import jsonDatabase.InitDatabase;
 import management.BotInfo;
 import management.Keywords;
 
@@ -18,7 +16,6 @@ public class Help
 	public Help(DiscordApi getApi)
 	{
 		DiscordApi helpApi = getApi;
-		Keywords myKey = new Keywords();
 		
 		displayHelp(helpApi);
 		
@@ -28,8 +25,6 @@ public class Help
 	public void displayHelp(DiscordApi getApi)
 	{
 		DiscordApi helpApi = getApi;
-		DatabaseLL modifyData = InitDatabase.getCurrLL();
-		Keywords getServerKey = new Keywords();
 		
 		helpApi.addMessageCreateListener(event ->
 		{
@@ -38,17 +33,9 @@ public class Help
 			String myKey = "";
 			String getServerAddress = "";
 			Icon userIcon;
-			int i;
-			
-			for (i = 0; i < BotInfo.getServerCount(); ++i)
-			{
-				getServerAddress = event.getServer().get().getIdAsString();
-				
-				if (getServerAddress.equals(modifyData.getCurrServerID(modifyData, i)))
-				{
-					myKey = getServerKey.getKey(getServerAddress, i);
-				}
-			}
+
+			getServerAddress = event.getServer().get().getIdAsString();
+			myKey = Keywords.getKey(getServerAddress);		
 			
 			try
 			{			
@@ -68,6 +55,8 @@ public class Help
 							.addInlineField(myKey + "Avatar", "Use either " + myKey + "avatar or " + myKey +  "avatar @[user]")
 							.addInlineField(myKey + "Invite", "Can be used to get an invite for the bot")
 							.addInlineField(myKey + "Ping", "The most basic of commands")
+							
+							.addInlineField(myKey + "ahelp", "Admin help panel")
 							
 							.setThumbnail(BotInfo.getBotImageStr())
 							.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())

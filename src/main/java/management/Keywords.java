@@ -28,13 +28,20 @@ public class Keywords
 		return defaultKey;
 	}
 	
-	public String getKey(String serverID, int i)
+	public static String getKey(String serverID)
 	{
 		DatabaseLL getDB = InitDatabase.getCurrLL();
+		String serverToGet = serverID;
 		String getPrefix = "";
-		int serverSlot = i;
+		int i;
 		
-		getPrefix = getDB.getServerPrefix(getDB, serverSlot);
+		for (i = 0; i < BotInfo.getServerCount(); ++i)
+		{
+			if (serverToGet.equals(getDB.getCurrServerID(getDB, i)))
+			{
+				getPrefix = getDB.getServerPrefix(getDB, i);
+			}
+		}
 		
 		return getPrefix;
 	}
