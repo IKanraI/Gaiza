@@ -58,6 +58,7 @@ public class gaiza
 		
 		PrefixChange initPChange = new PrefixChange(initApi);
 		AdminHelp initAdminHelp = new AdminHelp(initApi);
+		KickUser initKick = new KickUser(initApi);
 		
 		System.out.println("\nAdmin commands loaded!");
 		System.out.println("--------------------------------");
