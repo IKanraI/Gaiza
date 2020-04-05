@@ -60,6 +60,8 @@ public class AdminHelp
 							.setDescription("Admin Commands are currently all prefixed by: " + myKey)
 							
 							.addInlineField(myKey + "prefix", "Changes the current prefix of the server to whatever is set next")
+							.addInlineField(myKey + "kick", "Kick mentioned user with or without optional message. [user]<message>")
+							.addInlineField(myKey + "ban", "Ban mentioned user with or without optional message. [user]<message>")
 							
 							.setThumbnail(BotInfo.getBotImageStr())
 							.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
