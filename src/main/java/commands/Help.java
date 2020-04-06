@@ -57,6 +57,7 @@ public class Help
 							.addInlineField(myKey + "Ping", "The most basic of commands")
 							
 							.addInlineField(myKey + "ahelp", "Admin help panel")
+							.addInlineField(myKey + "define", "Search Urban Dictionary")
 							
 							.setThumbnail(BotInfo.getBotImageStr())
 							.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
