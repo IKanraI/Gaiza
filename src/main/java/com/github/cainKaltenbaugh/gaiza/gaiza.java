@@ -52,6 +52,7 @@ public class gaiza
 		Avatar avatarInit = new Avatar(initApi);
 		Help helpInit = new Help(initApi);
 		UrbanDictionary UDInit = new UrbanDictionary(initApi);
+		GifSearch gifInit = new GifSearch(initApi);
 		
 		System.out.println("\nCommands finished loading!");
 		System.out.println("--------------------------------");

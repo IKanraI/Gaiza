@@ -5,6 +5,7 @@ import java.awt.Color;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.Icon;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -158,7 +159,11 @@ public class UrbanDictionary
 		try
 		{
 			searchURL = searchURL.concat(searchString);
-			docReference = Jsoup.connect(searchURL).followRedirects(true).ignoreHttpErrors(true).userAgent("Mozilla/5.0").get();
+			docReference = Jsoup.connect(searchURL)
+					.followRedirects(true)
+					.ignoreHttpErrors(true)
+					.userAgent("Mozilla/5.0")
+					.get();
 
 			getDefinitions = docReference.select("div.meaning");
 			elementText = getDefinitions.get(0).text();
