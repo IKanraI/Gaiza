@@ -121,7 +121,7 @@ public class GifSearch
 		Elements getImg;
 		
 		Random randNum = new Random();
-		final int MAXRANDOM = 49;
+		final int MAXRANDOM = 15;
 		int randNumPick = 0;
 		userAgentSelect = "Chrome/74.0.3729.157";
 		
@@ -134,24 +134,29 @@ public class GifSearch
 					.ignoreHttpErrors(true)
 					.userAgent(userAgentSelect)
 					.get();
-			
-			randNumPick = randNum.nextInt(MAXRANDOM);
-			
-			getDiv = searchReference.select("div.Gif");
-			getImg = getDiv.get((int) (randNumPick)).select("img");
-			gifToSend = getImg.attr("abs:src");
-			
-			if (!gifToSend.equals(""))
+			do
 			{
-				return gifToSend;
-			}
-			
+				
+				randNumPick = randNum.nextInt(MAXRANDOM);
+				
+				getDiv = searchReference.select("div.Gif");
+				getImg = getDiv.get((int) (randNumPick)).select("img");
+				gifToSend = getImg.attr("abs:src");
+				
+			} while (gifToSend.equalsIgnoreCase("https://tenor.com/assets/img/gif-maker-entrypoints/search-entrypoint-desktop.gif"));
 		} 
 		catch (IOException e) 
 		{
 			e.printStackTrace();
 		}
 		
-		return "noneFoundHere";
+		if (!gifToSend.equals(""))
+		{
+			return gifToSend;
+		}
+		else
+		{
+			return "noneFoundHere";
+		}
 	}
 }
