@@ -63,6 +63,10 @@ public class AdminHelp
 							.addInlineField(myKey + "kick", "Kick mentioned user with or without optional message. [user]<message>")
 							.addInlineField(myKey + "ban", "Ban mentioned user with or without optional message. [user]<message>")
 							
+							.addInlineField(myKey + "enable", "Enable welcome messages with [true|false|t|f|0|1]. Channel and message must both be set first")
+							.addInlineField(myKey + "welcome", "Set the welcome message. Use <<mention>> to mention the user that joins [message]")
+							.addInlineField(myKey + "channel", "Set the welcome channel. Mention the channel with the #[channel]")
+							
 							.setThumbnail(BotInfo.getBotImageStr())
 							.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
 							.setTimestampToNow();

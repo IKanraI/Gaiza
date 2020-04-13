@@ -62,6 +62,7 @@ public class gaiza
 		AdminHelp initAdminHelp = new AdminHelp(initApi);
 		KickUser initKick = new KickUser(initApi);
 		BanUser initBan = new BanUser(initApi);
+		WelcomeMessage initWelcome = new WelcomeMessage(initApi);
 		
 		System.out.println("\nAdmin commands loaded!");
 		System.out.println("--------------------------------");

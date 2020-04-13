@@ -123,8 +123,8 @@ public class GifSearch
 		Random randNum = new Random();
 		final int MAXRANDOM = 15;
 		int randNumPick = 0;
-		userAgentSelect = "Chrome/74.0.3729.157";
 		
+		userAgentSelect = "Chrome/74.0.3729.157";
 		searchURL = searchURL.concat(searchTerm);
 
 		try 
