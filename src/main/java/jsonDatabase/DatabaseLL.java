@@ -9,6 +9,9 @@ public class DatabaseLL
 		private String serverName;
 		private String serverID;
 		private String serverPrefix;
+		private String welcomeMessageText;
+		private String welcomeMessageEnabled;
+		private String welcomeChannel;
 		private Node next;
 
 		public Node(String currID, String currName)
@@ -95,6 +98,51 @@ public class DatabaseLL
 		currNode.serverPrefix = getPrefix;
 	}
 	
+	public void setWelcomeEnabled(DatabaseLL currLL, String enableCheck, int serverSelect)
+	{
+		Node currNode = currLL.head;
+		String isEnabled = enableCheck;
+		int getServer = serverSelect;
+		int i;
+		
+		for (i = 0; i < getServer; ++i)
+		{
+			currNode = currNode.next;
+		}
+		
+		currNode.welcomeMessageEnabled = isEnabled;
+	}
+	
+	public void setWelcomeMessage(DatabaseLL currLL, String newWelcomeMessage, int serverSelect)
+	{
+		Node currNode = currLL.head;
+		String welcomeMessage = newWelcomeMessage;
+		int getServer = serverSelect;
+		int i;
+		
+		for (i = 0; i < getServer; ++i)
+		{
+			currNode = currNode.next;
+		}
+		
+		currNode.welcomeMessageText = welcomeMessage;
+	}
+	
+	public void setWelcomeChannel(DatabaseLL currLL, String newWelcomeChannel, int serverSelect)
+	{
+		Node currNode = currLL.head;
+		String welcomeChannel = newWelcomeChannel;
+		int getServer = serverSelect;
+		int i;
+		
+		for (i = 0; i < getServer; ++i)
+		{
+			currNode = currNode.next;
+		}
+		
+		currNode.welcomeChannel = welcomeChannel;
+	}
+	
 	public String getCurrServerID(DatabaseLL currList, int listPosition)
 	{
 		Node currNode = currList.head;
@@ -133,7 +181,49 @@ public class DatabaseLL
 		}
 		
 		return currNode.serverPrefix;
+	}
+	
+	public String getServerWelcomeChannel(DatabaseLL currLL, int serverSelect)
+	{
+		Node currNode = currLL.head;
+		int getServer = serverSelect;
+		int i;
 		
+		for (i = 0; i < getServer; ++i)
+		{
+			currNode = currNode.next;
+		}
+		
+		return currNode.welcomeChannel;
+	}
+	
+	
+	public String getServerWelcomeEnabled(DatabaseLL currLL, int serverSelect)
+	{
+		Node currNode = currLL.head;
+		int getServer = serverSelect;
+		int i;
+		
+		for (i = 0; i < getServer; ++i)
+		{
+			currNode = currNode.next;
+		}
+		
+		return currNode.welcomeMessageEnabled;
+	}
+	
+	public String getServerWelcomeMessage(DatabaseLL currLL, int serverSelect)
+	{
+		Node currNode = currLL.head;
+		int getServer = serverSelect;
+		int i;
+		
+		for (i = 0; i < getServer; ++i)
+		{
+			currNode = currNode.next;
+		}
+		
+		return currNode.welcomeMessageText;
 	}
 	
 	public int size(DatabaseLL currList)

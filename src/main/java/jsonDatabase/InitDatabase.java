@@ -21,6 +21,9 @@ public class InitDatabase
 	private final String keyFieldServerName = "Server Name";
 	private final String keyFieldID = "ID";
 	private final String keyFieldPrefix = "Prefix";
+	private final String keyFieldWEnabled = "Welcome Enabled";
+	private final String keyFieldWMessage = "Welcome Message";
+	private final String keyFieldChannel = "Welcome Channel";
 	
 	public InitDatabase()
 	{
@@ -61,6 +64,21 @@ public class InitDatabase
 		}
 		
 		if (!getInfo.get(2).equals(serverLL.getServerPrefix(serverLL, getServerPos)))
+		{
+			return true;
+		}
+		
+		if (!getInfo.get(3).equals(serverLL.getServerWelcomeEnabled(serverLL, getServerPos)))
+		{
+			return true;
+		}
+		
+		if (!getInfo.get(4).equals(serverLL.getServerWelcomeMessage(serverLL, getServerPos)))
+		{
+			return true;
+		}
+		
+		if (!getInfo.get(5).equals(serverLL.getServerWelcomeEnabled(serverLL, getServerPos)))
 		{
 			return true;
 		}
@@ -108,6 +126,9 @@ public class InitDatabase
 					blankFileInit(finalPath);
 					
 					serverLL.setServerPrefix(serverLL, Keywords.getDefaultKey(), serverLL.size(serverLL) - ADDSERVER);
+					serverLL.setWelcomeEnabled(serverLL, "false", serverLL.size(serverLL) - ADDSERVER);
+					serverLL.setWelcomeMessage(serverLL, "", serverLL.size(serverLL) - ADDSERVER);
+					serverLL.setWelcomeChannel(serverLL, "", serverLL.size(serverLL) - ADDSERVER);
 				} 
 				catch (Exception e) 
 				{
@@ -127,6 +148,9 @@ public class InitDatabase
 				}
 				
 				serverLL.setServerPrefix(serverLL, getPrefixJSON.get(keyFieldPrefix).toString(), serverLL.size(serverLL) - ADDSERVER);
+				serverLL.setWelcomeEnabled(serverLL, getPrefixJSON.get(keyFieldWEnabled).toString(), serverLL.size(serverLL) - ADDSERVER);
+				serverLL.setWelcomeMessage(serverLL, getPrefixJSON.get(keyFieldWMessage).toString(), serverLL.size(serverLL) - ADDSERVER);
+				serverLL.setWelcomeChannel(serverLL, getPrefixJSON.get(keyFieldChannel).toString(), serverLL.size(serverLL) - ADDSERVER);
 			}
 			
 			BotInfo.setServerCount(BotInfo.getServerCount() + ADDSERVER);
@@ -207,18 +231,25 @@ public class InitDatabase
 				
 				if (checkLength.length() == 0)
 				{
-					//File initialization
+					//File initialization. Handles adding to a freshly added server's linked list
 					blankFileInit(tempPath);
 					
 					serverLL.setServerPrefix(serverLL, Keywords.getDefaultKey(), trackList);
+					serverLL.setWelcomeEnabled(serverLL, "false", trackList);
+					serverLL.setWelcomeMessage(serverLL, "", trackList);
+					serverLL.setWelcomeChannel(serverLL, "", trackList);
 					
 				}
 				else
 				{
+					//If the file is already created, then it grabs the value out of the file and places it in the LL
 					dataManip = parsePrefix.parse(new FileReader(tempPath));
 					getData = (JSONObject) dataManip;
 					
-					serverLL.setServerPrefix(serverLL, getData.get(keyFieldPrefix).toString(), trackList);	
+					serverLL.setServerPrefix(serverLL, getData.get(keyFieldPrefix).toString(), trackList);
+					serverLL.setWelcomeEnabled(serverLL, getData.get(keyFieldWEnabled).toString(), trackList);
+					serverLL.setWelcomeMessage(serverLL, getData.get(keyFieldWMessage).toString(), trackList);
+					serverLL.setWelcomeChannel(serverLL, getData.get(keyFieldChannel).toString(), trackList);
 				}
 
 				++trackList;
@@ -236,9 +267,13 @@ public class InitDatabase
 		JSONObject initData = new JSONObject();
 		String filePath = getServerPath;
 		
-		initData.put("ID", "");
-		initData.put("Server Name", "");
-		initData.put("Prefix", Keywords.getDefaultKey());
+		initData.put(keyFieldID, "");
+		initData.put(keyFieldServerName, "");
+		initData.put(keyFieldPrefix, Keywords.getDefaultKey());
+		
+		initData.put(keyFieldWEnabled, "false");
+		initData.put(keyFieldWMessage, "");
+		initData.put(keyFieldChannel, "");
 		
 		try 
 		{
@@ -316,6 +351,9 @@ public class InitDatabase
 				tempCheck.add((String) storageGetJSON.get(keyFieldPrefix));
 				tempCheck.add((String) storageGetJSON.get(keyFieldID));
 				tempCheck.add((String) storageGetJSON.get(keyFieldServerName));
+				tempCheck.add((String) storageGetJSON.get(keyFieldWEnabled));
+				tempCheck.add((String) storageGetJSON.get(keyFieldWMessage));
+				tempCheck.add((String) storageGetJSON.get(keyFieldChannel));
 				
 				if (checkForChanges(tempCheck, i))
 				{
@@ -323,6 +361,9 @@ public class InitDatabase
 					saveData.put(keyFieldPrefix, serverLL.getServerPrefix(serverLL, i));
 					saveData.put(keyFieldID, serverLL.getCurrServerID(serverLL, i));
 					saveData.put(keyFieldServerName, serverLL.getCurrServerName(serverLL, i));
+					saveData.put(keyFieldWEnabled, serverLL.getServerWelcomeEnabled(serverLL, i));
+					saveData.put(keyFieldWMessage, serverLL.getServerWelcomeMessage(serverLL, i));
+					saveData.put(keyFieldChannel, serverLL.getServerWelcomeChannel(serverLL, i));
 					
 					Files.write(Paths.get(fullPath), saveData.toJSONString().getBytes());
 				}				

@@ -58,6 +58,7 @@ public class Help
 							
 							.addInlineField(myKey + "ahelp", "Admin help panel")
 							.addInlineField(myKey + "define", "Search Urban Dictionary")
+							.addInlineField(myKey + "gif", "Returns a gif [command]gif [search]")
 							
 							.setThumbnail(BotInfo.getBotImageStr())
 							.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
