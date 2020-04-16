@@ -53,6 +53,7 @@ public class gaiza
 		Help helpInit = new Help(initApi);
 		UrbanDictionary UDInit = new UrbanDictionary(initApi);
 		GifSearch gifInit = new GifSearch(initApi);
+		ChanceRolls initRoll = new ChanceRolls(initApi);
 		
 		System.out.println("\nCommands finished loading!");
 		System.out.println("--------------------------------");
