@@ -43,6 +43,7 @@ public class gaiza
 		System.out.println("\nServer List");
 		
 		InitDatabase dbInit = new InitDatabase(initApi);
+		GlobalUserInformation initUsers = new GlobalUserInformation(initApi);
 		
 		System.out.println("\n--------------------------------");
 		System.out.println("Bot command files loading... \n");

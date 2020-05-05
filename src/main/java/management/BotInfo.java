@@ -10,6 +10,7 @@ public class BotInfo
 	private static String botActivity;
 	private static Icon botImage;
 	private static int serverCount;
+	private static int userCount;
 	
 	public BotInfo(DiscordApi getApi)
 	{
@@ -60,6 +61,11 @@ public class BotInfo
 		serverCount = noOfServers;
 	}
 	
+	public static void setUserCount(int noUsers)
+	{
+		userCount = noUsers;
+	}
+	
 	//Getters
 	
 	public static String getBotActivity()
@@ -85,5 +91,10 @@ public class BotInfo
 	public static int getServerCount()
 	{
 		return serverCount;
+	}
+	
+	public static int getUserCount()
+	{
+		return userCount;
 	}
 }

@@ -17,7 +17,7 @@ import management.Keywords;
 public class InitDatabase
 {
 	private static DatabaseLL serverLL = new DatabaseLL();
-	private final String dbPath = "C:\\Users\\Cain\\Documents\\javaDocs\\gaiza\\bin\\Storage\\";
+	private final String dbPath = "C:\\Users\\Cain\\Documents\\javaDocs\\gaiza\\bin\\Storage\\Servers\\";
 	private final String keyFieldServerName = "Server Name";
 	private final String keyFieldID = "ID";
 	private final String keyFieldPrefix = "Prefix";
@@ -38,6 +38,31 @@ public class InitDatabase
 		saveDatabase();
 		listenForNewServer(initApi);
 		listenForLeaveServer(initApi);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void blankFileInit(String getServerPath)
+	{
+		JSONObject initData = new JSONObject();
+		String filePath = getServerPath;
+		
+		initData.put(keyFieldID, "");
+		initData.put(keyFieldServerName, "");
+		initData.put(keyFieldPrefix, Keywords.getDefaultKey());
+		
+		initData.put(keyFieldWEnabled, "false");
+		initData.put(keyFieldWMessage, "");
+		initData.put(keyFieldChannel, "");
+		
+		try 
+		{
+			Files.write(Paths.get(filePath), initData.toJSONString().getBytes());
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public boolean checkForChanges(ArrayList<String> infoCheck, int serverSelect)
@@ -260,32 +285,7 @@ public class InitDatabase
 			throw e;
 		}
 	}
-	
-	@SuppressWarnings("unchecked")
-	public void blankFileInit(String getServerPath)
-	{
-		JSONObject initData = new JSONObject();
-		String filePath = getServerPath;
-		
-		initData.put(keyFieldID, "");
-		initData.put(keyFieldServerName, "");
-		initData.put(keyFieldPrefix, Keywords.getDefaultKey());
-		
-		initData.put(keyFieldWEnabled, "false");
-		initData.put(keyFieldWMessage, "");
-		initData.put(keyFieldChannel, "");
-		
-		try 
-		{
-			Files.write(Paths.get(filePath), initData.toJSONString().getBytes());
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
-		
-	}
-	
+
 	public void getServerList(DiscordApi getApi)
 	{
 		//Handles acquiring the list of servers that the bot is currently residing in from the api
