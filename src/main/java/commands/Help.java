@@ -60,6 +60,9 @@ public class Help
 							.addInlineField(myKey + "define", "Search Urban Dictionary")
 							.addInlineField(myKey + "gif", "Returns a gif [command]gif [search]")
 							
+							.addInlineField(myKey + "fines", "Returns the amount of money you have in fines " + myKey + "fines")
+							.addInlineField(myKey + "leaderboard", "Returns the server leaderboard for uwu fines")
+							
 							.setThumbnail(BotInfo.getBotImageStr())
 							.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
 							.setTimestampToNow();
