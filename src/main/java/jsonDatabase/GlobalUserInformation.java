@@ -24,6 +24,7 @@ public class GlobalUserInformation
 		
 		getUsersList(userApi);
 		checkForNewUsers();
+		newUserJoins(userApi);
 		
 	}
 	
@@ -122,14 +123,22 @@ public class GlobalUserInformation
 		joinNewApi.addServerMemberJoinListener(event ->
 		{
 			String userID;
+			String userFilePath;
+			boolean fileExists;
 			
 			userID = event.getUser().getIdAsString();
-			addToList(userID);
-			blankFileInit(userID);
+			userFilePath = filePath + userID + ".json";
 			
-			System.out.println("User joined with ID of " + userID);
+			fileExists = new File(userFilePath).exists();
+			
+			if (!fileExists)
+			{
+				addToList(userID);
+				blankFileInit(userID);
+				
+				System.out.println("User joined with ID of " + userID);
+			}	
 		});
-		
 	}
 	
 	public void splitUserID(ArrayList<String> userInfo)
