@@ -1,6 +1,8 @@
 package commands;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.Icon;
@@ -34,18 +36,66 @@ public class UrbanDictionary
 		
 		String definition = messageToSend;
 		String definitionTerm = keyTerm;
+		String finalCount = "";
 		
-		EmbedBuilder output = new EmbedBuilder()
-				.setTitle(definitionTerm)
-				.setAuthor(messageAuthorName, messageAuthorURL, messageAuthorIcon)
-				.setColor(Color.magenta)
-				
-				.addInlineField("Definition", definition)
-				
-				.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
-				.setTimestampToNow();
+		final int MAXCHARCOUNT = 1024;
+		int bufferCharAmount = 30;
+		Integer charCount = 0;
 		
-		return output;
+		charCount = definition.length();
+		charCount += definitionTerm.length();
+		charCount += messageAuthorName.length() + messageAuthorURL.length() + BotInfo.getBotName().length();
+		charCount += bufferCharAmount;
+		
+		if (charCount <= MAXCHARCOUNT)
+		{
+			EmbedBuilder output = new EmbedBuilder()
+					.setTitle(definitionTerm)
+					.setAuthor(messageAuthorName, messageAuthorURL, messageAuthorIcon)
+					.setColor(Color.magenta)
+					
+					.addInlineField("Definition", definition)
+					
+					.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
+					.setTimestampToNow();
+			
+			return output;
+		}
+		else
+		{
+			return null;
+		}
+	}
+	
+	public String searchAndReturnMessage(String searchString, String searchURL)
+	{
+		Elements getDefinitions;
+		String elementText = "";
+		Document docReference;
+		
+		try
+		{
+			searchURL = searchURL.concat(searchString);
+			docReference = Jsoup.connect(searchURL)
+					.followRedirects(true)
+					.ignoreHttpErrors(true)
+					.userAgent("Mozilla/5.0")
+					.get();
+
+			getDefinitions = docReference.select("div.meaning");
+			elementText = getDefinitions.get(0).text();
+			
+			if (!elementText.equals(""))
+			{
+				return elementText;
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return "noneFoundHere";
 	}
 	
 	public void uDSearch(DiscordApi getApi)
@@ -65,11 +115,12 @@ public class UrbanDictionary
 			
 			String messageAuthorName;
 			String messageAuthorURL;
+			List<String> messageSplitForSize = new ArrayList<String>();
 			Icon messageAuthorIcon;
 			EmbedBuilder sendOutput;
-			int i;
 			
-			
+			final int MAXDISCORDMESSAGE = 2000;
+			int i, trackCharLimit = 0;
 			
 			if (event.getMessageAuthor().isUser())
 			{
@@ -97,7 +148,24 @@ public class UrbanDictionary
 						{
 							getTermForOutput = searchString.substring(0, 1).toUpperCase() + searchString.substring(1);
 							sendOutput = buildOutput(messageAuthorName, messageAuthorURL, messageAuthorIcon, finalMessage, getTermForOutput);
-							event.getChannel().sendMessage(sendOutput);
+							
+							if (sendOutput != null)
+							{
+								event.getChannel().sendMessage(sendOutput);
+							}
+							else
+							{
+								while (trackCharLimit < finalMessage.length())
+								{
+									messageSplitForSize.add(finalMessage.substring(trackCharLimit, Math.min(trackCharLimit + MAXDISCORDMESSAGE,  finalMessage.length())));
+									trackCharLimit += MAXDISCORDMESSAGE;
+								}
+								
+								for (i = 0; i < messageSplitForSize.size(); ++i)
+								{
+									event.getChannel().sendMessage(i + 1 + "/" + messageSplitForSize.size() + " " + messageSplitForSize.get(i));
+								}
+							}
 						}
 						catch (Exception e)
 						{
@@ -133,7 +201,24 @@ public class UrbanDictionary
 							getTermForOutput = searchString.substring(0, 1).toUpperCase() + searchString.substring(1);
 							getTermForOutput = getTermForOutput.replace('+', ' ');
 							sendOutput = buildOutput(messageAuthorName, messageAuthorURL, messageAuthorIcon, finalMessage, getTermForOutput);
-							event.getChannel().sendMessage(sendOutput);
+							
+							if (sendOutput != null)
+							{
+								event.getChannel().sendMessage(sendOutput);
+							}
+							else
+							{
+								while (trackCharLimit < finalMessage.length())
+								{
+									messageSplitForSize.add(finalMessage.substring(trackCharLimit, Math.min(trackCharLimit + MAXDISCORDMESSAGE,  finalMessage.length())));
+									trackCharLimit += MAXDISCORDMESSAGE;
+								}
+								
+								for (i = 0; i < messageSplitForSize.size(); ++i)
+								{
+									event.getChannel().sendMessage(i + 1 + "/" + messageSplitForSize.size() + " " + messageSplitForSize.get(i));
+								}
+							}
 						}
 						catch (Exception e)
 						{
@@ -148,36 +233,5 @@ public class UrbanDictionary
 				}
 			}
 		});
-	}
-	
-	public String searchAndReturnMessage(String searchString, String searchURL)
-	{
-		Elements getDefinitions;
-		String elementText = "";
-		Document docReference;
-		
-		try
-		{
-			searchURL = searchURL.concat(searchString);
-			docReference = Jsoup.connect(searchURL)
-					.followRedirects(true)
-					.ignoreHttpErrors(true)
-					.userAgent("Mozilla/5.0")
-					.get();
-
-			getDefinitions = docReference.select("div.meaning");
-			elementText = getDefinitions.get(0).text();
-			
-			if (!elementText.equals(""))
-			{
-				return elementText;
-			}
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		
-		return "noneFoundHere";
 	}
 }
