@@ -97,7 +97,7 @@ public class BoredResponse
 		
 		try
 		{
-			phraseFile = new File("C:\\Users\\Cain\\Documents\\javaDocs\\gaiza\\bin\\Resource\\boredPhrases.txt");
+			phraseFile = new File("C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\bin\\Resource\\boredPhrases.txt");
 			phraseScan = new Scanner(phraseFile);
 			
 			while(phraseScan.hasNextLine())

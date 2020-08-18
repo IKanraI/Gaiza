@@ -17,7 +17,7 @@ import management.Keywords;
 public class InitDatabase
 {
 	private static DatabaseLL serverLL = new DatabaseLL();
-	private final String dbPath = "C:\\Users\\Cain\\Documents\\javaDocs\\gaiza\\bin\\Storage\\Servers\\";
+	private final String dbPath = "C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\bin\\Storage\\Servers\\";
 	private final String keyFieldServerName = "Server Name";
 	private final String keyFieldID = "ID";
 	private final String keyFieldPrefix = "Prefix";

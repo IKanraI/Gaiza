@@ -15,7 +15,7 @@ import management.BotInfo;
 public class GlobalUserInformation 
 {
 	private static Map <String , String> userIDList = new HashMap<>();
-	private static String filePath = "C:\\Users\\Cain\\Documents\\javaDocs\\gaiza\\bin\\Storage\\Users\\uwuData\\";
+	private static String filePath = "C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\bin\\Storage\\Users\\uwuData\\";
 	private String uwuAmount = "Fine Amount";
 	
 	public GlobalUserInformation(DiscordApi getApi)

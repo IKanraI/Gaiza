@@ -15,7 +15,7 @@ public class Token
 	
 	public void setToken() throws FileNotFoundException
 	{
-		File tokenFile = new File("C:\\Users\\Cain\\Documents\\javaDocs\\Hidden\\Token.txt");
+		File tokenFile = new File("C:\\Users\\17244\\Documents\\JavaProjects\\Hidden\\Token.txt");
 		Scanner getToken = new Scanner(tokenFile);
 		
 		token = getToken.nextLine();
