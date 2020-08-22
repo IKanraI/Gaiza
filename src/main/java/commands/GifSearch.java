@@ -12,9 +12,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-
 import management.BotInfo;
 import management.Keywords;
 
@@ -103,6 +100,12 @@ public class GifSearch
 							e.printStackTrace();
 						}
 					}
+					else
+					{
+						event.getMessage().addReaction("❌");
+						event.getChannel().sendMessage("No image found");
+						
+					}
 				}
 				else if (splitMessage[0].equalsIgnoreCase(myKey + command) && splitMessage.length == 1)
 				{
@@ -119,38 +122,48 @@ public class GifSearch
 		String userAgentSelect = "";
 		String gifToSend = "";
 		
-		WebClient searchClient = new WebClient();
-		HtmlPage pageToFind;
 		Document searchReference;
 		Elements getDiv;
 		Elements getImg;
 		
 		Random randNum = new Random();
-		final int MAXRANDOM = 15;
+		final int REDUCEIMAGES = 2;
+		final int MAXIMAGES = 30;
+		int maxImagesFound = 0;
 		int randNumPick = 0;
 		
 		userAgentSelect = "Chrome/74.0.3729.157";
 		searchURL = searchURL.concat(searchTerm);
 		
-		
-
 		try 
-		{
-			pageToFind = searchClient.getPage(searchURL);
-			
+		{			
 			searchReference = Jsoup.connect(searchURL)
 					.followRedirects(true)
 					.ignoreHttpErrors(true)
 					.userAgent(userAgentSelect)
 					.get();
 			do
-			{
-				
-				randNumPick = randNum.nextInt(MAXRANDOM);
-				
+			{				
 				getDiv = searchReference.select("div.Gif");
-				getImg = getDiv.get((int) (randNumPick)).select("img");
-				gifToSend = getImg.attr("abs:src");
+				
+				maxImagesFound = getDiv.size();
+				
+				if (maxImagesFound > MAXIMAGES)
+				{
+					maxImagesFound /= REDUCEIMAGES;
+				}
+				if (maxImagesFound == 0)
+				{
+					gifToSend = "";
+				}
+				else
+				{
+				
+					randNumPick = randNum.nextInt(maxImagesFound);
+					
+					getImg = getDiv.get((int) (randNumPick)).select("img");
+					gifToSend = getImg.attr("abs:src");
+				}
 				
 			} while (gifToSend.equalsIgnoreCase("https://tenor.com/assets/img/gif-maker-entrypoints/search-entrypoint-desktop.gif"));
 		} 
