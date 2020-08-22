@@ -62,6 +62,17 @@ public class Help
 							
 							.addInlineField(myKey + "fines", "Returns the amount of money you have in fines " + myKey + "fines")
 							.addInlineField(myKey + "leaderboard", "Returns the server leaderboard for uwu fines")
+							.addInlineField(myKey + "pat",  "Pats a mentioned user")
+							
+							.addInlineField(myKey + "boob", "Boobs a mentioned user")
+							.addInlineField(myKey + "slap",  "Slaps a mentioned user")
+							.addInlineField(myKey + "hug",  "Hugs a mentioned user")
+							
+							.addInlineField(myKey + "snuggle",  "Snuggles a mentioned user")
+							.addInlineField(myKey + "kiss",  "Kisses a mentioned user")
+							.addInlineField(myKey + "poke",  "Pokes a mentioned user")
+							
+							.addInlineField(myKey + "stare",  "Stares at a mentioned user")
 							
 							.setThumbnail(BotInfo.getBotImageStr())
 							.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())

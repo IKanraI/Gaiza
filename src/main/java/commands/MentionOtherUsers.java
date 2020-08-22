@@ -1,11 +1,13 @@
 package commands;
 
+import java.awt.Color;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import org.javacord.api.DiscordApi;
+import org.javacord.api.entity.message.embed.EmbedBuilder;
 
 import management.Keywords;
 
@@ -21,7 +23,21 @@ public class MentionOtherUsers
 		getMentionType(mentionApi);
 	}
 	
-	//Pat, boop, slap, hug, snuggle, kiss, poke, stare
+	//Pat, boob, slap, hug, snuggle, kiss, poke, stare
+	
+	public EmbedBuilder buildEmbed (String gifToSend)
+	{
+		EmbedBuilder embedToReturn;
+		String gifToEmbed = gifToSend;
+		
+		embedToReturn = new EmbedBuilder()
+				.setColor(Color.magenta)
+				
+				.setImage(gifToEmbed)
+				.setTimestampToNow();
+		
+		return embedToReturn;
+	}
 	
 	public void getMentionType(DiscordApi getApi)
 	{
@@ -47,40 +63,67 @@ public class MentionOtherUsers
 				
 				checkKeyAsChar = serverKey.charAt(0);
 				
-				if (splitMessage[0].charAt(0) == checkKeyAsChar)
+				if (splitMessage[0].length() > 0 && splitMessage[0].charAt(0) == checkKeyAsChar)
 				{
 					checkMessage = splitMessage[0].replace(serverKey, "");
 					
 					userCommandCalled = getCalledCommand(checkMessage);
 					
-					if (splitMessage.length == 2 && userCommandCalled != null)
+					if (userCommandCalled != null && splitMessage.length == 2)
 					{
 						GifSearch getSearchGif;
+						EmbedBuilder messageEmbedToSend;
 						String userMentioned = "";
-						String getGifToSend = "";
+						String messageAuthor = "";
 						String searchTerm = "";
 						String finalGifSend = "";
+						char lastCharInCommand = '\n';
 						
 						searchTerm = "Anime " + userCommandCalled;
 
 						try
 						{
 							userMentioned = event.getMessage().getMentionedUsers().get(0).getIdAsString();
+							messageAuthor = event.getMessageAuthor().getIdAsString();
 							getSearchGif = new GifSearch(searchTerm);
 							
 							finalGifSend = getSearchGif.getGifReturnUrl();
 							
-							event.getChannel().sendMessage(finalGifSend);
+							messageEmbedToSend = buildEmbed(finalGifSend);
+							
+							lastCharInCommand = userCommandCalled.charAt(userCommandCalled.length() - 1);
+							
+							switch (lastCharInCommand)
+							{
+								case 'e':
+									userCommandCalled += "d";
+									break;
+									
+								case 't':
+									userCommandCalled += "ted";
+									break;
+									
+								default:
+									userCommandCalled += "ed";
+									break;
+							}
+							
+							event.getChannel().sendMessage("<@" + userMentioned + ">, you have been " + userCommandCalled + " by <@" + messageAuthor + ">");
+							event.getChannel().sendMessage(messageEmbedToSend);
 						}
 						catch(Exception e)
 						{
+							e.printStackTrace();
 							event.getChannel().sendMessage("User was not able to be mentioned");
 						}
 					}
+					else if (userCommandCalled != null && splitMessage.length == 1)
+					{
+						event.getMessage().addReaction("❌");
+						event.getChannel().sendMessage("Please mention a user");
+					}
 				}
-			}
-			
-			
+			}			
 		});
 	}
 	
