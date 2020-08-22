@@ -18,12 +18,23 @@ import management.Keywords;
 public class GifSearch 
 {
 	private String command = "gif";
+	private String searchURL = "https://tenor.com/search/";
+	private String returnGifUrl = "";
 	
 	public GifSearch(DiscordApi getApi)
 	{
 		DiscordApi gifApi = getApi;
 		
 		gifSearch(gifApi);
+	}
+	
+	public GifSearch(String searchTerm)
+	{
+		String gifUrl = "";
+		
+		gifUrl = searchGif(searchTerm, searchURL);
+		
+		setGifReturnUrl(gifUrl);
 	}
 	
 	public EmbedBuilder buildEmbed(String url, String author, String aURL, Icon aIcon)
@@ -180,5 +191,15 @@ public class GifSearch
 		{
 			return "noneFoundHere";
 		}
+	}
+	
+	public void setGifReturnUrl(String gifURL)
+	{
+		returnGifUrl = gifURL;
+	}
+	
+	public String getGifReturnUrl()
+	{
+		return returnGifUrl;
 	}
 }

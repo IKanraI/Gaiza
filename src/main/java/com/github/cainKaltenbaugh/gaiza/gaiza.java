@@ -55,6 +55,7 @@ public class gaiza
 		UrbanDictionary UDInit = new UrbanDictionary(initApi);
 		GifSearch gifInit = new GifSearch(initApi);
 		ChanceRolls initRoll = new ChanceRolls(initApi);
+		MentionOtherUsers initMention = new MentionOtherUsers(initApi);
 		
 		System.out.println("\nCommands finished loading!");
 		System.out.println("--------------------------------");
