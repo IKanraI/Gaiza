@@ -12,6 +12,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+
 import management.BotInfo;
 import management.Keywords;
 
@@ -116,6 +119,8 @@ public class GifSearch
 		String userAgentSelect = "";
 		String gifToSend = "";
 		
+		WebClient searchClient = new WebClient();
+		HtmlPage pageToFind;
 		Document searchReference;
 		Elements getDiv;
 		Elements getImg;
@@ -126,9 +131,13 @@ public class GifSearch
 		
 		userAgentSelect = "Chrome/74.0.3729.157";
 		searchURL = searchURL.concat(searchTerm);
+		
+		
 
 		try 
 		{
+			pageToFind = searchClient.getPage(searchURL);
+			
 			searchReference = Jsoup.connect(searchURL)
 					.followRedirects(true)
 					.ignoreHttpErrors(true)
