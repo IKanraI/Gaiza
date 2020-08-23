@@ -102,6 +102,14 @@ public class MentionOtherUsers
 								case 't':
 									userCommandCalled += "ted";
 									break;
+								
+								case 'p':
+									userCommandCalled += "ped";
+									break;
+								
+								case 'g':
+									userCommandCalled += "ged";
+									break;
 									
 								default:
 									userCommandCalled += "ed";
@@ -113,7 +121,6 @@ public class MentionOtherUsers
 						}
 						catch(Exception e)
 						{
-							e.printStackTrace();
 							event.getChannel().sendMessage("User was not able to be mentioned");
 						}
 					}

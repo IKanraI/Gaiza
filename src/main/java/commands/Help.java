@@ -73,6 +73,12 @@ public class Help
 							.addInlineField(myKey + "poke",  "Pokes a mentioned user")
 							
 							.addInlineField(myKey + "stare",  "Stares at a mentioned user")
+							.addInlineField(myKey + "smug",  "Makes a smug look at a mentioned user")
+							.addInlineField(myKey + "lewd",  "Lewds a mentioned user")
+							
+							.addInlineField(myKey + "bite",  "Bites a mentioned user")
+							.addInlineField(myKey + "meow",  "Does cat things at a mentioned user")
+							
 							
 							.setThumbnail(BotInfo.getBotImageStr())
 							.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
