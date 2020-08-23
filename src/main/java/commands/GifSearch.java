@@ -132,10 +132,14 @@ public class GifSearch
 		String searchURL = url;
 		String userAgentSelect = "";
 		String gifToSend = "";
+		String fullSizeUrl = "";
 		
 		Document searchReference;
+		Document secondSearchRef;
 		Elements getDiv;
 		Elements getImg;
+		Elements fullDiv;
+		Elements fullImg;
 		
 		Random randNum = new Random();
 		final int REDUCEIMAGES = 2;
@@ -147,36 +151,51 @@ public class GifSearch
 		searchURL = searchURL.concat(searchTerm);
 		
 		try 
-		{			
+		{	
+			
 			searchReference = Jsoup.connect(searchURL)
 					.followRedirects(true)
 					.ignoreHttpErrors(true)
 					.userAgent(userAgentSelect)
 					.get();
-			do
-			{				
-				getDiv = searchReference.select("div.Gif");
-				
-				maxImagesFound = getDiv.size();
-				
-				if (maxImagesFound > MAXIMAGES)
+							
+			getDiv = searchReference.select("figure.GifListItem");
+			
+			maxImagesFound = getDiv.size();
+			
+			if (maxImagesFound > MAXIMAGES)
+			{
+				maxImagesFound /= REDUCEIMAGES;
+			}
+			if (maxImagesFound == 0)
+			{
+				gifToSend = "";
+			}
+			else
+			{
+				do
 				{
-					maxImagesFound /= REDUCEIMAGES;
-				}
-				if (maxImagesFound == 0)
-				{
-					gifToSend = "";
-				}
-				else
-				{
-				
+			
 					randNumPick = randNum.nextInt(maxImagesFound);
-					
-					getImg = getDiv.get((int) (randNumPick)).select("img");
-					gifToSend = getImg.attr("abs:src");
-				}
 				
-			} while (gifToSend.equalsIgnoreCase("https://tenor.com/assets/img/gif-maker-entrypoints/search-entrypoint-desktop.gif"));
+					getImg = getDiv.get((int) (randNumPick)).select("a");
+					fullSizeUrl = getImg.attr("abs:href").toString();
+				
+					secondSearchRef = Jsoup.connect(fullSizeUrl)
+							.followRedirects(true)
+							.ignoreHttpErrors(true)
+							.userAgent(userAgentSelect)
+							.get();
+
+					
+				} while (fullSizeUrl.equalsIgnoreCase("https://tenor.com/gif-maker?utm_source=search-page&utm_medium=internal&utm_campaign=gif-maker-entrypoints"));
+					
+					fullDiv = secondSearchRef.select("div.Gif");
+					fullImg = fullDiv.get(0).select("img");
+					gifToSend = fullImg.attr("abs:src");
+				
+			}	
+			
 		} 
 		catch (IOException e) 
 		{
