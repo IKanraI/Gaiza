@@ -9,6 +9,7 @@ import java.util.Scanner;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 
+import management.BotInfo;
 import management.Keywords;
 
 public class MentionOtherUsers 
@@ -34,6 +35,7 @@ public class MentionOtherUsers
 				.setColor(Color.magenta)
 				
 				.setImage(gifToEmbed)
+				.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
 				.setTimestampToNow();
 		
 		return embedToReturn;
