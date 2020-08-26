@@ -11,7 +11,7 @@ import management.*;
 
 import java.io.*;
 
-public class gaiza 
+public class gaiza
 {
 	static DiscordApi startUp() throws FileNotFoundException
 	{
