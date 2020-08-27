@@ -9,6 +9,9 @@
 plugins {
     // Apply the java-library plugin to add support for Java Library
     id 'java-library'
+    
+    group 'org.javacord'
+	version '1.0.0-SNAPSHOT'
 }
 
 repositories {
@@ -17,6 +20,8 @@ repositories {
     jcenter()
     
     mavenCentral()
+    
+    maven { url "https://jitpack.io" }
 }
 
 dependencies {
@@ -29,9 +34,12 @@ dependencies {
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
     
-    implementation 'org.javacord:javacord:3.0.5'
+    implementation 'org.javacord:javacord:3.0.4'
+    implementation 'org.javacord:javacord:audio-3.0.1'
     
     implementation 'org.jsoup:jsoup:1.9.1'
     
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+    
+    implementation group: 'com.github.Bastian', name: 'Lavaplayer-Wrapper', version: '23d07cc'
 }

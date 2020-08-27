@@ -1,6 +1,7 @@
 package commandsAdmin;
 
 import org.javacord.api.DiscordApi;
+import org.javacord.api.audio.AudioSource;
 
 public class MusicIntro 
 {
@@ -19,9 +20,9 @@ public class MusicIntro
 		
 		musicApi.addServerVoiceChannelMemberJoinListener( event ->
 		{
-			//AudioSource musicSource = new YoutubeAudioSourceBuilder()
-					//.setUrl("https://www.youtube.com/watch?v=otOBHT4E5hs")
-					//.build();
+			AudioSource musicSource = new YoutubeAudioSourceBuilder()
+					.setUrl("https://www.youtube.com/watch?v=otOBHT4E5hs")
+					.build();
 			int i = 0;
 			int maxUsersInChannel = event.getChannel().getConnectedUserIds().size();
 			String[] idArray = (String[]) event.getChannel().getConnectedUserIds().toArray();
