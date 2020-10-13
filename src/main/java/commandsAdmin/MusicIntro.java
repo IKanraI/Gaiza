@@ -16,7 +16,7 @@ public class MusicIntro
 	
 	public void checkIfUserJoin(DiscordApi getApi)
 	{
-		DiscordApi musicApi = getApi;
+		/*DiscordApi musicApi = getApi;
 		
 		musicApi.addServerVoiceChannelMemberJoinListener( event ->
 		{
@@ -41,6 +41,6 @@ public class MusicIntro
 			{
 				
 			}
-		});
+		});*/
 	}
 }

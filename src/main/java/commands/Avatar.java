@@ -1,137 +1,76 @@
 package commands;
-
 import java.awt.Color;
+
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.Icon;
+import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
+import org.javacord.api.entity.user.User;
 
 import management.BotInfo;
 import management.Keywords;
 
-public class Avatar 
-{
-	private String avaCall = "avatar";
-	private String imageSize = "?size=256";
+public class Avatar {
+	private final String command;
+	private final String imageSize;
 	
-	public Avatar(DiscordApi getApi)
-	{
-		DiscordApi avaApi = getApi;
+	public Avatar(DiscordApi userApi) {
+		command = "avatar";
+		imageSize = "?size=256";
 		
-		listenAvatar(avaApi);
-		
-		System.out.println("Avatar.java loaded!");		
+		listenAvatar(userApi);
 	}
-	
-	public void listenAvatar(DiscordApi getApi)
-	{
-		DiscordApi avaApi = getApi;
+
+	private void listenAvatar(DiscordApi userApi) {
 		
-		avaApi.addMessageCreateListener(event ->
-		{
-			String messageString = "";
-			String checkMessage = "";
-			String concatMessage  = "";
-			String[] splitMessage = null;
-			String getServerAddress = "";
-			String myKey = "";
-
-			getServerAddress = event.getServer().get().getIdAsString();
-			myKey = Keywords.getKey(getServerAddress);
-
+		userApi.addMessageCreateListener(event -> {
 			
-			if (event.getMessageAuthor().isUser())
-			{
-				//Checks if user has entered command first then parses the command
-				messageString = event.getMessageContent();
+			if (event.getMessageAuthor().isUser()) {
 				
-				splitMessage = messageString.split(" ");
-				concatMessage = myKey + avaCall;
-				checkMessage = splitMessage[0];
+				String serverKey = Keywords.getKey(event.getServer().get().getIdAsString());
+				String userMessage[] = event.getMessageContent().split(" ");
 				
-				checkMessage.trim();
-				concatMessage.trim();
-				
-				if (checkMessage.equals(concatMessage) && splitMessage.length == 1)
+				if((serverKey + command).equalsIgnoreCase(userMessage[0]))
 				{
-					//Handles the command if there are no arguments
-					String imageStr = "";
-					String displayName = "";
-					String userImageUrl = "";
-					Icon userIcon;
 					
-					try
-					{
-						//Makes sure that if this statement is executed and a bad value comes back that the program does not break entirely
-						imageStr = event.getMessageAuthor().getAvatar().getUrl().toString() + imageSize;
-						displayName = event.getMessageAuthor().getDisplayName();
-						userIcon = event.getMessageAuthor().getAvatar();	
-						userImageUrl = event.getMessageAuthor().getAvatar().getUrl().toString();
-						
-						//Embed the image with these properties
-						EmbedBuilder embed = new EmbedBuilder()
-								.setAuthor(displayName, userImageUrl, userIcon)
-								.setColor(Color.magenta)
-								.setImage(imageStr)
-								.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
-								.setTimestampToNow();
-				
-						event.getChannel().sendMessage(embed);
+					switch (userMessage.length) {
+					case 1:
+						MessageAuthor auth = event.getMessageAuthor();
+						event.getChannel().sendMessage(
+							buildOutputMessage(
+								auth.getDisplayName(),
+								auth.getAvatar().getUrl().toString(),
+								auth.getAvatar(),
+								auth.getAvatar().getUrl().toString()));
+						break;
+					case 2:
+						User mUser = event.getMessage().getMentionedUsers().get(0);
+						event.getChannel().sendMessage(
+								buildOutputMessage(
+									mUser.getName(),
+									mUser.getAvatar().getUrl().toString(),
+									mUser.getAvatar(),
+									mUser.getAvatar().getUrl().toString()));
+						break;
+					default:
+						event.getMessage().addReaction("‼");
+						event.getChannel().sendMessage("Please either invoke just the command: (" + serverKey + command + ") or the command with one user: (" + serverKey + command + " [username])");
 					}
-					catch (Exception e)
-					{
-						//Not sure if it can hit this but hey I'll find out if I do
-						event.getChannel().sendMessage("Something went wrong");
-						
-						e.printStackTrace();
-					}
-					
 				}
-				else if (checkMessage.equals(concatMessage) && splitMessage.length == 2)
-				{
-					//Handles the command if there is one argument
-					String imageStr = "";
-					String displayName = "";
-					String userImageUrl = "";
-					Icon userIcon;
-					
-					try
-					{
-						//Makes sure that if this statement is executed and a bad value comes back that the program does not break entirely
-						imageStr = event.getMessage().getMentionedUsers().get(0).getAvatar().getUrl().toString() + imageSize;
-						displayName = event.getMessage().getMentionedUsers().get(0).getName();
-						userIcon = event.getMessage().getMentionedUsers().get(0).getAvatar();
-						userImageUrl = event.getMessageAuthor().getAvatar().getUrl().toString();
-						
-						//Embed the image with these properties
-						EmbedBuilder embed = new EmbedBuilder()
-								.setAuthor(displayName, userImageUrl, userIcon)
-								.setColor(Color.magenta)
-								.setImage(imageStr)
-								.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
-								.setTimestampToNow();
-								
-						//Sends the embedded message back to the channel
-						event.getChannel().sendMessage(embed);
-						
-					}
-					catch (Exception e)
-					{
-						//Catches exceptions that include user not being a mentioned user or not entering a user in the server
-						event.getChannel().sendMessage("User mentioned either doesn't exist in the server or is not a user");
-						
-						e.printStackTrace();
-					}
-					
-				}
-				else if (checkMessage.equals(concatMessage) && splitMessage.length > 2)
-				{
-					//Returns error if there are multiple arguments entered
-					event.getMessage().addReaction("‼");
-					event.getChannel().sendMessage("Please either invoke just the command: (" + myKey + avaCall + ") or the command with one user: (" + myKey + avaCall + " [username])");	
-				}
-				
 			}
-			
 		});
 	}
+	
+	private EmbedBuilder buildOutputMessage(String displayName, String userImageUrl, Icon userIcon, String imageStr) {
+		
+		EmbedBuilder embed = new EmbedBuilder()
+				.setAuthor(displayName, userImageUrl, userIcon)
+				.setColor(Color.magenta)
+				.setImage(imageStr + imageSize)
+				.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
+				.setTimestampToNow();
+		
+		return embed;
+	}
+
 }
