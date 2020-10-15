@@ -6,10 +6,13 @@ import java.util.Scanner;
 
 public class Token 
 {
-	static private String token = "";
+	private static String token = "";
 	
-	static public void setToken() throws FileNotFoundException
-	{
+	public Token() throws FileNotFoundException {
+		setToken();
+	}
+	
+	static public void setToken() throws FileNotFoundException {
 		File tokenFile = new File("C:\\Users\\17244\\Documents\\JavaProjects\\Hidden\\Token.txt");
 		Scanner getToken = new Scanner(tokenFile);
 		
@@ -18,8 +21,7 @@ public class Token
 		getToken.close();
 	}
 	
-	static public String getToken()
-	{
+	public String getToken() {
 		return token;
 	}
 }

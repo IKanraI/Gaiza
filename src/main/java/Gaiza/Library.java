@@ -24,7 +24,8 @@ public class Library
 	 }
 
 	public static void main(String[] args) throws Exception {
-		DiscordApi startUpApi = new DiscordApiBuilder().setToken(Token.getToken()).login().join();
+		Token token = new Token();
+		DiscordApi startUpApi = new DiscordApiBuilder().setToken(token.getToken()).login().join();
 		startUpApi.updateActivity(BotInfo.getBotActivity());
 		
 		commandInit(startUpApi);
@@ -39,7 +40,11 @@ public class Library
 		
 		File folder = new File("C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\commands");
 		
-		try {
+		InitDatabase dbInit = new InitDatabase(initApi);
+		GlobalUserInformation initUsers = new GlobalUserInformation(initApi);
+		cHandler.registerCommand(new Ping());
+		
+		/*try {
 			for (final File commandName : folder.listFiles()) {
 				if (!commandName.isDirectory()) {
 					String[] fileName = commandName.getName().split(".");
@@ -48,6 +53,6 @@ public class Library
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 }

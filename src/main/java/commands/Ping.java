@@ -1,22 +1,28 @@
 package commands;
 
+import org.apache.logging.log4j.message.Message;
 import org.javacord.api.DiscordApi;
+import org.javacord.api.entity.channel.TextChannel;
+import org.javacord.api.entity.user.User;
 
+import de.btobastian.sdcf4j.Command;
 import de.btobastian.sdcf4j.CommandExecutor;
 import management.Keywords;
 
 public class Ping implements CommandExecutor
 {
 	private String pingMsg = "ping";
+	private String serverPrefix;
 	
-	public Ping(DiscordApi api)
-	{
-		DiscordApi holdPingApi = api;
+	public Ping() {
+		Keywords.
+	}
+	
+	
+	@Command(aliases = {"!ping"}, async = true, description = "Pings Pong")
+	public void onCommand(DiscordApi api, TextChannel channel, User author, Message message, String[] args) {
+			channel.sendMessage(author.getName() + " rules in better code! ... er I mean... Pong" + args.length).join();
 		
-		listenPing(api);
-		
-		System.out.println("Ping.java loaded!");
-			
 	}
 	
 	public void listenPing(DiscordApi pingApi)
@@ -38,4 +44,6 @@ public class Ping implements CommandExecutor
 			}
 		});
 	}
+	
+	
 }
