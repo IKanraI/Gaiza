@@ -23,7 +23,7 @@ public class BotInfo
 		getBotName = botApi.getYourself().getName();
 		getBotImageStr = botApi.getYourself().getAvatar().getUrl().toString();
 		getBotIcon = botApi.getYourself().getAvatar();
-		standardActivity = "Moving to Java | Commands WIP";
+		standardActivity = "Spookify";
 		
 		setBotName(getBotName);
 		setBotImageStr(getBotImageStr);
@@ -35,7 +35,6 @@ public class BotInfo
 	}
 	
 	//Setters
-	
 	public void setBotActivity(String setActivity)
 	{
 		botActivity = setActivity;

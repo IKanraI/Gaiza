@@ -2,9 +2,10 @@ package commands;
 
 import org.javacord.api.DiscordApi;
 
+import de.btobastian.sdcf4j.CommandExecutor;
 import management.Keywords;
 
-public class Ping
+public class Ping implements CommandExecutor
 {
 	private String pingMsg = "ping";
 	
