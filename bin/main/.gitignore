@@ -1,6 +1,7 @@
+/AdminCommands/
+/Command/
+/Database/
 /Gaiza/
-/commands/
-/commandsAdmin/
-/jsonDatabase/
-/listener/
-/management/
+/Listener/
+/Management/
+/UserCommands/
