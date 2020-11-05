@@ -37,4 +37,6 @@ dependencies {
     implementation group: 'com.github.Bastian', name: 'Lavaplayer-Wrapper', version: '23d07cc'
     implementation "de.btobastian.sdcf4j:sdcf4j-javacord:${versions.sdcf4j}"
     implementation "de.btobastian.sdcf4j:sdcf4j-core:${versions.sdcf4j}"
+    compileOnly 'org.projectlombok:lombok:1.18.16'
+    annotationProcessor 'org.projectlombok:lombok:1.18.16'
 }
