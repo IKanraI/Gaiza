@@ -17,7 +17,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 @Getter
 @Setter
-@NoArgsConstructor
 public abstract class Command {
     private DiscordApi api;
     private TextChannel channel;
@@ -61,9 +60,39 @@ public abstract class Command {
         return true;
     }
 
-    public boolean onCommand(DiscordApi api, TextChannel channel, Message message, MessageAuthor messageAuthor) {
+    private void setServer(Server server2) {
+		server = server2;
+		
+	}
+
+	public boolean onCommand(DiscordApi api, TextChannel channel, Message message, MessageAuthor messageAuthor) {
         return onCommand(api, channel, message, messageAuthor, this.user, this.server, (ArrayList) args) ? true : false;
     }
+
+	public DiscordApi getApi() {
+		// TODO Auto-generated method stub
+		return api;
+	}
+
+	public void setCommand(String string) {
+		// TODO Auto-generated method stub
+		command = string;
+	}
+
+	public TextChannel getChannel() {
+		// TODO Auto-generated method stub
+		return channel;
+	}
+
+	public Message getMessage() {
+		// TODO Auto-generated method stub
+		return message;
+	}
+
+	public MessageAuthor getMessageAuthor() {
+		// TODO Auto-generated method stub
+		return messageAuthor;
+	}
 
 
 
