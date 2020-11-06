@@ -1,8 +1,15 @@
 package UserCommands;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 
+import Command.Command;
+import lombok.Getter;
+import lombok.Setter;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.Icon;
+import org.javacord.api.entity.channel.TextChannel;
+import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.entity.user.User;
@@ -10,67 +17,57 @@ import org.javacord.api.entity.user.User;
 import Management.BotInfo;
 import Management.Keywords;
 
-public class Avatar {
-	private final String command;
+public class Avatar extends Command {
+	@Getter
 	private final String imageSize;
 	
-	public Avatar(DiscordApi userApi) {
-		command = "avatar";
+	public Avatar(DiscordApi api) {
+		super(api);
 		imageSize = "?size=256";
-		
-		listenAvatar(userApi);
-	}
-
-	private void listenAvatar(DiscordApi userApi) {
-		
-		userApi.addMessageCreateListener(event -> {
-			
-			if (event.getMessageAuthor().isUser()) {
-				
-				String serverKey = Keywords.getKey(event.getServer().get().getIdAsString());
-				String userMessage[] = event.getMessageContent().split(" ");
-				
-				if((serverKey + command).equalsIgnoreCase(userMessage[0]))
-				{
-					
-					switch (userMessage.length) {
-					case 1:
-						MessageAuthor auth = event.getMessageAuthor();
-						event.getChannel().sendMessage(
-							buildOutputMessage(
-								auth.getDisplayName(),
-								auth.getAvatar().getUrl().toString(),
-								auth.getAvatar(),
-								auth.getAvatar().getUrl().toString()));
-						break;
-					case 2:
-						User mUser = event.getMessage().getMentionedUsers().get(0);
-						event.getChannel().sendMessage(
-								buildOutputMessage(
-									mUser.getName(),
-									mUser.getAvatar().getUrl().toString(),
-									mUser.getAvatar(),
-									mUser.getAvatar().getUrl().toString()));
-						break;
-					default:
-						event.getMessage().addReaction("‼");
-						event.getChannel().sendMessage("Please either invoke just the command: (" + serverKey + command + ") or the command with one user: (" + serverKey + command + " [username])");
-					}
-				}
-			}
+		api.addMessageCreateListener(event -> {
+			avatarCommand(api, super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
 		});
 	}
+
+	public void avatarCommand(DiscordApi api, TextChannel channel, Message message, MessageAuthor messageAuthor, List<String> args) {
+		if(!onCommand(api, channel, message, messageAuthor, args)) {
+			return;
+		}
+
+		switch(args.size()) {
+			case 0:
+				channel.sendMessage(buildOutputMessage(messageAuthor.asUser().get()));
+				break;
+			case 1:
+				if (message.getMentionedUsers().size() == 0) {
+					return;
+				}
+				channel.sendMessage(buildOutputMessage(message.getMentionedUsers().get(0)))
+						.exceptionally(e -> {
+							channel.sendMessage("User not found");
+							return null;
+						});;
+				break;
+			default:
+				channel.sendMessage("Please either invoke just the command: ("
+						+ super.getKey() + super.getCommand() + ") or the command with one user: ("
+						+ super.getKey()+ super.getCommand() + " [username])")
+				.exceptionally(e -> {
+					e.printStackTrace();
+					return null;
+				});
+				break;
+		}
+	}
 	
-	private EmbedBuilder buildOutputMessage(String displayName, String userImageUrl, Icon userIcon, String imageStr) {
-		
+	private EmbedBuilder buildOutputMessage(User user) {
 		EmbedBuilder embed = new EmbedBuilder()
-				.setAuthor(displayName, userImageUrl, userIcon)
+				.setAuthor(user.getDiscriminatedName(), user.getAvatar().getUrl().toString(), user.getAvatar())
 				.setColor(Color.magenta)
-				.setImage(imageStr + imageSize)
+				.setImage(user.getAvatar().getUrl() + imageSize)
 				.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
 				.setTimestampToNow();
 		
 		return embed;
 	}
-
 }

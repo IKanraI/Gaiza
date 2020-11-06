@@ -1,5 +1,6 @@
 package UserCommands;
 
+import lombok.Getter;
 import org.javacord.api.DiscordApi;
 import Command.*;
 
@@ -10,11 +11,11 @@ import org.javacord.api.entity.message.MessageAuthor;
 
 public class Ping extends Command
 {
-	private String pingMsg = "ping";
+	@Getter
+	private static String help = "Typical test command. Returns !pong normally.";
 	
 	public Ping(DiscordApi api) {
 		super(api);
-		super.setCommand("ping");
 		api.addMessageCreateListener(event -> {
 			pingCommand(api, super.getChannel(), super.getMessage(), super.getMessageAuthor());
 		});
