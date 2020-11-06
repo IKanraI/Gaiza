@@ -16,7 +16,7 @@ public class Ping extends Command
 		super(api);
 		super.setCommand("ping");
 		api.addMessageCreateListener(event -> {
-			pingCommand(super.getApi(), super.getChannel(), super.getMessage(), super.getMessageAuthor());
+			pingCommand(api, super.getChannel(), super.getMessage(), super.getMessageAuthor());
 		});
 	}
 
