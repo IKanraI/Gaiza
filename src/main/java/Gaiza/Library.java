@@ -16,6 +16,8 @@ import Database.*;
 import Management.*;
 
 import java.io.*;
+import java.lang.reflect.Constructor;
+import java.util.*;
 
 public class Library
 {
@@ -34,65 +36,37 @@ public class Library
 	
 	@SuppressWarnings("unused")
 	static void commandInit(DiscordApi api) throws Exception {
-		//Initializes all the commands, listeners, and management
-		String fileA = "Ping";
-		
-		File folder = new File("C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\commands");
-		
 		InitDatabase dbInit = new InitDatabase(api);
 		GlobalUserInformation initUsers = new GlobalUserInformation(api);
-
-		//Ping ping = new Ping(api);
 
 		System.out.println("\n--------------------------------");
 		System.out.println("Bot command files loading... \n");
 
-		Ping pingInit = new Ping(api);
-		Invite inviteInit = new Invite(api);
-		Avatar avatarInit = new Avatar(api);
-		Help helpInit = new Help(api);
-		UrbanDictionary UDInit = new UrbanDictionary(api);
-		GifSearch gifInit = new GifSearch(api);
-		ChanceRolls initRoll = new ChanceRolls(api);
-		MentionOtherUsers initMention = new MentionOtherUsers(api);
+		Map<String, File> commands = new HashMap();
+		commands.put("UserCommands", new File("C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\UserCommands\\"));
+		commands.put("AdminCommands", new File("C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\AdminCommands\\"));
+		commands.put("Listener", new File("C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\Listener\\"));
 
-		System.out.println("\nCommands finished loading!");
-		System.out.println("--------------------------------");
-		System.out.println("Admin commands loading... \n");
-
-		PrefixChange initPChange = new PrefixChange(api);
-		AdminHelp initAdminHelp = new AdminHelp(api);
-		KickUser initKick = new KickUser(api);
-		BanUser initBan = new BanUser(api);
-		WelcomeMessage initWelcome = new WelcomeMessage(api);
-
-		System.out.println("\nAdmin commands loaded!");
-		System.out.println("--------------------------------");
-		System.out.println("Bot listener files loading... \n");
-
-		BoredResponse boredInit = new BoredResponse(api);
-		MicrowaveResponse microInit = new MicrowaveResponse(api);
-		UwuResponse uwuInit = new UwuResponse(api);
-
-		System.out.println("\nBot listener files loaded!");
-		System.out.println("---------------------------------");
-		System.out.println("Management files loading... \n");
-
-		BotInfo bInfoInit = new BotInfo(api);
-
-		System.out.println("\nManagement files loaded!\n");
-
-		api.updateActivity(BotInfo.getBotActivity());
-		
-		/*try {
-			for (final File commandName : folder.listFiles()) {
-				if (!commandName.isDirectory()) {
-					String[] fileName = commandName.getName().split(".");
-					cHandler.registerCommand((CommandExecutor) Class.forName(fileName[0]).newInstance());
+		try {
+			for (Map.Entry<String, File> command : commands.entrySet()) {
+				for (final File commandName : command.getValue().listFiles()) {
+					if (!commandName.isDirectory()) {
+						Class.forName(command.getKey() + "." + commandName.getName().replace(".java", ""))
+								.getDeclaredConstructor(DiscordApi.class).newInstance(api);
+						System.out.println(commandName.getName() + " loaded!");
+					}
 				}
+				System.out.println("\n" + command.getKey() + " files loaded!");
+				System.out.println("--------------------------------\n");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}*/
+		}
+		BotInfo bInfoInit = new BotInfo(api);
+
+		System.out.println("Management files loaded!\n");
+
+
+
 	}
 }
