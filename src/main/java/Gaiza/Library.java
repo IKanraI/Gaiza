@@ -21,16 +21,13 @@ import java.util.*;
 
 public class Library
 {
-	
 	 public boolean someLibraryMethod() {
 	        return true;
 	 }
 
 	public static void main(String[] args) throws Exception {
-		Token token = new Token();
-		DiscordApi api = new DiscordApiBuilder().setToken(token.getToken()).login().join();
+		DiscordApi api = new DiscordApiBuilder().setToken(new Token().getToken()).login().join();
 		api.updateActivity(BotInfo.getBotActivity());
-		
 		commandInit(api);
 	}
 	
@@ -65,8 +62,5 @@ public class Library
 		BotInfo bInfoInit = new BotInfo(api);
 
 		System.out.println("Management files loaded!\n");
-
-
-
 	}
 }

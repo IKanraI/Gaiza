@@ -34,12 +34,13 @@ public abstract class Command {
             channel = event.getChannel();
             server = event.getServer().get();
             messageAuthor = event.getMessageAuthor();
-            key = message.getContent().split(" ")[0];
+            key = message.getContent().split("\\s")[0];
             args = new ArrayList();
         });
     }
 
     public boolean onCommand(DiscordApi api, TextChannel channel, Message message, MessageAuthor messageAuthor, User user, Server server, ArrayList args) {
+        command = Thread.currentThread().getStackTrace()[3].getClassName().split("\\.")[1];
         api.addMessageCreateListener(event -> {
             setServer(event.getServer().get());
         });
@@ -48,7 +49,7 @@ public abstract class Command {
             return false;
         }
 
-        for (String arg : message.toString().split(" ")) {
+        for (String arg : message.getContent().split("\\s")) {
             if (arg.equals(key)) {
                 continue;
             }
@@ -63,6 +64,12 @@ public abstract class Command {
 	}
 
 	public boolean onCommand(DiscordApi api, TextChannel channel, Message message, MessageAuthor messageAuthor) {
-        return onCommand(this.api, this.channel, this.message, this.messageAuthor, this.user, this.server, (ArrayList) this.args) ? true : false;
+        return onCommand(this.api, this.channel, this.message, this.messageAuthor,
+                this.user, this.server, (ArrayList) this.args) ? true : false;
+    }
+
+    public boolean onCommand(DiscordApi api, TextChannel channel, Message message, MessageAuthor messageAuthor, List<String> args) {
+        return onCommand(this.api, this.channel, this.message, this.messageAuthor,
+                this.user, this.server, (ArrayList) this.args) ? true : false;
     }
 }
