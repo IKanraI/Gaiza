@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Getter;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.Icon;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
@@ -17,6 +18,8 @@ import Management.Keywords;
 
 public class UrbanDictionary 
 {
+	@Getter
+	public static String help = "Search urban dictionary";
 	private String command = "define";
 	
 	public UrbanDictionary(DiscordApi getApi)

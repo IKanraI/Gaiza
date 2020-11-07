@@ -1,97 +1,69 @@
 package UserCommands;
 
-import java.awt.Color;
-
+import Command.Command;
+import lombok.SneakyThrows;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.Icon;
+import org.javacord.api.entity.channel.TextChannel;
+import org.javacord.api.entity.message.Message;
+import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 
 import Management.BotInfo;
-import Management.Keywords;
+import org.javacord.api.entity.user.User;
 
-public class Help 
+import java.awt.*;
+import java.io.File;
+import java.util.List;
+
+public class Help extends Command
 {
-	private String helpCommand = "help";
-	
-	public Help(DiscordApi getApi)
-	{
-		DiscordApi helpApi = getApi;
-		
-		displayHelp(helpApi);
-		
-		System.out.println("Help.java loaded!");
-	}
-	
-	public void displayHelp(DiscordApi getApi)
-	{
-		DiscordApi helpApi = getApi;
-		
-		helpApi.addMessageCreateListener(event ->
-		{
-			String userWhoCalled;
-			String userCalledIconURL;
-			String myKey = "";
-			String getServerAddress = "";
-			Icon userIcon;
+	public Help(DiscordApi api) {
+		super(api);
 
-			getServerAddress = event.getServer().get().getIdAsString();
-			myKey = Keywords.getKey(getServerAddress);		
-			
-			try
-			{			
-				if (event.getMessageContent().equalsIgnoreCase(myKey + helpCommand) && event.getMessageAuthor().isUser())
-				{
-					userWhoCalled = event.getMessageAuthor().getDisplayName();
-					userCalledIconURL = event.getMessageAuthor().getAvatar().getUrl().toString();
-					userIcon = event.getMessageAuthor().getAvatar();
-					
-					EmbedBuilder embed = new EmbedBuilder()
-							.setAuthor(userWhoCalled, userCalledIconURL, userIcon)
-							.setColor(Color.magenta)
-							
-							.setTitle("Bot Help")
-							.setDescription("Commands are currently all prefixed by: " + myKey)
-							
-							.addInlineField(myKey + "Avatar", "Use either " + myKey + "avatar or " + myKey +  "avatar @[user]")
-							.addInlineField(myKey + "Invite", "Can be used to get an invite for the bot")
-							.addInlineField(myKey + "Ping", "The most basic of commands")
-							
-							.addInlineField(myKey + "ahelp", "Admin help panel")
-							.addInlineField(myKey + "define", "Search Urban Dictionary")
-							.addInlineField(myKey + "gif", "Returns a gif [command]gif [search]")
-							
-							.addInlineField(myKey + "fines", "Returns the amount of money you have in fines " + myKey + "fines")
-							.addInlineField(myKey + "leaderboard", "Returns the server leaderboard for uwu fines")
-							.addInlineField(myKey + "pat",  "Pats a mentioned user")
-							
-							.addInlineField(myKey + "boob", "Boobs a mentioned user")
-							.addInlineField(myKey + "slap",  "Slaps a mentioned user")
-							.addInlineField(myKey + "hug",  "Hugs a mentioned user")
-							
-							.addInlineField(myKey + "snuggle",  "Snuggles a mentioned user")
-							.addInlineField(myKey + "kiss",  "Kisses a mentioned user")
-							.addInlineField(myKey + "poke",  "Pokes a mentioned user")
-							
-							.addInlineField(myKey + "stare",  "Stares at a mentioned user")
-							.addInlineField(myKey + "smug",  "Makes a smug look at a mentioned user")
-							.addInlineField(myKey + "lewd",  "Lewds a mentioned user")
-							
-							.addInlineField(myKey + "bite",  "Bites a mentioned user")
-							.addInlineField(myKey + "meow",  "Does cat things at a mentioned user")
-							
-							
-							.setThumbnail(BotInfo.getBotImageStr())
-							.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
-							.setTimestampToNow();
-					
-					event.getChannel().sendMessage(embed);
-							
-				}
-			}
-			catch (Exception e)
-			{
-				e.printStackTrace();
-			}
+		api.addMessageCreateListener(e -> {
+			helpCommand(api, getChannel(), getMessage(), getMessageAuthor(), getArgs());
 		});
+
+	}
+
+	@SneakyThrows
+	public void helpCommand(DiscordApi api, TextChannel channel, Message message, MessageAuthor author, List<String> args) {
+		if (!onCommand(api, channel, message, author, args)) {
+			return;
+		}
+
+		if (args.size() == 1) {
+			String name = args.get(0).substring(0, 1).toUpperCase() + args.get(0).substring(1);
+			channel.sendMessage(Class.forName("UserCommands." + name).getDeclaredField("help").get(0).toString())
+			.exceptionally(e -> {
+				channel.sendMessage("Command not found");
+				return null;
+			});
+		} else {
+			channel.sendMessage(buildEmbed(author.asUser().get()));
+		}
+	}
+
+	private EmbedBuilder buildEmbed(User user) {
+		EmbedBuilder embed = new EmbedBuilder()
+				.setAuthor(user.getDiscriminatedName(), user.getAvatar().getUrl().toString(), user.getAvatar())
+				.setColor(Color.MAGENTA)
+				.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
+				.setTimestampToNow();
+		try {
+			File folder = new File("C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\UserCommands\\");
+			for (File f : folder.listFiles()) {
+				String currCommand = f.getName().replaceAll(".java", "");
+				if (currCommand.equalsIgnoreCase("help")) {
+					continue;
+				}
+				embed.addInlineField(getKey().replace("help", "")
+						+ currCommand, Class.forName("UserCommands." + currCommand).getDeclaredField("help").get(0).toString());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return embed;
 	}
 }

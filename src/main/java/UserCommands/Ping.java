@@ -12,11 +12,11 @@ import org.javacord.api.entity.message.MessageAuthor;
 public class Ping extends Command
 {
 	@Getter
-	private static String help = "Typical test command. Returns !pong normally.";
+	public static String help = "Typical test command. Returns !pong normally.";
 	
 	public Ping(DiscordApi api) {
 		super(api);
-		api.addMessageCreateListener(event -> {
+		api.addMessageCreateListener(e-> {
 			pingCommand(api, super.getChannel(), super.getMessage(), super.getMessageAuthor());
 		});
 	}
