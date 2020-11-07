@@ -20,11 +20,13 @@ import Management.Keywords;
 public class Avatar extends Command {
 	@Getter
 	private final String imageSize;
+	@Getter
+	public static String help = "Returns the avatar of a user.";
 	
 	public Avatar(DiscordApi api) {
 		super(api);
 		imageSize = "?size=256";
-		api.addMessageCreateListener(event -> {
+		api.addMessageCreateListener(e -> {
 			avatarCommand(api, super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
 		});
 	}
@@ -33,20 +35,20 @@ public class Avatar extends Command {
 		if(!onCommand(api, channel, message, messageAuthor, args)) {
 			return;
 		}
+		if (message.getMentionedUsers().size() == 0 && args.size() == 1) {
+			return;
+		}
 
 		switch(args.size()) {
 			case 0:
 				channel.sendMessage(buildOutputMessage(messageAuthor.asUser().get()));
 				break;
 			case 1:
-				if (message.getMentionedUsers().size() == 0) {
-					return;
-				}
 				channel.sendMessage(buildOutputMessage(message.getMentionedUsers().get(0)))
 						.exceptionally(e -> {
 							channel.sendMessage("User not found");
 							return null;
-						});;
+						});
 				break;
 			default:
 				channel.sendMessage("Please either invoke just the command: ("
@@ -67,7 +69,6 @@ public class Avatar extends Command {
 				.setImage(user.getAvatar().getUrl() + imageSize)
 				.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
 				.setTimestampToNow();
-		
 		return embed;
 	}
 }

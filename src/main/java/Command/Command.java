@@ -58,11 +58,6 @@ public abstract class Command {
         return true;
     }
 
-    private void setServer(Server server2) {
-		server = server2;
-
-	}
-
 	public boolean onCommand(DiscordApi api, TextChannel channel, Message message, MessageAuthor messageAuthor) {
         return onCommand(this.api, this.channel, this.message, this.messageAuthor,
                 this.user, this.server, (ArrayList) this.args) ? true : false;

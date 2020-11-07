@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.io.IOException;
 import java.util.Random;
 
+import lombok.Getter;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.Icon;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
@@ -17,6 +18,8 @@ import Management.Keywords;
 
 public class GifSearch 
 {
+	@Getter
+	public static String help = "Searches for a specified gif";
 	private String command = "gif";
 	private String searchURL = "https://tenor.com/search/";
 	private String returnGifUrl = "";

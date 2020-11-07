@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.io.File;
 import java.util.Random;
 
+import lombok.Getter;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 
@@ -11,11 +12,8 @@ import Management.Keywords;
 
 public class ChanceRolls 
 {
-	/*Uhhh I need a coin flip
-	A six-sided die
-	And maybe a ten sided
-	20 sided die*/
-	
+	@Getter
+	public static String help = "Does a roll for a specified amount";
 	private String commandCoin = "flip";
 	private String commandRoll = "roll";
 	private String command6 = "6";

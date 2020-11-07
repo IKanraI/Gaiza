@@ -1,11 +1,14 @@
 package UserCommands;
 
+import lombok.Getter;
 import org.javacord.api.DiscordApi;
 
 import Management.Keywords;
 
 public class Invite 
 {
+	@Getter
+	public static String help = "Returns an invite link for the bot";
 	private String botInvite;
 	private String invMsg = "invite";
 	

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import lombok.Getter;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 
@@ -14,7 +15,9 @@ import Management.Keywords;
 
 public class MentionOtherUsers 
 {
-	private List<String> mentionableList = new ArrayList<String>();
+	@Getter
+	public static String help = "Returns an image to a mentioned user. Supports pat, hug, kiss, slap, meow, boob, butt...";
+	private List<String> mentionableList = new ArrayList();
 	
 	public MentionOtherUsers(DiscordApi getApi)
 	{
