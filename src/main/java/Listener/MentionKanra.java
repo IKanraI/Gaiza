@@ -26,7 +26,7 @@ public class MentionKanra {
                     break;
                 }
             }
-            if (!mentioned) {
+            if (!mentioned || !event.getServer().get().getIdAsString().equals("256490441120284672")) {
                 return;
             }
 
