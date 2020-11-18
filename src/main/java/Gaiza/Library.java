@@ -3,9 +3,6 @@
  */
 package Gaiza;
 import AdminCommands.*;
-import Listener.BoredResponse;
-import Listener.MicrowaveResponse;
-import Listener.UwuResponse;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 
@@ -14,6 +11,7 @@ import de.btobastian.sdcf4j.CommandHandler;
 import de.btobastian.sdcf4j.handler.JavacordHandler;
 import Database.*;
 import Management.*;
+import Listener.*;
 
 import java.io.*;
 import java.lang.reflect.Constructor;
@@ -27,7 +25,6 @@ public class Library
 
 	public static void main(String[] args) throws Exception {
 		DiscordApi api = new DiscordApiBuilder().setToken(new Token().getToken()).login().join();
-		api.updateActivity(BotInfo.getBotActivity());
 		commandInit(api);
 	}
 	
@@ -60,7 +57,8 @@ public class Library
 			e.printStackTrace();
 		}
 		BotInfo bInfoInit = new BotInfo(api);
-
 		System.out.println("Management files loaded!\n");
+
+		api.updateActivity(BotInfo.getBotActivity());
 	}
 }

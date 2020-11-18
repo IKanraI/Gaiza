@@ -299,7 +299,11 @@ public class UwuResponse
 			String userID = "";
 			ArrayList<Character> charMessageArray = null;
 			int i = 0;
-			
+
+			if (event.getMessage().getAuthor().getIdAsString().equals(BotInfo.getOwnerId())) {
+				return;
+			}
+
 			if (event.getMessage().getAuthor().isUser())
 			{
 				getWholeMessage = event.getMessageContent();
