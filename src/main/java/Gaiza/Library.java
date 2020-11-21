@@ -40,6 +40,7 @@ public class Library
 		commands.put("UserCommands", new File("C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\UserCommands\\"));
 		commands.put("AdminCommands", new File("C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\AdminCommands\\"));
 		commands.put("Listener", new File("C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\Listener\\"));
+		commands.put("UserMentions", new File("C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\UserMentions\\"));
 
 		try {
 			for (Map.Entry<String, File> command : commands.entrySet()) {

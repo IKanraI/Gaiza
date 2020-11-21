@@ -17,6 +17,7 @@ public class MentionKanra {
         listenForMention(api);
     }
 
+
     public void listenForMention(DiscordApi api) {
         api.addMessageCreateListener(event -> {
             boolean mentioned = false;
@@ -42,7 +43,7 @@ public class MentionKanra {
             } catch (IOException e) {
                 e.printStackTrace();
         }
-            event.getChannel().sendMessage("I'm sorry. Who ARE you?");
+            //event.getChannel().sendMessage("I'm sorry. Who ARE you?");
         });
     }
 }

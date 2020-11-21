@@ -76,7 +76,7 @@ public class MentionOtherUsers
 					
 					if (userCommandCalled != null && splitMessage.length == 2)
 					{
-						GifSearch getSearchGif;
+						Gif getSearchGif;
 						EmbedBuilder messageEmbedToSend;
 						String userMentioned = "";
 						String messageAuthor = "";
@@ -90,7 +90,7 @@ public class MentionOtherUsers
 						{
 							userMentioned = event.getMessage().getMentionedUsers().get(0).getIdAsString();
 							messageAuthor = event.getMessageAuthor().getIdAsString();
-							getSearchGif = new GifSearch(searchTerm);
+							getSearchGif = new Gif(searchTerm);
 							
 							finalGifSend = getSearchGif.getGifReturnUrl();
 							
@@ -121,7 +121,7 @@ public class MentionOtherUsers
 									break;
 							}
 							
-							event.getChannel().sendMessage("<@" + userMentioned + ">, you have been " + userCommandCalled + " by <@" + messageAuthor + ">");
+							event.getChannel().sendMessage(event.getMessage().getMentionedUsers().get(0).getName() + ", you have been " + userCommandCalled + " by <@" + messageAuthor + ">");
 							event.getChannel().sendMessage(messageEmbedToSend);
 						}
 						catch(Exception e)
