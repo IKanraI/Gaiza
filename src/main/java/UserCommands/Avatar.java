@@ -36,29 +36,22 @@ public class Avatar extends Command {
 			return;
 		}
 		if (message.getMentionedUsers().size() == 0 && args.size() == 1) {
+			channel.sendMessage("Please mention a user");
 			return;
 		}
 
-		switch(args.size()) {
-			case 0:
-				channel.sendMessage(buildOutputMessage(messageAuthor.asUser().get()));
-				break;
-			case 1:
-				channel.sendMessage(buildOutputMessage(message.getMentionedUsers().get(0)))
-						.exceptionally(e -> {
-							channel.sendMessage("User not found");
-							return null;
-						});
-				break;
-			default:
-				channel.sendMessage("Please either invoke just the command: ("
-						+ super.getKey() + super.getCommand() + ") or the command with one user: ("
-						+ super.getKey()+ super.getCommand() + " [username])")
-				.exceptionally(e -> {
-					e.printStackTrace();
-					return null;
-				});
-				break;
+		if (args.size() == 0) {
+			channel.sendMessage(buildOutputMessage(messageAuthor.asUser().get()))
+					.exceptionally(e -> {
+						channel.sendMessage("User not found");
+						return null;
+					});
+		} else if (args.size() == 1) {
+			channel.sendMessage(buildOutputMessage(message.getMentionedUsers().get(0)))
+					.exceptionally(e -> {
+						channel.sendMessage("User not found");
+						return null;
+					});
 		}
 	}
 	

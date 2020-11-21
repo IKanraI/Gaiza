@@ -22,9 +22,10 @@ public class Ping extends Command
 	}
 
 	public void pingCommand(DiscordApi api, TextChannel channel, Message message, MessageAuthor messageAuthor) {
-		if (!onCommand(api, channel, message, messageAuthor)) {
+		if(!onCommand(api, channel, message, messageAuthor)) {
 			return;
 		}
+
 
 		channel.sendMessage("<@" + messageAuthor.getIdAsString() + "> rules! ... well pong i guess");
 	}
