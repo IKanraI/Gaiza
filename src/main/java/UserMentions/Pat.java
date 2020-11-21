@@ -31,9 +31,14 @@ public class Pat extends Command {
             channel.sendMessage("Please mention a user");
             return;
         }
-        String term = "Anime pat";
-        Gif gif = new Gif(term);
+        if (message.getMentionedUsers().get(0).getIdAsString().equals(author.getIdAsString())) {
+            channel.sendMessage("Must you really give yourself a headpat? That's so sad :(");
+        }
+        if (message.getMentionedUsers().get(0).getIdAsString().equals(BotInfo.getBotId())) {
+            channel.sendMessage("Oh you want to give me a headpat? Thank you so much <3");
+        }
 
+        Gif gif = new Gif("Anime-pat");
         channel.sendMessage(buildEmbed(author, message.getMentionedUsers().get(0), gif.getGifReturnUrl(), "patted"))
         .exceptionally(error -> {
             error.getCause().getMessage();
