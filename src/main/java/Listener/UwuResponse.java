@@ -282,6 +282,16 @@ public class UwuResponse
 						event.getChannel().sendMessage("<@" + userID + ">, you currently owe: " + finalCurrency);
 					}
 				}
+				else if (splitMessage[0].equalsIgnoreCase(myKey + command) && splitMessage.length == 2) {
+					userPath = getUserPath(event.getMessage().getMentionedUsers().get(0).getIdAsString());
+					userFine = getCurrentFine(userPath);
+					finalCurrency = formatCurrency(userFine);
+
+					if (userFine != errorReturn)
+					{
+						event.getChannel().sendMessage(event.getMessage().getMentionedUsers().get(0).getName() + ", currently owes: " + finalCurrency);
+					}
+				}
 			}
 		});
 	}
