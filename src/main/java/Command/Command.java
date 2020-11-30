@@ -68,4 +68,9 @@ public abstract class Command {
         return onCommand(this.api, this.channel, this.message, this.messageAuthor,
                 this.user, this.server, (ArrayList) this.args);
     }
+
+    public boolean onCommand(DiscordApi api, TextChannel channel, Message message, List<String> args) {
+        return onCommand(this.api, this.channel, this.message, this.messageAuthor,
+                this.user, this.server, (ArrayList) this.args);
+    }
 }
