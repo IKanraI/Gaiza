@@ -3,7 +3,6 @@ package UserCommands;
 import Command.Command;
 import lombok.SneakyThrows;
 import org.javacord.api.DiscordApi;
-import org.javacord.api.entity.Icon;
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.message.MessageAuthor;
