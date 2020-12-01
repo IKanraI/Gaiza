@@ -5,8 +5,7 @@ import org.javacord.api.DiscordApi;
 
 import Management.Keywords;
 
-public class Invite 
-{
+public class Invite {
 	@Getter
 	public static String help = "Returns an invite link for the bot";
 	private String botInvite;

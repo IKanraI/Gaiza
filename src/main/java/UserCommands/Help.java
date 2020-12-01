@@ -13,13 +13,11 @@ import org.javacord.api.entity.user.User;
 
 import java.awt.*;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Help extends Command
-{
+public class Help extends Command {
 	public Help(DiscordApi api) {
 		super(api);
 
