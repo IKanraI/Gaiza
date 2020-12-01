@@ -31,13 +31,13 @@ public class Define extends Command {
 	public Define(DiscordApi api) {
 		super(api);
 		api.addMessageCreateListener(e -> {
-			urbanSearch(api, super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
+			urbanSearch(super.getChannel(), super.getMessageAuthor(), super.getArgs());
 		});
 	}
 
 	@SneakyThrows
-	private void urbanSearch(DiscordApi api, TextChannel channel, Message message, MessageAuthor messageAuthor, List<String> args) {
-		if (!onCommand(api, channel, message, messageAuthor, args)) {
+	private void urbanSearch(TextChannel channel, MessageAuthor messageAuthor, List<String> args) {
+		if (!onCommand()) {
 			return;
 		}
 		if (args.size() == 0) {

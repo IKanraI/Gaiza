@@ -17,12 +17,12 @@ public class Invite extends Command {
 	public Invite(DiscordApi api) {
 		super(api);
 		api.addMessageCreateListener(event -> {
-			inviteBot(api, super.getChannel(), super.getMessage(), super.getMessageAuthor());
+			inviteBot(super.getChannel());
 		});
 	}
 
-	private void inviteBot(DiscordApi api, TextChannel channel, Message message, MessageAuthor messageAuthor) {
-		if (!onCommand(api, channel, message, messageAuthor)) {
+	private void inviteBot(TextChannel channel) {
+		if (!onCommand()) {
 			return;
 		}
 		channel.sendMessage("Here is your invite! : " + BotInfo.getBotInvite());

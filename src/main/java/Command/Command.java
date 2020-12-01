@@ -39,7 +39,7 @@ public abstract class Command {
         });
     }
 
-    public boolean onCommand(DiscordApi api, TextChannel channel, Message message, MessageAuthor messageAuthor, User user, Server server, ArrayList args) {
+    public boolean onCommand(DiscordApi api, Message message,  Server server, ArrayList args) {
         command = Thread.currentThread().getStackTrace()[3].getClassName().split("\\.")[1];
         api.addMessageCreateListener(event -> {
             setServer(event.getServer().get());
@@ -58,19 +58,7 @@ public abstract class Command {
        return true;
     }
 
-	public boolean onCommand(DiscordApi api, TextChannel channel, Message message, MessageAuthor messageAuthor) {
-        return onCommand(this.api, this.channel, this.message, this.messageAuthor,
-                this.user, this.server, (ArrayList) this.args);
-
-    }
-
-    public boolean onCommand(DiscordApi api, TextChannel channel, Message message, MessageAuthor messageAuthor, List<String> args) {
-        return onCommand(this.api, this.channel, this.message, this.messageAuthor,
-                this.user, this.server, (ArrayList) this.args);
-    }
-
-    public boolean onCommand(DiscordApi api, TextChannel channel, Message message, List<String> args) {
-        return onCommand(this.api, this.channel, this.message, this.messageAuthor,
-                this.user, this.server, (ArrayList) this.args);
+	public boolean onCommand() {
+        return onCommand(this.api, this.message, this.server, (ArrayList) this.args);
     }
 }

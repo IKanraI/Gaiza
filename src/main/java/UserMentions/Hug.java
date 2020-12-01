@@ -17,12 +17,12 @@ public class Hug extends Command {
         super(api);
 
         api.addMessageCreateListener(event -> {
-            hugCommand(api, super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
+            hugCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
         });
     }
 
-    public void hugCommand(DiscordApi api, TextChannel channel, Message message, MessageAuthor author, List<String> args) {
-        if (!onCommand(api, channel, message, author, args)) {
+    public void hugCommand(TextChannel channel, Message message, MessageAuthor author, List<String> args) {
+        if (!onCommand()) {
             return;
         }
         if (message.getMentionedUsers().size() == 0 || args.size() == 0) {
