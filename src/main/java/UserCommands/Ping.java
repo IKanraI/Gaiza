@@ -4,7 +4,6 @@ import lombok.Getter;
 import org.javacord.api.DiscordApi;
 import Command.*;
 
-import Management.Keywords;
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.message.MessageAuthor;
@@ -20,7 +19,7 @@ public class Ping extends Command {
 		});
 	}
 
-	public void pingCommand(DiscordApi api, TextChannel channel, Message message, MessageAuthor messageAuthor) {
+	private void pingCommand(DiscordApi api, TextChannel channel, Message message, MessageAuthor messageAuthor) {
 		if(!onCommand(api, channel, message, messageAuthor)) {
 			return;
 		}

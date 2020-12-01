@@ -25,7 +25,7 @@ import Management.Keywords;
 
 public class Define extends Command {
 	@Getter
-	public static String help = "Search urban dictionary";
+	public static String help = "Search urban dictionary. Usage [prefix]define [term]";
 	private String command = "define";
 	
 	public Define(DiscordApi api) {
