@@ -17,12 +17,12 @@ public class Lewd extends Command {
         super(api);
 
         api.addMessageCreateListener(event -> {
-            lewdCommand(api, super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
+            lewdCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
         });
     }
 
-    public void lewdCommand(DiscordApi api, TextChannel channel, Message message, MessageAuthor author, List<String> args) {
-        if (!onCommand(api, channel, message, author, args)) {
+    public void lewdCommand(TextChannel channel, Message message, MessageAuthor author, List<String> args) {
+        if (!onCommand()) {
             return;
         }
         if (message.getMentionedUsers().size() == 0 || args.size() == 0) {

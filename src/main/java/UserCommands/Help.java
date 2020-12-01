@@ -22,14 +22,14 @@ public class Help extends Command {
 		super(api);
 
 		api.addMessageCreateListener(e -> {
-			helpCommand(api, getChannel(), getMessage(), getMessageAuthor(), getArgs());
+			helpCommand(getChannel(), getMessageAuthor(), getArgs());
 		});
 
 	}
 
 	@SneakyThrows
-	public void helpCommand(DiscordApi api, TextChannel channel, Message message, MessageAuthor author, List<String> args) {
-		if (!onCommand(api, channel, message, author, args)) {
+	public void helpCommand(TextChannel channel, MessageAuthor author, List<String> args) {
+		if (!onCommand()) {
 			return;
 		}
 		if (args.size() == 0) {

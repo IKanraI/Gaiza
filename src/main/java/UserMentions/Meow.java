@@ -16,12 +16,12 @@ public class Meow extends Command {
     public Meow(DiscordApi api) {
         super(api);
         api.addMessageCreateListener(event -> {
-            meowCommand(api, super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
+            meowCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
         });
     }
 
-    public void meowCommand(DiscordApi api, TextChannel channel, Message message, MessageAuthor author, List<String> args) {
-        if (!onCommand(api, channel, message, author, args)) {
+    public void meowCommand(TextChannel channel, Message message, MessageAuthor author, List<String> args) {
+        if (!onCommand()) {
             return;
         }
         if (message.getMentionedUsers().size() == 0 || args.size() == 0) {

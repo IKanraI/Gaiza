@@ -17,12 +17,12 @@ public class Boob extends Command {
         super(api);
 
         api.addMessageCreateListener(event -> {
-            boobCommand(api, super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
+            boobCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
         });
     }
 
-    public void boobCommand(DiscordApi api, TextChannel channel, Message message, MessageAuthor author, List<String> args) {
-        if (!onCommand(api, channel, message, author, args)) {
+    public void boobCommand(TextChannel channel, Message message, MessageAuthor author, List<String> args) {
+        if (!onCommand()) {
             return;
         }
         if (message.getMentionedUsers().size() == 0 || args.size() == 0) {

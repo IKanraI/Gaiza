@@ -17,12 +17,12 @@ public class Smug extends Command {
         super(api);
 
         api.addMessageCreateListener(event -> {
-            smugCommand(api, super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
+            smugCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
         });
     }
 
-    public void smugCommand(DiscordApi api, TextChannel channel, Message message, MessageAuthor author, List<String> args) {
-        if (!onCommand(api, channel, message, author, args)) {
+    public void smugCommand(TextChannel channel, Message message, MessageAuthor author, List<String> args) {
+        if (!onCommand()) {
             return;
         }
         if (message.getMentionedUsers().size() == 0 || args.size() == 0) {

@@ -29,12 +29,12 @@ public class Roll extends Command
 	{
 		super(api);
 		api.addMessageCreateListener(event -> {
-			rollOrFlip(api, super.getChannel(), super.getMessage(), super.getArgs());
+			rollOrFlip(super.getChannel(), super.getArgs());
 		});
 	}
 
-	private void rollOrFlip(DiscordApi api, TextChannel channel, Message message, List<String> args) {
-		if (!onCommand(api, channel, message, args)) {
+	private void rollOrFlip(TextChannel channel, List<String> args) {
+		if (!onCommand()) {
 			return;
 		}
 		try {

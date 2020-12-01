@@ -27,12 +27,12 @@ public class Avatar extends Command {
 		super(api);
 		imageSize = "?size=256";
 		api.addMessageCreateListener(e -> {
-			avatarCommand(api, super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
+			avatarCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
 		});
 	}
 
-	public void avatarCommand(DiscordApi api, TextChannel channel, Message message, MessageAuthor messageAuthor, List<String> args) {
-		if(!onCommand(api, channel, message, messageAuthor, args)) {
+	public void avatarCommand(TextChannel channel, Message message, MessageAuthor messageAuthor, List<String> args) {
+		if(!onCommand()) {
 			return;
 		}
 		if (message.getMentionedUsers().size() == 0 && args.size() == 1) {

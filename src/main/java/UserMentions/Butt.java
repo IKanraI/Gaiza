@@ -17,12 +17,12 @@ public class Butt extends Command {
         super(api);
 
         api.addMessageCreateListener(event -> {
-            buttCommand(api, super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
+            buttCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
         });
     }
 
-    public void buttCommand(DiscordApi api, TextChannel channel, Message message, MessageAuthor author, List<String> args) {
-        if (!onCommand(api, channel, message, author, args)) {
+    public void buttCommand(TextChannel channel, Message message, MessageAuthor author, List<String> args) {
+        if (!onCommand()) {
             return;
         }
         if (message.getMentionedUsers().size() == 0 || args.size() == 0) {

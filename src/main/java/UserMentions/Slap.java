@@ -17,12 +17,12 @@ public class Slap extends Command {
         super(api);
 
         api.addMessageCreateListener(event -> {
-            slapCommand(api, super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
+            slapCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
         });
     }
 
-    public void slapCommand(DiscordApi api, TextChannel channel, Message message, MessageAuthor author, List<String> args) {
-        if (!onCommand(api, channel, message, author, args)) {
+    public void slapCommand(TextChannel channel, Message message, MessageAuthor author, List<String> args) {
+        if (!onCommand()) {
             return;
         }
         if (message.getMentionedUsers().size() == 0 || args.size() == 0) {

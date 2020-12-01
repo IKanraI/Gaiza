@@ -19,12 +19,12 @@ public class Pat extends Command {
         super(api);
 
         api.addMessageCreateListener(event -> {
-            patCommand(api, super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
+            patCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
         });
     }
 
-    public void patCommand(DiscordApi api, TextChannel channel, Message message, MessageAuthor author, List<String> args) {
-        if (!onCommand(api, channel, message, author, args)) {
+    public void patCommand(TextChannel channel, Message message, MessageAuthor author, List<String> args) {
+        if (!onCommand()) {
             return;
         }
         if (message.getMentionedUsers().size() == 0 || args.size() == 0) {
