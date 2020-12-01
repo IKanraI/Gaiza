@@ -37,8 +37,7 @@ public class Poke extends Command {
             channel.sendMessage("Hello :) How may I help you?");
         }
 
-        Gif gif = new Gif("Anime-poke");
-        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), gif.getGifReturnUrl(), "poked"))
+        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), Gif.searchGif("Anime-poke"), "poked"))
                 .exceptionally(error -> {
                     error.getCause().getMessage();
                     return null;

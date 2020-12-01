@@ -37,8 +37,7 @@ public class Stare extends Command {
             channel.sendMessage(":eyes:");
         }
 
-        Gif gif = new Gif("Anime-stare");
-        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), gif.getGifReturnUrl(), "stared at"))
+        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), Gif.searchGif("Anime-stare"), "stared at"))
                 .exceptionally(error -> {
                     error.getCause().getMessage();
                     return null;

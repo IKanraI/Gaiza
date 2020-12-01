@@ -37,8 +37,7 @@ public class Snuggle extends Command {
             channel.sendMessage("Oh you want to snuggle me? Thank you so much <3");
         }
 
-        Gif gif = new Gif("Anime-snuggle");
-        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), gif.getGifReturnUrl(), "snuggled"))
+        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), Gif.searchGif("Anime-snuggle"), "snuggled"))
                 .exceptionally(error -> {
                     error.getCause().getMessage();
                     return null;

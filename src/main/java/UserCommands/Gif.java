@@ -6,9 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import Command.Command;
 import lombok.Getter;
+import lombok.SneakyThrows;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.Icon;
+import org.javacord.api.entity.channel.TextChannel;
+import org.javacord.api.entity.message.Message;
+import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 
 import org.jsoup.Jsoup;
@@ -19,219 +24,100 @@ import org.jsoup.select.Elements;
 import Management.BotInfo;
 import Management.Keywords;
 
-public class Gif
+public class Gif extends Command
 {
 	@Getter
-	public static String help = "Searches for a specified gif";
+	public static String help = "Searches for a specified gif. Returns a random results from the search. Usage [prefix]gif [query]";
 	private String command = "gif";
 	private String searchURL = "https://tenor.com/search/";
 	private String returnGifUrl = "";
 	
-	public Gif(DiscordApi getApi)
-	{
-		DiscordApi gifApi = getApi;
-		
-		gifSearch(gifApi);
+	public Gif(DiscordApi api) {
+		super(api);
+		api.addMessageCreateListener(event -> {
+			userGifSearch(super.getChannel(), super.getMessageAuthor(), super.getArgs());
+		});
+	}
+
+	private void userGifSearch(TextChannel channel, MessageAuthor author, List<String> args) {
+		if (!onCommand()) {
+			return;
+		}
+		if (args.size() == 0) {
+			channel.sendMessage("Please enter a search term");
+			return;
+		}
+		StringBuilder term = new StringBuilder();
+		for (String s : args) {
+			term.append(s + " ");
+		}
+
+		channel.sendMessage(buildEmbed(searchGif(term.toString()), author)).exceptionally(e -> {
+			channel.sendMessage("Gif could not be returned");
+			return null;
+		});
+
 	}
 	
-	public Gif(String searchTerm)
-	{
-		String gifUrl = "";
-		
-		gifUrl = searchGif(searchTerm, searchURL);
-		
-		setGifReturnUrl(gifUrl);
-	}
-	
-	public EmbedBuilder buildEmbed(String url, String author, String aURL, Icon aIcon)
-	{
-		String messageAuthorName = author;
-		String messageAuthorURL = aURL;
-		String gifToSend = url;
-		Icon messageAuthorIcon = aIcon;
-		
+	public EmbedBuilder buildEmbed(String url, MessageAuthor author) {
 		EmbedBuilder message = new EmbedBuilder()
 				.setTitle("A gif for your viewing")
-				.setAuthor(messageAuthorName, messageAuthorURL, messageAuthorIcon)
+				.setAuthor(author.getName(), author.getAvatar().getUrl().toString(), author.getAvatar())
 				.setColor(Color.magenta)
-				
-				.setImage(gifToSend)
-				
+				.setImage(url)
 				.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
 				.setTimestampToNow();
 		
 		return message;
-		
 	}
 	
-	public void gifSearch(DiscordApi getApi)
-	{
-		DiscordApi gifApi = getApi;
-		
-		gifApi.addMessageCreateListener(event ->
-		{
-			String myKey = "";
-			String serverCalled = "";
-			String fullMessage = "";
-			String[] splitMessage = null;
-			String searchTerm = "";
-			
-			String searchURL = "";
-			String getURL = "";
-			String authorName = "";
-			String authorURL = "";
-			Icon authorIcon;
-			int i;
-			
-			serverCalled = event.getServer().get().getIdAsString();
-			myKey = Keywords.getKey(serverCalled);
-			
-			fullMessage = event.getMessageContent();
-			splitMessage = fullMessage.split(" ");			
-			
-			if (event.getMessageAuthor().isUser())
-			{
-				if (splitMessage[0].equalsIgnoreCase(myKey + command) && splitMessage.length > 1)
-				{
-					searchURL = "https://tenor.com/search/";
-					for (i = 1; i < splitMessage.length; ++i)
-					{
-						searchTerm = searchTerm.concat(splitMessage[i] + " ");
-					}
-					
-					searchTerm.trim();
-					
-					getURL = searchGif(searchTerm, searchURL);
-					
-					if (!getURL.equalsIgnoreCase("noneFoundHere"))
-					{	
-						try 
-						{
-							authorName = event.getMessageAuthor().getName();
-							authorIcon = event.getMessageAuthor().getAvatar();
-							authorURL = event.getMessageAuthor().getAvatar().getUrl().toString();
-							event.getChannel().sendMessage(buildEmbed(getURL, authorName, authorURL, authorIcon));
-						}
-						catch (Exception e)
-						{
-							e.printStackTrace();
-						}
-					}
-					else
-					{
-						//event.getMessage().addReaction("");
-						event.getChannel().sendMessage("No image found");
-						
-					}
-				}
-				else if (splitMessage[0].equalsIgnoreCase(myKey + command) && splitMessage.length == 1)
-				{
-					event.getChannel().sendMessage("Please input a term to find a gif");
-				}
-			}
-		});
-	}
-	
-	public String searchGif(String term, String url)
-	{
-		String searchTerm = term;
-		String searchURL = url;
-		String userAgentSelect = "";
-		String gifToSend = "";
-		String fullSizeUrl = "";
-		
-		Document searchReference;
-		Document secondSearchRef;
-		Elements getDiv;
-		Elements getImg;
-		Elements fullDiv;
-		Elements fullImg;
-		
-		Random randNum = new Random();
-		final int REDUCEIMAGES = 2;
-		final int MAXIMAGES = 30;
-		int maxImagesFound = 0;
-		int randNumPick = 0;
-		
-		userAgentSelect = "Chrome/74.0.3729.157";
-		searchURL = searchURL.concat(searchTerm);
-		
-		try 
-		{	
-			
-			searchReference = Jsoup.connect(searchURL)
-					.followRedirects(true)
-					.ignoreHttpErrors(true)
-					.userAgent(userAgentSelect)
-					.get();
-							
-			getDiv = searchReference.select("Figure.GifListItem").select("a[href]");
-			List<String> validElements = new ArrayList();
-			for (Element e : getDiv) {
-				for (Element a : e.children()) {
-					if (a.className().equals("Gif")) {
-						validElements.add(a.parent().attr("href"));
-					}
-				}
-			}
-			
-			maxImagesFound = validElements.size();
-			
-			if (maxImagesFound > MAXIMAGES)
-			{
-				maxImagesFound /= REDUCEIMAGES;
-			}
-			if (maxImagesFound == 0)
-			{
-				gifToSend = "";
-			}
-			else
-			{
-				do
-				{
-			
-					randNumPick = randNum.nextInt(maxImagesFound);
+	@SneakyThrows
+	public static String searchGif(String term) {
+		Elements css = Jsoup.connect("https://tenor.com/search/" + term)
+				.followRedirects(true)
+				.ignoreHttpErrors(true)
+				.userAgent("Chrome/74.0.3729.157")
+				.get()
+				.select("Figure.GifListItem")
+				.select("a[href]");
 
-					fullSizeUrl = "https://tenor.com" + validElements.get(randNumPick);
-				
-					secondSearchRef = Jsoup.connect(fullSizeUrl)
-							.followRedirects(true)
-							.ignoreHttpErrors(true)
-							.userAgent(userAgentSelect)
-							.get();
+		if (css.isEmpty()) {
+			return null;
+		}
 
-					
-				} while (fullSizeUrl.equalsIgnoreCase("https://tenor.com/gif-maker?utm_source=search-page&utm_medium=internal&utm_campaign=gif-maker-entrypoints"));
-					
-					fullDiv = secondSearchRef.select("div.Gif");
-					fullImg = fullDiv.get(0).select("img");
-					gifToSend = fullImg.attr("abs:src");
-				
-			}	
-			
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
+		List<String> validElements = new ArrayList();
+		for (Element e : css) {
+			for (Element a : e.children()) {
+				if (a.className().equals("Gif")) {
+					validElements.add(a.parent().attr("href"));
+				}
+			}
 		}
-		
-		if (!gifToSend.equals(""))
-		{
-			return gifToSend;
+
+		String searchUrl = "";
+		int select = (int) Math.floor(Math.random() * (validElements.size() > 30 ? validElements.size() / 2 : validElements.size()));
+		searchUrl = "https://tenor.com" + validElements.get(select);
+
+		if (searchUrl.equalsIgnoreCase("https://tenor.com/gif-maker?utm_source=search-page&utm_medium=internal&utm_campaign=gif-maker-entrypoints")) {
+			if (select == 0) {
+				select += 1;
+			} else if (select == validElements.size()) {
+				select -= 1;
+			} else {
+				select += 1;
+			}
+			searchUrl = "https://tenor.com" + validElements.get(select);
 		}
-		else
-		{
-			return "noneFoundHere";
-		}
-	}
-	
-	public void setGifReturnUrl(String gifURL)
-	{
-		returnGifUrl = gifURL;
-	}
-	
-	public String getGifReturnUrl()
-	{
-		return returnGifUrl;
+
+		Elements search = Jsoup.connect(searchUrl)
+				.followRedirects(true)
+				.ignoreHttpErrors(true)
+				.userAgent("Chrome/74.0.3729.157")
+				.get()
+				.select("div.Gif")
+				.get(0)
+				.select("img");
+
+		return search.attr("abs:src");
 	}
 }
