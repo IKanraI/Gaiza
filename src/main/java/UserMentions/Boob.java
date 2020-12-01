@@ -37,8 +37,7 @@ public class Boob extends Command {
             channel.sendMessage("Hell yeah bobs are great");
         }
 
-        Gif gif = new Gif("Anime-boobs");
-        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), gif.getGifReturnUrl(), "bamboobzled"))
+        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), Gif.searchGif("Anime-boobs"), "bamboobzled"))
                 .exceptionally(error -> {
                     error.getCause().getMessage();
                     return null;

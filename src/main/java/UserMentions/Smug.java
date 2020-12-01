@@ -37,8 +37,7 @@ public class Smug extends Command {
             channel.sendMessage("What... did you... do?");
         }
 
-        Gif gif = new Gif("Anime-smug");
-        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), gif.getGifReturnUrl(), "smuggified"))
+        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), Gif.searchGif("Anime-smug"), "smuggified"))
                 .exceptionally(error -> {
                     error.getCause().getMessage();
                     return null;

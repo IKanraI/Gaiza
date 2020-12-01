@@ -37,8 +37,7 @@ public class Kiss extends Command {
 
         }
 
-        Gif gif = new Gif("Anime-kiss");
-        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), gif.getGifReturnUrl(), "kissed"))
+        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), Gif.searchGif("Anime-kiss"), "kissed"))
                 .exceptionally(error -> {
                     error.getCause().getMessage();
                     return null;

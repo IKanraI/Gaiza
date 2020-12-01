@@ -37,8 +37,7 @@ public class Lewd extends Command {
             channel.sendMessage("Please don't lewd me");
         }
 
-        Gif gif = new Gif("Anime-lewd");
-        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), gif.getGifReturnUrl(), "lewded"))
+        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), Gif.searchGif("Anime-lewd"), "lewded"))
                 .exceptionally(error -> {
                     error.getCause().getMessage();
                     return null;

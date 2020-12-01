@@ -37,8 +37,7 @@ public class Hug extends Command {
             channel.sendMessage("Oh you want to give me a hug? Thank you so much <3");
         }
 
-        Gif gif = new Gif("Anime-hug");
-        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), gif.getGifReturnUrl(), "hugged"))
+        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), Gif.searchGif("Anime-hug"), "hugged"))
                 .exceptionally(error -> {
                     error.getCause().getMessage();
                     return null;

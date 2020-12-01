@@ -37,8 +37,7 @@ public class Bite extends Command {
             channel.sendMessage("Ow!");
         }
 
-        Gif gif = new Gif("Anime-bite");
-        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), gif.getGifReturnUrl(), "bitten"))
+        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), Gif.searchGif("Anime-bite"), "bitten"))
                 .exceptionally(error -> {
                     error.getCause().getMessage();
                     return null;

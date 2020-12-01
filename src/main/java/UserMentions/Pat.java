@@ -38,8 +38,7 @@ public class Pat extends Command {
             channel.sendMessage("Oh you want to give me a headpat? Thank you so much <3");
         }
 
-        Gif gif = new Gif("Anime-pat");
-        channel.sendMessage(buildEmbed(author, message.getMentionedUsers().get(0), gif.getGifReturnUrl(), "patted"))
+        channel.sendMessage(buildEmbed(author, message.getMentionedUsers().get(0), Gif.searchGif("Anime-pat"), "patted"))
         .exceptionally(error -> {
             error.getCause().getMessage();
             return null;

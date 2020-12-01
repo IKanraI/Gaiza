@@ -37,8 +37,7 @@ public class Butt extends Command {
 
         }
 
-        Gif gif = new Gif("Anime-booty");
-        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), gif.getGifReturnUrl(), "bootified"))
+        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), Gif.searchGif("Anime-booty"), "bootified"))
                 .exceptionally(error -> {
                     error.getCause().getMessage();
                     return null;

@@ -36,8 +36,7 @@ public class Meow extends Command {
             channel.sendMessage("Nya!");
         }
 
-        Gif gif = new Gif("Anime-meow");
-        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), gif.getGifReturnUrl(), "meowed at"))
+        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), Gif.searchGif("Anime-meow"), "meowed at"))
                 .exceptionally(error -> {
                     error.getCause().getMessage();
                     return null;

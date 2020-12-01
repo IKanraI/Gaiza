@@ -37,8 +37,7 @@ public class Slap extends Command {
             return;
         }
 
-        Gif gif = new Gif("Anime-slap");
-        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), gif.getGifReturnUrl(), "slapped"))
+        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), Gif.searchGif("Anime-slap"), "slapped"))
                 .exceptionally(error -> {
                     error.getCause().getMessage();
                     return null;
