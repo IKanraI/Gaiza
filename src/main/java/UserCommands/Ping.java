@@ -9,8 +9,7 @@ import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.message.MessageAuthor;
 
-public class Ping extends Command
-{
+public class Ping extends Command {
 	@Getter
 	public static String help = "Typical test command. Returns !pong normally.";
 	
@@ -25,8 +24,6 @@ public class Ping extends Command
 		if(!onCommand(api, channel, message, messageAuthor)) {
 			return;
 		}
-
-
 		channel.sendMessage("<@" + messageAuthor.getIdAsString() + "> rules! ... well pong i guess");
 	}
 }
