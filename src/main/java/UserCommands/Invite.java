@@ -1,56 +1,30 @@
 package UserCommands;
 
+import Command.Command;
+import Management.BotInfo;
 import lombok.Getter;
 import org.javacord.api.DiscordApi;
 
 import Management.Keywords;
+import org.javacord.api.entity.channel.TextChannel;
+import org.javacord.api.entity.message.Message;
+import org.javacord.api.entity.message.MessageAuthor;
 
-public class Invite {
+public class Invite extends Command {
 	@Getter
 	public static String help = "Returns an invite link for the bot";
-	private String botInvite;
-	private String invMsg = "invite";
-	
-	public Invite(DiscordApi getApi)
-	{
-		DiscordApi inviteApi = getApi;
-		
-		setInvite(inviteApi.createBotInvite());
-		sendInvite(inviteApi);
-		
-		System.out.println("Invite.java loaded!");
-		
-	}
-	
-	public void setInvite(String inviteLink)
-	{
-		botInvite = inviteLink;
-	}
-	
-	public String getInvite()
-	{
-		return botInvite;
-	}
-	
-	public void sendInvite(DiscordApi sendInviteApi)
-	{
-		DiscordApi sendInv = sendInviteApi;
-		
-		sendInv.addMessageCreateListener(event ->
-		{
-			String myKey = "";
-			String getServerAddress = "";
-			
-			getServerAddress = event.getServer().get().getIdAsString();
-			myKey = Keywords.getKey(getServerAddress);
-				
-			if (event.getMessageContent().equalsIgnoreCase(myKey + invMsg))
-			{
-				event.getChannel().sendMessage("Here's your invite! " + sendInv.createBotInvite());
-			}
+
+	public Invite(DiscordApi api) {
+		super(api);
+		api.addMessageCreateListener(event -> {
+			inviteBot(api, super.getChannel(), super.getMessage(), super.getMessageAuthor());
 		});
 	}
-	
-	
 
+	private void inviteBot(DiscordApi api, TextChannel channel, Message message, MessageAuthor messageAuthor) {
+		if (!onCommand(api, channel, message, messageAuthor)) {
+			return;
+		}
+		channel.sendMessage("Here is your invite! : " + BotInfo.getBotInvite());
+	}
 }
