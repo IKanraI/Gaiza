@@ -37,7 +37,7 @@ public class AdminHelp
 			String getImageUrl = "";
 			Icon getUserIcon = null;
 			
-			if (event.getMessageAuthor().isServerAdmin())
+			if (event.getMessageAuthor().isServerAdmin() || event.getMessageAuthor().equals(BotInfo.getOwnerId()))
 			{
 				serverAddress = event.getServer().get().getIdAsString();
 				myKey = Keywords.getKey(serverAddress);

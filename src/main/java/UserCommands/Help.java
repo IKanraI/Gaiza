@@ -18,13 +18,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Help extends Command {
+
 	public Help(DiscordApi api) {
 		super(api);
-
-		api.addMessageCreateListener(e -> {
-			helpCommand(getChannel(), getMessageAuthor(), getArgs());
-		});
-
+		api.addMessageCreateListener(e ->
+			helpCommand(getChannel(), getMessageAuthor(), getArgs()));
 	}
 
 	@SneakyThrows

@@ -13,9 +13,8 @@ public class Ping extends Command {
 	
 	public Ping(DiscordApi api) {
 		super(api);
-		api.addMessageCreateListener(e-> {
-			pingCommand(super.getChannel(), super.getMessageAuthor());
-		});
+		api.addMessageCreateListener(e ->
+			pingCommand(super.getChannel(), super.getMessageAuthor()));
 	}
 
 	private void pingCommand(TextChannel channel, MessageAuthor messageAuthor) {

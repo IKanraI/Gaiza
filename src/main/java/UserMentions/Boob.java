@@ -16,9 +16,8 @@ public class Boob extends Command {
     public Boob(DiscordApi api) {
         super(api);
 
-        api.addMessageCreateListener(event -> {
-            boobCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
-        });
+        api.addMessageCreateListener(event ->
+            boobCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs()));
     }
 
     public void boobCommand(TextChannel channel, Message message, MessageAuthor author, List<String> args) {

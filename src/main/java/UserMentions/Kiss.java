@@ -16,9 +16,8 @@ public class Kiss extends Command {
     public Kiss(DiscordApi api) {
         super(api);
 
-        api.addMessageCreateListener(event -> {
-            kissCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
-        });
+        api.addMessageCreateListener(event ->
+            kissCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs()));
     }
 
     public void kissCommand(TextChannel channel, Message message, MessageAuthor author, List<String> args) {

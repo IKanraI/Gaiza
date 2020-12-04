@@ -28,9 +28,8 @@ public class Roll extends Command
 	public Roll(DiscordApi api)
 	{
 		super(api);
-		api.addMessageCreateListener(event -> {
-			rollOrFlip(super.getChannel(), super.getArgs());
-		});
+		api.addMessageCreateListener(event ->
+			rollOrFlip(super.getChannel(), super.getArgs()));
 	}
 
 	private void rollOrFlip(TextChannel channel, List<String> args) {

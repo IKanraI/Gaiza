@@ -27,6 +27,10 @@ public class GlobalUserInformation
 		newUserJoins(userApi);
 		
 	}
+
+	public static String getUserByIdDb (String id) {
+		return userIDList.get(id);
+	}
 	
 	public static Map<String, String> getUserIDList()
 	{

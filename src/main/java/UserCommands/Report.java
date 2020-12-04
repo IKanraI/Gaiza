@@ -14,9 +14,8 @@ public class Report extends Command {
 
     public Report(DiscordApi api) {
         super(api);
-        api.addMessageCreateListener(event -> {
-            reportCommand(api, super.getMessageAuthor(), super.getChannel(), super.getArgs());
-        });
+        api.addMessageCreateListener(event ->
+            reportCommand(api, super.getMessageAuthor(), super.getChannel(), super.getArgs()));
     }
 
     private void reportCommand(DiscordApi api, MessageAuthor author, TextChannel channel, List<String> args) {

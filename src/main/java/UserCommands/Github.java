@@ -14,9 +14,8 @@ public class Github extends Command {
 
     public Github(DiscordApi api) {
         super(api);
-        api.addMessageCreateListener(event -> {
-            inviteBot(super.getChannel());
-        });
+        api.addMessageCreateListener(event ->
+            inviteBot(super.getChannel()));
     }
 
     private void inviteBot(TextChannel channel) {

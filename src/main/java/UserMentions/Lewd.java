@@ -16,9 +16,8 @@ public class Lewd extends Command {
     public Lewd(DiscordApi api) {
         super(api);
 
-        api.addMessageCreateListener(event -> {
-            lewdCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
-        });
+        api.addMessageCreateListener(event ->
+            lewdCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs()));
     }
 
     public void lewdCommand(TextChannel channel, Message message, MessageAuthor author, List<String> args) {

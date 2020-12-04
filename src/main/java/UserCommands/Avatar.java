@@ -26,9 +26,8 @@ public class Avatar extends Command {
 	public Avatar(DiscordApi api) {
 		super(api);
 		imageSize = "?size=256";
-		api.addMessageCreateListener(e -> {
-			avatarCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
-		});
+		api.addMessageCreateListener(e ->
+			avatarCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs()));
 	}
 
 	public void avatarCommand(TextChannel channel, Message message, MessageAuthor messageAuthor, List<String> args) {

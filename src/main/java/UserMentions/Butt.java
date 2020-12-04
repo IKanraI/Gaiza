@@ -16,9 +16,8 @@ public class Butt extends Command {
     public Butt(DiscordApi api) {
         super(api);
 
-        api.addMessageCreateListener(event -> {
-            buttCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
-        });
+        api.addMessageCreateListener(event ->
+            buttCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs()));
     }
 
     public void buttCommand(TextChannel channel, Message message, MessageAuthor author, List<String> args) {
