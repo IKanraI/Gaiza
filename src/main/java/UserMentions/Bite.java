@@ -16,9 +16,8 @@ public class Bite extends Command {
     public Bite(DiscordApi api) {
         super(api);
 
-        api.addMessageCreateListener(event -> {
-            biteCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
-        });
+        api.addMessageCreateListener(event ->
+            biteCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs()));
     }
 
     public void biteCommand(TextChannel channel, Message message, MessageAuthor author, List<String> args) {

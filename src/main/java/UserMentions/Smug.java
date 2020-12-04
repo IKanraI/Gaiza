@@ -16,9 +16,8 @@ public class Smug extends Command {
     public Smug(DiscordApi api) {
         super(api);
 
-        api.addMessageCreateListener(event -> {
-            smugCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
-        });
+        api.addMessageCreateListener(event ->
+            smugCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs()));
     }
 
     public void smugCommand(TextChannel channel, Message message, MessageAuthor author, List<String> args) {

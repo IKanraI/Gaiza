@@ -5,11 +5,6 @@ public class UserFineObject implements Comparable
 	private long fineValue;
 	private String userID;
 	
-	public UserFineObject()
-	{
-		
-	}
-	
 	public UserFineObject(String uID, long fValue)
 	{
 		userID = uID;

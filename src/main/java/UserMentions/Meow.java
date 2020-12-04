@@ -15,9 +15,8 @@ public class Meow extends Command {
 
     public Meow(DiscordApi api) {
         super(api);
-        api.addMessageCreateListener(event -> {
-            meowCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
-        });
+        api.addMessageCreateListener(event ->
+            meowCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs()));
     }
 
     public void meowCommand(TextChannel channel, Message message, MessageAuthor author, List<String> args) {

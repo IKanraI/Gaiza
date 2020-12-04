@@ -30,9 +30,8 @@ public class Define extends Command {
 	
 	public Define(DiscordApi api) {
 		super(api);
-		api.addMessageCreateListener(e -> {
-			urbanSearch(super.getChannel(), super.getMessageAuthor(), super.getArgs());
-		});
+		api.addMessageCreateListener(e ->
+			urbanSearch(super.getChannel(), super.getMessageAuthor(), super.getArgs()));
 	}
 
 	@SneakyThrows

@@ -16,9 +16,8 @@ public class Hug extends Command {
     public Hug(DiscordApi api) {
         super(api);
 
-        api.addMessageCreateListener(event -> {
-            hugCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
-        });
+        api.addMessageCreateListener(event ->
+            hugCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs()));
     }
 
     public void hugCommand(TextChannel channel, Message message, MessageAuthor author, List<String> args) {

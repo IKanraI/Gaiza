@@ -16,9 +16,8 @@ public class Slap extends Command {
     public Slap(DiscordApi api) {
         super(api);
 
-        api.addMessageCreateListener(event -> {
-            slapCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
-        });
+        api.addMessageCreateListener(event ->
+            slapCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs()));
     }
 
     public void slapCommand(TextChannel channel, Message message, MessageAuthor author, List<String> args) {

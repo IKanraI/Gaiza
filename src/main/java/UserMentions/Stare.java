@@ -16,9 +16,8 @@ public class Stare extends Command {
     public Stare(DiscordApi api) {
         super(api);
 
-        api.addMessageCreateListener(event -> {
-            stareCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
-        });
+        api.addMessageCreateListener(event ->
+            stareCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs()));
     }
 
     public void stareCommand(TextChannel channel, Message message, MessageAuthor author, List<String> args) {

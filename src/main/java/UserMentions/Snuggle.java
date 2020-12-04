@@ -16,9 +16,8 @@ public class Snuggle extends Command {
     public Snuggle(DiscordApi api) {
         super(api);
 
-        api.addMessageCreateListener(event -> {
-            snuggleCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs());
-        });
+        api.addMessageCreateListener(event ->
+            snuggleCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs()));
     }
 
     public void snuggleCommand(TextChannel channel, Message message, MessageAuthor author, List<String> args) {

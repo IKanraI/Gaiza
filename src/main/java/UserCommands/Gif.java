@@ -28,15 +28,11 @@ public class Gif extends Command
 {
 	@Getter
 	public static String help = "Searches for a specified gif. Returns a random results from the search. Usage [prefix]gif [query]";
-	private String command = "gif";
-	private String searchURL = "https://tenor.com/search/";
-	private String returnGifUrl = "";
 	
 	public Gif(DiscordApi api) {
 		super(api);
-		api.addMessageCreateListener(event -> {
-			userGifSearch(super.getChannel(), super.getMessageAuthor(), super.getArgs());
-		});
+		api.addMessageCreateListener(event ->
+				userGifSearch(super.getChannel(), super.getMessageAuthor(), super.getArgs()));
 	}
 
 	private void userGifSearch(TextChannel channel, MessageAuthor author, List<String> args) {
