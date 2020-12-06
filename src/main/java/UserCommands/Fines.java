@@ -15,6 +15,8 @@ import java.util.Locale;
 
 public class Fines extends Command {
 
+    public static String help = "Checks the fine amount of a mentioned user. Usage [prefix]fines | [prefix]fines <user>";
+
     public Fines(DiscordApi api) {
         super(api);
         api.addMessageCreateListener(event ->
