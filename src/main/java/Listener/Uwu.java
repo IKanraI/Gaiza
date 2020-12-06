@@ -28,7 +28,6 @@ public class Uwu
 	public Uwu(DiscordApi getApi)
 	{
 		DiscordApi uwuApi = getApi;
-		
 		uwuListener(uwuApi);
 	}
 	
@@ -180,7 +179,6 @@ public class Uwu
 	public void setUserFine(String id)
 	{
 		JSONObject saveData = new JSONObject();
-		System.out.println(GlobalUserInformation.getUserByIdDb(id));
 		saveData.put(keyFielduwu, getUserFine(GlobalUserInformation.getUserByIdDb(id)) + fine);
 		Files.write(Paths.get(GlobalUserInformation.getUserByIdDb(id)), saveData.toJSONString().getBytes());
 	}
@@ -202,10 +200,10 @@ public class Uwu
 				event.getChannel().sendMessage(violationEmbed());
 				setUserFine(event.getMessage().getAuthor().getIdAsString());
 			} else {
-				for (int i = 0; i < event.getMessageContent().length() - 2; ++i) {
+				for (int i = 0; i < msg.length() - 2; ++i) {
 					if (msg.charAt(i) == 'u'
 							&& msg.charAt(i + 1) == 'w'
-							&& (msg.charAt(i + 3) == 'u')) {
+							&& (msg.charAt(i + 2) == 'u')) {
 
 						event.getChannel().sendMessage(violationEmbed());
 						setUserFine(event.getMessage().getAuthor().getIdAsString());
