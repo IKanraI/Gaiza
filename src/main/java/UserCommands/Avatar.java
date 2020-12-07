@@ -56,7 +56,7 @@ public class Avatar extends Command {
 	
 	private EmbedBuilder buildOutputMessage(User user) {
 		EmbedBuilder embed = new EmbedBuilder()
-				.setAuthor(user.getDiscriminatedName(), user.getAvatar().getUrl().toString(), user.getAvatar())
+				.setAuthor(user.getDiscriminatedName(), user.getAvatar().getUrl().toString() + imageSize, user.getAvatar())
 				.setColor(Color.magenta)
 				.setImage(user.getAvatar().getUrl() + imageSize)
 				.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())

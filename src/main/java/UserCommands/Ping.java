@@ -9,7 +9,7 @@ import org.javacord.api.entity.message.MessageAuthor;
 
 public class Ping extends Command {
 	@Getter
-	public static String help = "Typical test command. Returns !pong normally.";
+	public static String help = "Typical test command. Returns pong normally.";
 	
 	public Ping(DiscordApi api) {
 		super(api);
