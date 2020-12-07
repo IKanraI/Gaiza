@@ -2,8 +2,12 @@ package Management;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.SneakyThrows;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.Icon;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class BotInfo 
 {
@@ -18,6 +22,7 @@ public class BotInfo
 	@Getter @Setter private static int serverCount;
 	@Getter @Setter private static int userCount;
 
+	@SneakyThrows
 	public BotInfo(DiscordApi api)
 	{
 		ownerId = "150415472028811264";
@@ -25,7 +30,7 @@ public class BotInfo
 		botName = api.getYourself().getName();
 		botImageStr = api.getYourself().getAvatar().getUrl().toString();
 		botImage = api.getYourself().getAvatar();
-		botActivity = "Looking for Artist";
+		botActivity = Files.readString(Path.of("C:\\Users\\17244\\Desktop\\BotActivity.txt"));
 		botInvite = "https://discordapp.com/oauth2/authorize?client_id=369295519576489984&scope=bot&permissions=2146561111";
 		botRepo = "https://github.com/IKanraI/Gaiza";
 	}
