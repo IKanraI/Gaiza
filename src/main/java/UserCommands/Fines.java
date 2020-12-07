@@ -32,7 +32,6 @@ public class Fines extends Command {
         }
 
         if (args.size() == 0) {
-            System.err.println(Uwu.getUserFine(author.getIdAsString()));
             channel.sendMessage("<@" + author.getIdAsString()
                     + ">, you currently owe: "
                     + NumberFormat.getCurrencyInstance(Locale.US).format(Uwu.getUserFine(GlobalUserInformation.getUserByIdDb(author.getIdAsString()))));
