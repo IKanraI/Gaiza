@@ -2,12 +2,12 @@
 
     Gaiza is a multipurpose bot that is in development to test the reaches of Java through the Javacord API
     
-    JavaCord api can be found here: https://github.com/Javacord/Javacord
+JavaCord api can be found here: https://github.com/Javacord/Javacord
     
 
 Currently the bot has a handful of commands and listeners that can be utilized by anyone who invites the bot to their server
 
-    Bot invite link can be found here: https://discordapp.com/oauth2/authorize?client_id=369295519576489984&scope=bot&permissions=2146561111
+Bot invite link can be found here: https://discordapp.com/oauth2/authorize?client_id=369295519576489984&scope=bot&permissions=2146561111
     
     A list of commands can be found on the bot through the help command. The default command usage for the bot is '$'. Prefixes are able to
     be changed by admins of the server.
