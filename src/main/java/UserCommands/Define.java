@@ -64,20 +64,21 @@ public class Define extends Command {
 		definition.add(css.parents().select("div.example").get(0).text());
 		definition.add(css.parents().select("div.contributor").get(0).text());
 
-		channel.sendMessage(buildEmbed(term.toString(), messageAuthor, definition)).exceptionally(e -> {
+		channel.sendMessage(buildEmbed(term.toString(), "https://www.urbandictionary.com/define.php?term=" + term.toString(), definition)).exceptionally(e -> {
 			channel.sendMessage(definition.get(0));
 			channel.sendMessage("Credit: Contributed " + definition.get(2));
 			return null;
 		});
 	}
 
-	private EmbedBuilder buildEmbed(String message, MessageAuthor messageAuthor, List<String> def) {
+	private EmbedBuilder buildEmbed(String message, String link, List<String> def) {
 		EmbedBuilder embed = new EmbedBuilder()
 				.setTitle(message.substring(0, 1).toUpperCase() + message.substring(1))
 				.setColor(Color.magenta)
 				.addField("Definition", def.get(0))
 				.addField("Example:", def.get(1))
 				.addField("Credit:", "Contributed " + def.get(2))
+				.addField("Link", link)
 				.setTimestampToNow()
 				.setFooter(BotInfo.getBotName(), BotInfo.getBotImage());
 		return embed;
