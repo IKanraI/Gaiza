@@ -49,7 +49,7 @@ public abstract class Command {
         if (!(Keywords.getKey(server.getIdAsString()) + command).equalsIgnoreCase(key)) {
             return false;
         }
-        if (!messageAuthor.isRegularUser()) {
+        if (!messageAuthor.isRegularUser() || channel.getIdAsString().equals("519563130603307018")) {
             return false;
         }
 
