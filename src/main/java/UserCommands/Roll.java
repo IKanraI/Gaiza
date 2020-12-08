@@ -18,15 +18,14 @@ import Management.Keywords;
 public class Roll extends Command
 {
 	@Getter
-	public static String help = "Does a roll for a specified amount [flip | 6 | 10 | 20]";
+	public static String help = "Does a roll for a specified amount [prefix]roll [roll amount]";
 	private String commandCoin = "flip";
 	private String commandRoll = "roll";
 	private String command6 = "6";
 	private String command10 = "10";
 	private String command20 = "20";
 	
-	public Roll(DiscordApi api)
-	{
+	public Roll(DiscordApi api) {
 		super(api);
 		api.addMessageCreateListener(event ->
 			rollOrFlip(super.getChannel(), super.getArgs()));

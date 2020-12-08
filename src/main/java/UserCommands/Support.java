@@ -5,6 +5,7 @@ import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.channel.TextChannel;
 
 public class Support extends Command {
+    public static String help = "Retuns the invite to the support server";
 
     public Support(DiscordApi api) {
         super(api);
