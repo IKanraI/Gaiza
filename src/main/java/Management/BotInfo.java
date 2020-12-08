@@ -6,9 +6,7 @@ import lombok.SneakyThrows;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.Icon;
 
-import java.io.File;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class BotInfo 

@@ -1,5 +1,6 @@
 package AdminCommands;
 
+import lombok.Getter;
 import org.javacord.api.DiscordApi;
 
 import Database.DatabaseLL;
@@ -12,6 +13,8 @@ public class WelcomeMessage
 	private String commandE = "enable";
 	private String commandM = "welcome";
 	private String commandC = "channel";
+	@Getter
+	public static String help = "Welcome module. Not manipulated to the new code standards yet";
 	
 	public WelcomeMessage(DiscordApi initApi)
 	{

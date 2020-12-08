@@ -1,83 +1,68 @@
 package AdminCommands;
 
 import java.awt.Color;
+import java.io.File;
+import java.util.List;
 
+import Command.Command;
+import lombok.SneakyThrows;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.Icon;
+import org.javacord.api.entity.channel.TextChannel;
+import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 
 import Management.BotInfo;
 import Management.Keywords;
+import org.javacord.api.entity.user.User;
 
-public class AdminHelp 
-{
-	private String command = "ahelp";
-	
-	public AdminHelp(DiscordApi getApi)
-	{
-		DiscordApi adminHelpApi = getApi;
-		
-		displayAdminHelp(adminHelpApi);
-		
-		System.out.println("AdminHelp.java loaded!");
+public class AdminHelp extends Command {
+	public static String help = "Admin panel help menu. Usage: [prefix]AdminHelp";
+	private static File folder;
+	public AdminHelp(DiscordApi api) {
+		super(api);
+		folder = new File("C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\AdminCommands\\");
+		api.addMessageCreateListener(event ->
+				displayHelp(super.getChannel(), super.getMessageAuthor(), super.getArgs()));
+
 	}
-	
-	public void displayAdminHelp(DiscordApi getApi)
-	{
-		DiscordApi aHelpApi = getApi;
-		
-		aHelpApi.addMessageCreateListener(event ->
-		{
-			String myKey;
-			String serverAddress;
-			String splitMessage[] = null;
-			String messageToGet = "";
-			String getMessageSent = "";
-			String getUsername = "";
-			String getImageUrl = "";
-			Icon getUserIcon = null;
-			
-			if (event.getMessageAuthor().isServerAdmin() || event.getMessageAuthor().equals(BotInfo.getOwnerId()))
-			{
-				serverAddress = event.getServer().get().getIdAsString();
-				myKey = Keywords.getKey(serverAddress);
-				
-				getMessageSent = event.getMessageContent();
-				splitMessage = getMessageSent.split(" ");
-				messageToGet = myKey + command;
-				
-				if (splitMessage[0].equalsIgnoreCase(messageToGet))
-				{
-					getUsername = event.getMessageAuthor().getDisplayName().toString();
-					getImageUrl = event.getMessageAuthor().getAvatar().getUrl().toString();
-					getUserIcon = event.getMessageAuthor().getAvatar();
-					
-					EmbedBuilder embed = new EmbedBuilder()
-							.setAuthor(getUsername, getImageUrl, getUserIcon)
-							.setColor(Color.magenta)
-							
-							.setTitle("Admin Help Panel")
-							.setDescription("Admin Commands are currently all prefixed by: " + myKey)
-							
-							.addInlineField(myKey + "prefix", "Changes the current prefix of the server to whatever is set next")
-							.addInlineField(myKey + "kick", "Kick mentioned user with or without optional message. [user]<message>")
-							.addInlineField(myKey + "ban", "Ban mentioned user with or without optional message. [user]<message>")
-							
-							.addInlineField(myKey + "enable", "Enable welcome messages with [true|false|t|f|0|1]. Channel and message must both be set first")
-							.addInlineField(myKey + "welcome", "Set the welcome message. Use <<mention>> to mention the user that joins [message]")
-							.addInlineField(myKey + "channel", "Set the welcome channel. Mention the channel with the #[channel]")
-							
-							.setThumbnail(BotInfo.getBotImageStr())
-							.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
-							.setTimestampToNow();
-					
-					event.getChannel().sendMessage(embed);
-				}
+	@SneakyThrows
+	private void displayHelp(TextChannel channel, MessageAuthor author, List<String> args) {
+		if (!onAdminCommand()) {
+			return;
+		}
+		if (args.size() == 0) {
+			channel.sendMessage(buildEmbed(author.asUser().get()));
+		} else if (args.size() == 1) {
+			channel.sendMessage(Class.forName("AdminCommands."
+					+ args.get(0).substring(0, 1).toUpperCase() + args.get(0).substring(1))
+					.getDeclaredField("help").get(0).toString())
+					.exceptionally(e -> {
+						channel.sendMessage("Command not found");
+						return null;
+			});
+		}
+	}
+
+	@SneakyThrows
+	private EmbedBuilder buildEmbed(User user) {
+		EmbedBuilder embed = new EmbedBuilder()
+				.setAuthor(user.getDiscriminatedName(), user.getAvatar().getUrl().toString(), user.getAvatar())
+				.addField("Attention", "Most of these are incorrect and being worked on")
+				.setColor(Color.MAGENTA)
+				.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
+				.setTimestampToNow();
+
+		for (File f : folder.listFiles()) {
+			String currCommand = f.getName().replaceAll(".java", "");
+			if (currCommand.equalsIgnoreCase("adminhelp")) {
+				continue;
 			}
-			
-			
-			
-		});
-	}
 
+			embed.addInlineField(getKey().replace("adminhelp", "")
+					+ currCommand, Class.forName("AdminCommands." + currCommand).getDeclaredField("help").get(0).toString());
+
+		}
+		return embed;
+	}
 }

@@ -1,24 +1,24 @@
 package Management;
 
+import lombok.SneakyThrows;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Token 
 {
 	private static String token = "";
 	
-	public Token() throws FileNotFoundException {
+	public Token() {
 		setToken();
 	}
-	
-	static public void setToken() throws FileNotFoundException {
-		File tokenFile = new File("C:\\Users\\17244\\Documents\\JavaProjects\\Hidden\\Token.txt");
-		Scanner getToken = new Scanner(tokenFile);
-		
-		token = getToken.nextLine();
-		
-		getToken.close();
+	@SneakyThrows
+	static public void setToken() {
+		token = Files.readAllLines(Paths.get("C:\\Users\\17244\\Documents\\JavaProjects\\Hidden\\Token.txt")).get(0);
 	}
 	
 	public String getToken() {

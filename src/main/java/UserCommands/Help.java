@@ -1,6 +1,8 @@
 package UserCommands;
 
 import Command.Command;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.SneakyThrows;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.channel.TextChannel;
@@ -18,26 +20,27 @@ import java.util.List;
 import java.util.Map;
 
 public class Help extends Command {
+	@Setter @Getter
+	private Map<String, File> folders = new HashMap();
 
 	public Help(DiscordApi api) {
 		super(api);
+		folders.put("UserCommands.", new File("C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\UserCommands\\"));
+		folders.put("UserMentions.", new File("C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\UserMentions\\"));
+
 		api.addMessageCreateListener(e ->
 			helpCommand(getChannel(), getMessageAuthor(), getArgs()));
 	}
 
 	@SneakyThrows
-	public void helpCommand(TextChannel channel, MessageAuthor author, List<String> args) {
+	private void helpCommand(TextChannel channel, MessageAuthor author, List<String> args) {
 		if (!onCommand()) {
 			return;
 		}
 		if (args.size() == 0) {
 			channel.sendMessage(buildEmbed(author.asUser().get()));
-		}
+		} else if (args.size() == 1) {
 
-		if (args.size() == 1) {
-			Map<String, File> folders = new HashMap();
-			folders.put("UserCommands.", new File("C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\UserCommands\\"));
-			folders.put("UserMentions.", new File("C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\UserMentions\\"));
 			String name = args.get(0).substring(0, 1).toUpperCase() + args.get(0).substring(1);
 			String type = "";
 
@@ -69,25 +72,21 @@ public class Help extends Command {
 				.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
 				.setTimestampToNow();
 
-			Map<String, File> folders = new HashMap();
-			folders.put("UserCommands", new File("C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\UserCommands\\"));
-			folders.put("UserMentions", new File("C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\UserMentions\\"));
-
-			folders.forEach((folder, file) -> {
-				for (File f : file.listFiles()) {
-					String currCommand = f.getName().replaceAll(".java", "");
-					if (currCommand.equalsIgnoreCase("help")) {
-						continue;
-					}
-					try {
-						embed.addInlineField(getKey().replace("help", "")
-								+ currCommand, Class.forName(folder + "." + currCommand).getDeclaredField("help").get(0).toString());
-
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+		folders.forEach((folder, file) -> {
+			for (File f : file.listFiles()) {
+				String currCommand = f.getName().replaceAll(".java", "");
+				if (currCommand.equalsIgnoreCase("help")) {
+					continue;
 				}
-			});
+
+				try {
+					embed.addInlineField(getKey().replace("help", "")
+							+ currCommand, Class.forName(folder + "." + currCommand).getDeclaredField("help").get(0).toString());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 
 		return embed;
 	}

@@ -1,5 +1,6 @@
 package AdminCommands;
 
+import lombok.Getter;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.user.User;
 
@@ -8,6 +9,8 @@ import Management.Keywords;
 public class BanUser 
 {
 	private String command = "ban";
+	@Getter
+	public static String help = "Bans user with or without a reason";
 	
 	public BanUser(DiscordApi getApi)
 	{

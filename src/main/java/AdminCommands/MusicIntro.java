@@ -1,11 +1,14 @@
 package AdminCommands;
 
+import lombok.Getter;
 import org.javacord.api.DiscordApi;
 //import org.javacord.api.audio.AudioSource;
 
 public class MusicIntro 
 {
 	private String CakeID = "136785961622306816";
+	@Getter
+	public static String help = "Not functional don't use this";
 	
 	public MusicIntro(DiscordApi getApi)
 	{

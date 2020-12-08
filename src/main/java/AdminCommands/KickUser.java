@@ -1,5 +1,6 @@
 package AdminCommands;
 
+import lombok.Getter;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.user.User;
 
@@ -8,6 +9,8 @@ import Management.Keywords;
 public class KickUser 
 {
 	private String command = "kick";
+	@Getter
+	public static String help = "Kicks user with or without a reason";
 	
 	public KickUser(DiscordApi getApi)
 	{
