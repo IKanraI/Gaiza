@@ -6,8 +6,10 @@ import lombok.SneakyThrows;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.Icon;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class BotInfo 
 {
@@ -30,7 +32,7 @@ public class BotInfo
 		botName = api.getYourself().getName();
 		botImageStr = api.getYourself().getAvatar().getUrl().toString();
 		botImage = api.getYourself().getAvatar();
-		botActivity = Files.readString(Path.of("C:\\Users\\17244\\Desktop\\BotActivity.txt"));
+		botActivity = Files.readAllLines(Paths.get("C:\\Users\\17244\\Desktop\\BotActivity.txt")).get(0);
 		botInvite = "https://discordapp.com/oauth2/authorize?client_id=369295519576489984&scope=bot&permissions=2146561111";
 		botRepo = "https://github.com/IKanraI/Gaiza";
 	}

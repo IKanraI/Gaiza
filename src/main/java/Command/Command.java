@@ -48,6 +48,9 @@ public abstract class Command {
         if (!(Keywords.getKey(server.getIdAsString()) + command).equalsIgnoreCase(key)) {
             return false;
         }
+        if (!messageAuthor.isRegularUser()) {
+            return false;
+        }
 
         for (String arg : message.getContent().split("\\s")) {
             if (arg.equals(key)) {

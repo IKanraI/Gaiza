@@ -1,55 +1,20 @@
 package Management;
 
-public class UserFineObject implements Comparable
-{
-	private long fineValue;
-	private String userID;
-	
-	public UserFineObject(String uID, long fValue)
-	{
-		userID = uID;
-		fineValue = fValue;
-	}
-	
-	public int compareThis(UserFineObject userCompareObject) 
-	{
-		int checkReturn;
-		
-		checkReturn = Long.compare(this.fineValue, userCompareObject.getFineValue());
-		
-		return checkReturn;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter @Setter
+public class UserFineObject implements Comparable<UserFineObject> {
+	private long fine;
+	private String id;
+
+	public UserFineObject(String id, long fine) {
+		this.id = id;
+		this.fine = fine;
 	}
 
 	@Override
-	public int compareTo(Object o) throws ClassCastException
-	{
-		if (o.getClass().equals(this.getClass()))
-		{
-			return compareThis((UserFineObject) o);
-		}
-		else
-		{
-			throw new ClassCastException("holy fuck you can't do that");
-		}
-	}
-	
-	public long getFineValue() 
-	{
-		return fineValue;
-	}
-	
-	public void setFineValue(long fineValue) 
-	{
-		this.fineValue = fineValue;
-	}
-	
-	public String getUserID() 
-	{
-		return userID;
-	}
-	
-	public void setUserID(String userID) 
-	{
-		this.userID = userID;
+	public int compareTo(UserFineObject user) {
+		return Long.compare(user.getFine(), this.fine);
 	}
 }
