@@ -1,5 +1,6 @@
 package AdminCommands;
 
+import lombok.Getter;
 import org.javacord.api.DiscordApi;
 
 import Database.DatabaseLL;
@@ -10,6 +11,8 @@ import Management.Keywords;
 public class PrefixChange 
 {
 	private String prefixChangeCommand = "prefix";
+	@Getter
+	public static String help = "Changes the prefix of the server";
 	
 	public PrefixChange(DiscordApi getApi)
 	{

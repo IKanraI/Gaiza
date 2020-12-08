@@ -1,5 +1,6 @@
 package Command;
 
+import Management.BotInfo;
 import Management.Keywords;
 import lombok.Getter;
 import lombok.Setter;
@@ -63,5 +64,11 @@ public abstract class Command {
 
 	public boolean onCommand() {
         return onCommand(this.api, this.message, this.server, (ArrayList) this.args);
+    }
+
+    public boolean onAdminCommand() {
+            return (messageAuthor.isServerAdmin() || messageAuthor.getIdAsString().equals(BotInfo.getOwnerId()))
+                    && onCommand(this.api, this.message, this.server, (ArrayList) this.args);
+
     }
 }
