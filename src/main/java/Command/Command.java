@@ -69,6 +69,9 @@ public abstract class Command {
     public boolean onAdminCommand() {
             return (messageAuthor.isServerAdmin() || messageAuthor.getIdAsString().equals(BotInfo.getOwnerId()))
                     && onCommand(this.api, this.message, this.server, (ArrayList) this.args);
+    }
 
+    public boolean isIgnoredChannel() {
+       return channel.getIdAsString().equals("519563130603307018");
     }
 }

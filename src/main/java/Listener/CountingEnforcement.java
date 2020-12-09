@@ -9,11 +9,6 @@ import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.entity.user.User;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-
 public class CountingEnforcement extends Command {
 
     public CountingEnforcement (DiscordApi api) {
