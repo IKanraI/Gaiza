@@ -72,7 +72,6 @@ public class Uwu extends Command
 				}
 			}
 		}
-
 	}
 
 	private EmbedBuilder violationEmbed () {
