@@ -36,6 +36,7 @@ public class CountingEnforcement extends Command {
             }
         } catch (Exception e) {
             channel.sendMessage("<@" + author.getIdAsString() + ">" + ", did you forget what a number is?");
+            Thread.sleep(1250);
             message.delete();
             Thread.sleep(2000);
             channel.getMessages(1).get().getNewestMessage().get().delete();
@@ -54,11 +55,13 @@ public class CountingEnforcement extends Command {
 
         if (!compare.equals(Integer.parseInt(message.getContent()))) {
             channel.sendMessage("<@" + author.getIdAsString() + ">" + ", do you know how to fucking count cunt?");
+            Thread.sleep(1250);
             message.delete();
             Thread.sleep(2000);
             channel.getMessages(1).get().getNewestMessage().get().delete();
         } else if (author.getIdAsString().equals(user.getIdAsString())) {
             channel.sendMessage("<@" + author.getIdAsString() + ">" + ", stop being a greedy cunt and wait your turn");
+            Thread.sleep(1250);
             message.delete();
             Thread.sleep(2000);
             channel.getMessages(1).get().getNewestMessage().get().delete();
