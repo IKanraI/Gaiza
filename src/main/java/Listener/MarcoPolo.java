@@ -11,7 +11,7 @@ public class MarcoPolo {
 
     private void response(DiscordApi api) {
         api.addMessageCreateListener(event -> {
-            if (!event.getMessageAuthor().isRegularUser() || !event.getMessageAuthor().equals("136785961622306816")) {
+            if (!event.getMessageAuthor().getIdAsString().equals("136785961622306816")) {
                 return;
             }
             if (event.getMessageContent().replaceAll("[^a-zA-Z]", "").equalsIgnoreCase("marco")) {
