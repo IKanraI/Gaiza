@@ -33,7 +33,7 @@ public class Help extends Command {
 	}
 
 	@SneakyThrows
-	private void helpCommand(TextChannel channel, MessageAuthor author, List<String> args) {
+	public void helpCommand(TextChannel channel, MessageAuthor author, List<String> args) {
 		if (!onCommand()) {
 			return;
 		}
@@ -65,7 +65,7 @@ public class Help extends Command {
 		}
 	}
 
-	private EmbedBuilder buildEmbed(User user) {
+	public EmbedBuilder buildEmbed(User user) {
 		EmbedBuilder embed = new EmbedBuilder()
 				.setAuthor(user.getDiscriminatedName(), user.getAvatar().getUrl().toString(), user.getAvatar())
 				.setColor(Color.MAGENTA)
@@ -81,9 +81,9 @@ public class Help extends Command {
 
 				try {
 					embed.addInlineField(getKey().replace("help", "")
-							+ currCommand, Class.forName(folder + "." + currCommand).getDeclaredField("help").get(0).toString());
+							+ currCommand, Class.forName(folder + currCommand).getDeclaredField("help").get(0).toString());
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.err.println(currCommand + " : " + folder + " : ");
 				}
 			}
 		});
