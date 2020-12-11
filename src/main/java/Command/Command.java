@@ -1,7 +1,7 @@
 package Command;
 
 import Management.BotInfo;
-import Management.Keywords;
+import Management.Prefix;
 import lombok.Getter;
 import lombok.Setter;
 import org.javacord.api.DiscordApi;
@@ -46,7 +46,7 @@ public abstract class Command {
             setServer(event.getServer().get());
         });
 
-        if (!(Keywords.getKey(server.getIdAsString()) + command).equalsIgnoreCase(key)) {
+        if (!(Prefix.getKey(server.getIdAsString()) + command).equalsIgnoreCase(key)) {
             return false;
         }
         if (!messageAuthor.isRegularUser() || channel.getIdAsString().equals("519563130603307018")) {

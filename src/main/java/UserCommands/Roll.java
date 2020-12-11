@@ -1,19 +1,11 @@
 package UserCommands;
 
-import java.awt.Color;
-import java.io.File;
 import java.util.List;
-import java.util.Random;
 
 import Command.Command;
 import lombok.Getter;
 import org.javacord.api.DiscordApi;
-import org.javacord.api.entity.channel.Channel;
 import org.javacord.api.entity.channel.TextChannel;
-import org.javacord.api.entity.message.Message;
-import org.javacord.api.entity.message.embed.EmbedBuilder;
-
-import Management.Keywords;
 
 public class Roll extends Command
 {

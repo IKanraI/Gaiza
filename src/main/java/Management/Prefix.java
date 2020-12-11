@@ -2,14 +2,15 @@ package Management;
 
 import Database.DatabaseLL;
 import Database.InitDatabase;
+import lombok.Getter;
 
-public class Keywords 
+public class Prefix
 {
-	private static String defaultKey = "$";
+	public static String defaultPrefix = "$";
 	
 	public void setDefaultKey(String newKey)
 	{
-		defaultKey = newKey;
+		defaultPrefix = newKey;
 	}
 	
 	public void setKey(DatabaseLL modifyData, String newKey, int selectServer)
@@ -21,11 +22,6 @@ public class Keywords
 		getLLData.setServerPrefix(getLLData, getNewKey, serverSlot);
 		
 		saveDB.saveDatabase();
-	}
-	
-	public static String getDefaultKey()
-	{
-		return defaultKey;
 	}
 	
 	public static String getKey(String serverID)

@@ -4,7 +4,6 @@ import Command.Command;
 import Database.GlobalUserInformation;
 import Listener.Uwu;
 import Management.BotInfo;
-import Management.Keywords;
 import Management.UserFineObject;
 import lombok.Getter;
 import lombok.SneakyThrows;
