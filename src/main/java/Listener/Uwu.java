@@ -52,7 +52,7 @@ public class Uwu extends Command
 	}
 	
 	public void uwuListener(TextChannel channel, MessageAuthor author, Message message) {
-		if (author.getIdAsString().equals(BotInfo.getOwnerId()) || !author.isRegularUser() || !isIgnoredChannel()) {
+		if (author.getIdAsString().equals(BotInfo.getOwnerId()) || !author.isRegularUser() || isIgnoredChannel()) {
 			return;
 		}
 
