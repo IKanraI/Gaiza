@@ -5,10 +5,7 @@ import Management.BotInfo;
 import lombok.Getter;
 import org.javacord.api.DiscordApi;
 
-import Management.Keywords;
 import org.javacord.api.entity.channel.TextChannel;
-import org.javacord.api.entity.message.Message;
-import org.javacord.api.entity.message.MessageAuthor;
 
 public class Invite extends Command {
 	@Getter

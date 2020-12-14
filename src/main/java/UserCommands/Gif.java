@@ -1,28 +1,22 @@
 package UserCommands;
 
 import java.awt.Color;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import Command.Command;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import org.javacord.api.DiscordApi;
-import org.javacord.api.entity.Icon;
 import org.javacord.api.entity.channel.TextChannel;
-import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import Management.BotInfo;
-import Management.Keywords;
 
 public class Gif extends Command
 {

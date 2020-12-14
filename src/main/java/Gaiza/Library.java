@@ -3,6 +3,7 @@
  */
 package Gaiza;
 import AdminCommands.*;
+import lombok.SneakyThrows;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 
@@ -23,18 +24,22 @@ public class Library
 	        return true;
 	 }
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		DiscordApi api = new DiscordApiBuilder().setToken(new Token().getToken()).login().join();
 		commandInit(api);
 	}
 	
 	@SuppressWarnings("unused")
-	static void commandInit(DiscordApi api) throws Exception {
+	@SneakyThrows
+	static void commandInit(DiscordApi api) {
+	 	System.out.println();
+		BotInfo bInfoInit = new BotInfo(api);
 		InitDatabase dbInit = new InitDatabase(api);
 		GlobalUserInformation initUsers = new GlobalUserInformation(api);
+		api.updateActivity(BotInfo.getBotActivity());
 
-		System.out.println("\n--------------------------------");
-		System.out.println("Bot command files loading... \n");
+		System.out.println("\nManagement files loaded!");
+		System.out.println("--------------------------------\n");
 
 		Map<String, File> commands = new HashMap();
 		commands.put("UserCommands", new File("C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\UserCommands\\"));
@@ -42,24 +47,17 @@ public class Library
 		commands.put("Listener", new File("C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\Listener\\"));
 		commands.put("UserMentions", new File("C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\UserMentions\\"));
 
-		try {
-			for (Map.Entry<String, File> command : commands.entrySet()) {
-				for (final File commandName : command.getValue().listFiles()) {
-					if (!commandName.isDirectory()) {
-						Class.forName(command.getKey() + "." + commandName.getName().replace(".java", ""))
-								.getDeclaredConstructor(DiscordApi.class).newInstance(api);
-						System.out.println(commandName.getName() + " loaded!");
-					}
-				}
-				System.out.println("\n" + command.getKey() + " files loaded!");
-				System.out.println("--------------------------------\n");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		BotInfo bInfoInit = new BotInfo(api);
-		System.out.println("Management files loaded!\n");
 
-		api.updateActivity(BotInfo.getBotActivity());
+		for (Map.Entry<String, File> command : commands.entrySet()) {
+			for (final File commandName : command.getValue().listFiles()) {
+				if (!commandName.isDirectory()) {
+					Class.forName(command.getKey() + "." + commandName.getName().replace(".java", ""))
+							.getDeclaredConstructor(DiscordApi.class).newInstance(api);
+					System.out.println(commandName.getName() + " loaded!");
+				}
+			}
+			System.out.println("\n" + command.getKey() + " files loaded!");
+			System.out.println("--------------------------------\n");
+		}
 	}
 }

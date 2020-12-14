@@ -6,7 +6,7 @@ import org.javacord.api.DiscordApi;
 import Database.DatabaseLL;
 import Database.InitDatabase;
 import Management.BotInfo;
-import Management.Keywords;
+import Management.Prefix;
 
 public class PrefixChange 
 {
@@ -27,7 +27,7 @@ public class PrefixChange
 	{
 		DiscordApi prefixChangeApi = getApi;
 		DatabaseLL modifyData = InitDatabase.getCurrLL();
-		Keywords modifyKey = new Keywords();
+		Prefix modifyKey = new Prefix();
 		
 		
 		prefixChangeApi.addMessageCreateListener(event ->
@@ -46,7 +46,7 @@ public class PrefixChange
 			try
 			{
 				getServerAddress = event.getServer().get().getIdAsString();
-				serverPrefix = Keywords.getKey(getServerAddress);
+				serverPrefix = Prefix.getKey(getServerAddress);
 				
 				if (splitMessage[0].equalsIgnoreCase(serverPrefix + prefixChangeCommand) && splitMessage.length == MESSAGELENGTH)
 				{
@@ -58,7 +58,7 @@ public class PrefixChange
 						{
 							if (getServerAddress.equals(modifyData.getCurrServerID(modifyData, i)))
 							{
-								modifyKey.setKey(modifyData, newPrefix, i);
+								modifyKey.setKey(event.getServer().get().getIdAsString(), newPrefix);
 								event.getChannel().sendMessage("Success! The server's prefix was set to : " + newPrefix);
 							}
 						}

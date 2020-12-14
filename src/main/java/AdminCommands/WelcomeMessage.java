@@ -6,7 +6,7 @@ import org.javacord.api.DiscordApi;
 import Database.DatabaseLL;
 import Database.InitDatabase;
 import Management.BotInfo;
-import Management.Keywords;
+import Management.Prefix;
 
 public class WelcomeMessage 
 {
@@ -42,7 +42,7 @@ public class WelcomeMessage
 			String setToValue = "";
 			
 			serverID = event.getServer().get().getIdAsString();
-			myKey = Keywords.getKey(serverID);
+			myKey = Prefix.getKey(serverID);
 			
 			getMessage = event.getMessageContent();
 			splitMessage = getMessage.split(" ");
@@ -271,7 +271,7 @@ public class WelcomeMessage
 			if (event.getMessageAuthor().isServerAdmin())
 			{
 				serverID = event.getServer().get().getIdAsString();
-				keyWord = Keywords.getKey(serverID);
+				keyWord = Prefix.getKey(serverID);
 				
 				getMessage = event.getMessageContent();
 				splitMessage = getMessage.split(" ");
@@ -312,7 +312,7 @@ public class WelcomeMessage
 			int i;
 			
 			serverID = event.getServer().get().getIdAsString();
-			myKey = Keywords.getKey(serverID);
+			myKey = Prefix.getKey(serverID);
 			
 			getMessage = event.getMessageContent();
 			splitMessage = getMessage.split(" ");

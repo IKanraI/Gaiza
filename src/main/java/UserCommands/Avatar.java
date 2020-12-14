@@ -1,13 +1,10 @@
 package UserCommands;
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.List;
 
 import Command.Command;
 import lombok.Getter;
-import lombok.Setter;
 import org.javacord.api.DiscordApi;
-import org.javacord.api.entity.Icon;
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.message.MessageAuthor;
@@ -15,7 +12,6 @@ import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.entity.user.User;
 
 import Management.BotInfo;
-import Management.Keywords;
 
 public class Avatar extends Command {
 	@Getter

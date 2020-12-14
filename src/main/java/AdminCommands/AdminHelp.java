@@ -7,13 +7,11 @@ import java.util.List;
 import Command.Command;
 import lombok.SneakyThrows;
 import org.javacord.api.DiscordApi;
-import org.javacord.api.entity.Icon;
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 
 import Management.BotInfo;
-import Management.Keywords;
 import org.javacord.api.entity.user.User;
 
 public class AdminHelp extends Command {
