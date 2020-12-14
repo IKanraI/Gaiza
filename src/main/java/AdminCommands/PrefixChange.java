@@ -58,7 +58,7 @@ public class PrefixChange
 						{
 							if (getServerAddress.equals(modifyData.getCurrServerID(modifyData, i)))
 							{
-								modifyKey.setKey(modifyData, newPrefix, i);
+								modifyKey.setKey(event.getServer().get().getIdAsString(), newPrefix);
 								event.getChannel().sendMessage("Success! The server's prefix was set to : " + newPrefix);
 							}
 						}

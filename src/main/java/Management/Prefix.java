@@ -13,32 +13,13 @@ public class Prefix
 		defaultPrefix = newKey;
 	}
 	
-	public void setKey(DatabaseLL modifyData, String newKey, int selectServer)
-	{
-		InitDatabase saveDB = new InitDatabase();
-		DatabaseLL getLLData = modifyData;
-		String getNewKey = newKey;
-		int serverSlot = selectServer;
-		getLLData.setServerPrefix(getLLData, getNewKey, serverSlot);
-		
-		saveDB.saveDatabase();
+	public void setKey(String id, String prefix) {
+		InitDatabase.getData().get(id).setPrefix(prefix);
+		new InitDatabase().saveDatabase();
+
 	}
 	
-	public static String getKey(String serverID)
-	{
-		DatabaseLL getDB = InitDatabase.getCurrLL();
-		String serverToGet = serverID;
-		String getPrefix = "";
-		int i;
-		
-		for (i = 0; i < BotInfo.getServerCount(); ++i)
-		{
-			if (serverToGet.equals(getDB.getCurrServerID(getDB, i)))
-			{
-				getPrefix = getDB.getServerPrefix(getDB, i);
-			}
-		}
-		
-		return getPrefix;
+	public static String getKey(String id) {
+		return InitDatabase.getData().get(id).getPrefix();
 	}
 }
