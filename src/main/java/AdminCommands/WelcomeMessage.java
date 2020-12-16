@@ -84,22 +84,12 @@ public class WelcomeMessage
 		});
 	}
 	
-	public boolean isEnabled(String getServerID)
-	{
-		DatabaseLL getLLData = InitDatabase.getCurrLL();
+	public boolean isEnabled(String getServerID) {
 		String serverID = getServerID;
-		String isEnabledCheck = "";
-		int i;
 
-		for (i = 0; i < BotInfo.getServerCount(); ++i)
-		{
-			if (serverID.equals(getLLData.getCurrServerID(getLLData, i)))
-			{
-				isEnabledCheck = getLLData.getServerWelcomeEnabled(getLLData, i);	
-			}
-		}
+
 		
-		if (isEnabledCheck.equalsIgnoreCase("true"))
+		if (InitDatabase.getData().get(serverID).getWEnabled().equalsIgnoreCase("true"))
 		{
 			return true;
 		}
@@ -158,101 +148,29 @@ public class WelcomeMessage
 		});
 	}	
 	
-	public String getWelcomeMessage(String getServer)
-	{
-		DatabaseLL welcomeDB = InitDatabase.getCurrLL();
-		String serverID = getServer;
-		String getWelcomeMessage = "";
-		int i;
-		
-		for (i = 0; i < BotInfo.getServerCount(); ++i)
-		{
-			if (serverID.equals(welcomeDB.getCurrServerID(welcomeDB, i)))
-			{
-				getWelcomeMessage = welcomeDB.getServerWelcomeMessage(welcomeDB, i);
-			}
-		}
-		
-		return getWelcomeMessage;
+	public String getWelcomeMessage(String id) {
+		return InitDatabase.getData().get(id).getWMsg();
 		
 	}
 	
-	public String getWelcomeChannel(String getServer)
-	{
-		DatabaseLL welcomeDB = InitDatabase.getCurrLL();
-		String serverID = getServer;
-		String getWelcomeChannel = "";
-		int i;
-		
-		for (i = 0; i < BotInfo.getServerCount(); ++i)
-		{
-			if (serverID.equals(welcomeDB.getCurrServerID(welcomeDB, i)))
-			{
-				getWelcomeChannel = welcomeDB.getServerWelcomeChannel(welcomeDB, i);
-			}
-		}
-		
-		return getWelcomeChannel;
+	public String getWelcomeChannel(String id) {
+		return InitDatabase.getData().get(id).getWChannel();
 	}
 	
-	public void setWelcomeChannel(String wChannel, String serverID)
-	{
-		InitDatabase saveDB = new InitDatabase();
-		DatabaseLL getLLData = InitDatabase.getCurrLL();
-		
-		String currServerID = serverID;
-		String welcomeChannel = wChannel;
-		int i;
-		
-		for (i = 0; i < BotInfo.getServerCount(); ++i)
-		{
-			if (currServerID.equals(getLLData.getCurrServerID(getLLData, i)))
-			{
-				getLLData.setWelcomeChannel(getLLData, welcomeChannel, i);
-			}
-		}
-		
-		saveDB.saveDatabase();
+	public void setWelcomeChannel(String channel, String id) {
+		InitDatabase.getData().get(id).setWChannel(channel);
+		InitDatabase.saveDatabase();
 	}
 	
-	public void setWelcomeEnabled(String wEnable, String serverID)
-	{
-		InitDatabase saveDB = new InitDatabase();
-		DatabaseLL getLLData = InitDatabase.getCurrLL();
-		
-		String currServerID = serverID;
-		String isEnabled = wEnable;
-		int i;
-		
-		for (i = 0; i < BotInfo.getServerCount(); ++i)
-		{
-			if (currServerID.equals(getLLData.getCurrServerID(getLLData, i)))
-			{
-				getLLData.setWelcomeEnabled(getLLData, isEnabled, i);
-			}
-		}
-		
-		saveDB.saveDatabase();
+	public void setWelcomeEnabled(String enable, String id) {
+		InitDatabase.getData().get(id).setWEnabled(enable);
+		InitDatabase.saveDatabase();
 	}
 	
-	public void setWelcomeMessage(String message, String serverID)
-	{
-		InitDatabase saveDB = new InitDatabase();
-		DatabaseLL getLLData = InitDatabase.getCurrLL();
-		
-		String currServerID = serverID;
-		String welcomeMessage = message;
-		int i;
-		
-		for (i = 0; i < BotInfo.getServerCount(); ++i)
-		{
-			if (currServerID.equals(getLLData.getCurrServerID(getLLData, i)))
-			{
-				getLLData.setWelcomeMessage(getLLData, welcomeMessage, i);
-			}
-		}
-		
-		saveDB.saveDatabase();
+	public void setWelcomeMessage(String message, String id) {
+		InitDatabase.getData().get(id).setWMsg(message);
+		InitDatabase.saveDatabase();
+
 	}
 	
 	public void updateWelcomeChannel(DiscordApi getApi)

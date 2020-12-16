@@ -22,7 +22,7 @@ public class InitDatabase
 {
 	private static DatabaseLL serverLL = new DatabaseLL();
 	@Getter private static Map<String, Servers> data = new HashMap();
-	private final String dbPath = "C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\bin\\Storage\\Servers\\";
+	private static final String dbPath = "C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\bin\\Storage\\Servers\\";
 	private final String keyFieldServerName = "Server Name";
 	private final String keyFieldID = "ID";
 	private final String keyFieldPrefix = "Prefix";
@@ -47,7 +47,7 @@ public class InitDatabase
 	}
 
 	@SneakyThrows
-	public boolean checkForChanges(String path, String id) {
+	public static boolean checkForChanges(String path, String id) {
 		Object obj = new JSONParser().parse(new FileReader(path));
 		JSONObject read = (JSONObject) obj;
 
@@ -179,7 +179,7 @@ public class InitDatabase
 
 	@SneakyThrows
 	@SuppressWarnings("unchecked")	
-	public void saveDatabase() {
+	public static void saveDatabase() {
 		for (Map.Entry<String, Servers> s : data.entrySet()) {
 			String currPath = dbPath.concat(s.getKey() + ".json");
 
