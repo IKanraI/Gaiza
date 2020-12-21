@@ -2,12 +2,12 @@ package Database;
 
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
+import Command.Command;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import org.javacord.api.DiscordApi;
@@ -16,34 +16,18 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import Management.BotInfo;
-import Management.Prefix;
 
-public class InitDatabase
-{
-	private static DatabaseLL serverLL = new DatabaseLL();
+public class InitDatabase extends Command {
 	@Getter private static Map<String, Servers> data = new HashMap();
-	private static final String dbPath = "C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\bin\\Storage\\Servers\\";
-	private final String keyFieldServerName = "Server Name";
-	private final String keyFieldID = "ID";
-	private final String keyFieldPrefix = "Prefix";
-	private final String keyFieldWEnabled = "Welcome Enabled";
-	private final String keyFieldWMessage = "Welcome Message";
-	private final String keyFieldChannel = "Welcome Channel";
-	
-	public InitDatabase() {
+	@Getter private static String dbPath = "C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\bin\\Storage\\Servers\\";
 
-	}
-	public InitDatabase(DiscordApi api) throws Exception {
-		splitServerInfo(api);
-		manageDbFiles(api);
-		listenForNewServer(api);
-		listenForLeaveServer(api);
-	}
-	
-	@SuppressWarnings("unchecked")
-	@SneakyThrows
-	public void blankFileInit(String path, String id) {
-		Files.write(Paths.get(path), data.get(id).toJSONString().toJSONString().getBytes());
+	public InitDatabase(DiscordApi api) {
+		super(api);
+		initializeServers(api);
+		api.addServerJoinListener(event ->
+			serverJoin(super.getServer()));
+		api.addServerLeaveListener(event ->
+				serverLeave(super.getServer()));
 	}
 
 	@SneakyThrows
@@ -58,121 +42,40 @@ public class InitDatabase
 		}
 		return false;
 	}
-	
-	public void listenForNewServer(DiscordApi getApi) {
-		DiscordApi newServerApi = getApi;
-		
-		
-		newServerApi.addServerJoinListener(event ->
-		{
-			String serverName = "";
-			String serverID = "";
-			String filePath = "";
-			String finalPath = "";
-			
-			File saveNewServerFile;
-			boolean fileExists;
-			final int ADDSERVER = 1;
-			
-			JSONObject getPrefixJSON = null;
-			JSONParser prefixData = new JSONParser();
-			Object checkStorage;
-			
-			filePath = dbPath;
-			
-			serverID = event.getServer().getIdAsString();
-			serverName = event.getServer().getName();
-			
-			finalPath = filePath.concat(serverID + ".json");
-			
-			serverLL.insertNewServerInfo(serverLL, serverID, serverName);
-			
-			fileExists = new File(finalPath).exists();
-			
-			if (!fileExists)
-			{
-				try 
-				{
-					saveNewServerFile = new File(finalPath);
-					saveNewServerFile.createNewFile();
-					blankFileInit(finalPath, serverID);
-					
-					serverLL.setServerPrefix(serverLL, Prefix.defaultPrefix, serverLL.size(serverLL) - ADDSERVER);
-					serverLL.setWelcomeEnabled(serverLL, "false", serverLL.size(serverLL) - ADDSERVER);
-					serverLL.setWelcomeMessage(serverLL, "", serverLL.size(serverLL) - ADDSERVER);
-					serverLL.setWelcomeChannel(serverLL, "", serverLL.size(serverLL) - ADDSERVER);
-				} 
-				catch (Exception e) 
-				{
-					e.printStackTrace();
-				}
-			}
-			else
-			{
-				try
-				{
-					checkStorage = prefixData.parse(new FileReader(finalPath));
-					getPrefixJSON = (JSONObject) checkStorage;
-				}
-				catch (Exception e)
-				{
-					e.printStackTrace();
-				}
-				
-				serverLL.setServerPrefix(serverLL, getPrefixJSON.get(keyFieldPrefix).toString(), serverLL.size(serverLL) - ADDSERVER);
-				serverLL.setWelcomeEnabled(serverLL, getPrefixJSON.get(keyFieldWEnabled).toString(), serverLL.size(serverLL) - ADDSERVER);
-				serverLL.setWelcomeMessage(serverLL, getPrefixJSON.get(keyFieldWMessage).toString(), serverLL.size(serverLL) - ADDSERVER);
-				serverLL.setWelcomeChannel(serverLL, getPrefixJSON.get(keyFieldChannel).toString(), serverLL.size(serverLL) - ADDSERVER);
-			}
-			
-			BotInfo.setServerCount(BotInfo.getServerCount() + ADDSERVER);
-			
-			System.out.println("The server " + serverName + " joined with ID of " + serverID + "!");
-			
-			saveDatabase();
-		});
+
+	@SneakyThrows
+	public void serverJoin(Server server) {
+		File target = new File(dbPath + server.getIdAsString() + ".json");
+		data.put(server.getIdAsString(), new Servers(server.getIdAsString(), server.getName()));
+
+		if (target.createNewFile()) {
+			Files.write(Paths.get(target.toString()), data.get(server.getIdAsString()).toJSONString().toJSONString().getBytes());
+		} else {
+			data.get(server.getIdAsString()).loadJson(target);
+		}
+
+		BotInfo.setServerCount(BotInfo.getServerCount() + 1);
+		System.out.println("The server " + server.getName() + " joined with ID of " + server.getIdAsString() + ", with " + server.getMembers().size() + " members!");
+		saveDatabase();
 	}
 	
-	public void listenForLeaveServer(DiscordApi getApi) {
-		final int REMOVESERVER = 1;
-		DiscordApi newServerApi = getApi;
-		
-		newServerApi.addServerLeaveListener(event ->
-		{
-			String serverID = "";
-			String serverName = "";
-			int i;
-			
-			serverID = event.getServer().getIdAsString();
-			serverName = event.getServer().getName();
-			
-			for(i = 0; i < BotInfo.getServerCount(); ++i)
-			{
-				if (serverID.equals(serverLL.getCurrServerID(serverLL, i)))
-				{
-					serverLL.removeNode(serverLL, i);
-					
-					BotInfo.setServerCount(BotInfo.getServerCount() - REMOVESERVER);
-					
-					System.out.println("The server " + serverName + " left with the ID of " + serverID + ".");
-					
-					break;
-				}
-			}
-			
-		});
+	public void serverLeave(Server server) {
+		data.remove(server.getIdAsString());
+		BotInfo.setServerCount(BotInfo.getServerCount() - 1);
+		System.out.println("Server " + server.getName() + " has left with id of " + server.getIdAsString());
 	}
 
-	public void manageDbFiles(DiscordApi api) throws Exception {
+	@SneakyThrows
+	public void initializeServers(DiscordApi api) {
 		for (Server s : api.getServers()) {
+			data.put(s.getIdAsString(), new Servers(s.getIdAsString(), s.getName()));
+			data.get(s.getIdAsString()).consolePrint(api);
 			File target = new File(dbPath.concat(s.getIdAsString().concat(".json")));
-			if (!target.exists()) {
-				target.createNewFile();
-				blankFileInit(target.toString(), s.getIdAsString());
+
+			if (target.createNewFile()) {
+				Files.write(Paths.get(target.toString()), data.get(s.getIdAsString()).toJSONString().toJSONString().getBytes());
 			} else {
-				Object obj = new JSONParser().parse(new FileReader(target));
-				JSONObject storage = (JSONObject) obj;
-				data.get(s.getIdAsString()).loadJson(storage);
+				data.get(s.getIdAsString()).loadJson(target);
 			}
 		}
 	}
@@ -187,17 +90,5 @@ public class InitDatabase
 				Files.write(Paths.get(currPath), data.get(s.getKey()).toJSONString().toJSONString().getBytes());
 			}
 		}
-	}
-	
-	public void splitServerInfo(DiscordApi api) {
-		for (Server s : api.getServers()) {
-			data.put(s.getIdAsString(), new Servers(s.getIdAsString(), s.getName()));
-			serverLL.insertNewServerInfo(serverLL, s.getIdAsString(), s.getName());
-			data.get(s.getIdAsString()).consolePrint(api);
-		}
-	}
-	
-	public static DatabaseLL getCurrLL() {
-		return serverLL;
 	}
 }

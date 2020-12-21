@@ -40,7 +40,7 @@ public class Ranks extends Command {
         for (User user : server.getMembers()) {
             fineList.add(
                     new UserFineObject(user.getIdAsString(),
-                            Uwu.getUserFine(GlobalUserInformation.getUserByIdDb(user.getIdAsString()))));
+                            Uwu.getUserFine(GlobalUserInformation.filePath + user.getIdAsString())));
         }
 
         Collections.sort(fineList);

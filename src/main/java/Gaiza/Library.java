@@ -8,8 +8,6 @@ import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 
 import UserCommands.*;
-import de.btobastian.sdcf4j.CommandHandler;
-import de.btobastian.sdcf4j.handler.JavacordHandler;
 import Database.*;
 import Management.*;
 import Listener.*;

@@ -33,13 +33,13 @@ public class Fines extends Command {
         if (args.size() == 0) {
             channel.sendMessage("<@" + author.getIdAsString()
                     + ">, you currently owe: "
-                    + NumberFormat.getCurrencyInstance(Locale.US).format(Uwu.getUserFine(GlobalUserInformation.getUserByIdDb(author.getIdAsString()))));
+                    + NumberFormat.getCurrencyInstance(Locale.US).format(Uwu.getUserFine(GlobalUserInformation.filePath + author.getIdAsString())));
 
         } else {
             channel.sendMessage("<@" + message.getMentionedUsers().get(0).getIdAsString()
                     + "> currently owes: "
                     + NumberFormat.getCurrencyInstance(Locale.US).format(Uwu
-                    .getUserFine(GlobalUserInformation.getUserByIdDb(message.getMentionedUsers().get(0).getIdAsString()))));
+                    .getUserFine(GlobalUserInformation.filePath + message.getMentionedUsers().get(0).getIdAsString())));
         }
     }
 }
