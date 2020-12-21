@@ -49,7 +49,7 @@ public class InitDatabase extends Command {
 		data.put(server.getIdAsString(), new Servers(server.getIdAsString(), server.getName()));
 
 		if (target.createNewFile()) {
-			Files.write(Paths.get(target.toString()), data.get(server.getIdAsString()).toJSONString().toJSONString().getBytes());
+			Files.write(Paths.get(target.toString()), data.get(server.getIdAsString()).toJSONString().getBytes());
 		} else {
 			data.get(server.getIdAsString()).loadJson(target);
 		}
@@ -73,7 +73,7 @@ public class InitDatabase extends Command {
 			File target = new File(dbPath.concat(s.getIdAsString().concat(".json")));
 
 			if (target.createNewFile()) {
-				Files.write(Paths.get(target.toString()), data.get(s.getIdAsString()).toJSONString().toJSONString().getBytes());
+				Files.write(Paths.get(target.toString()), data.get(s.getIdAsString()).toJSONString().getBytes());
 			} else {
 				data.get(s.getIdAsString()).loadJson(target);
 			}
@@ -87,7 +87,7 @@ public class InitDatabase extends Command {
 			String currPath = dbPath.concat(s.getKey() + ".json");
 
 			if (checkForChanges(currPath, s.getKey())) {
-				Files.write(Paths.get(currPath), data.get(s.getKey()).toJSONString().toJSONString().getBytes());
+				Files.write(Paths.get(currPath), data.get(s.getKey()).toJSONString().getBytes());
 			}
 		}
 	}

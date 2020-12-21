@@ -1,5 +1,7 @@
 package Database;
 
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
@@ -7,6 +9,7 @@ import org.javacord.api.DiscordApi;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import java.io.DataInput;
 import java.io.File;
 import java.io.FileReader;
 
@@ -28,7 +31,8 @@ public class Servers {
     }
 
     @SuppressWarnings("unchecked")
-    public JSONObject toJSONString() {
+    @SneakyThrows
+    public String toJSONString() {
         JSONObject obj = new JSONObject();
         obj.put("name", name);
         obj.put("id", id);
@@ -37,7 +41,8 @@ public class Servers {
         obj.put("wChannel", wChannel);
         obj.put("wMsg", wMsg);
 
-        return obj;
+        ObjectMapper map = new ObjectMapper();
+        return map.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
     }
     @SneakyThrows
     public void loadJson(File target) {
