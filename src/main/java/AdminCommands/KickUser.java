@@ -4,7 +4,7 @@ import lombok.Getter;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.user.User;
 
-import Management.Prefix;
+import Management.ServerPrefix;
 
 public class KickUser 
 {
@@ -42,7 +42,7 @@ public class KickUser
 				{
 					//Splits the message into parts to be used for later and server comparison
 					serverAddress = event.getServer().get().getIdAsString();
-					myKey = Prefix.getKey(serverAddress);
+					myKey = ServerPrefix.getKey(serverAddress);
 					
 					getWholeMessage = event.getMessageContent();
 					splitMessage = getWholeMessage.split(" ");

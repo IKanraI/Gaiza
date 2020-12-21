@@ -47,8 +47,8 @@ public class Uwu extends Command
 	@SneakyThrows
 	public void setUserFine(String id) {
 		JSONObject saveData = new JSONObject();
-		saveData.put(key, getUserFine(GlobalUserInformation.getUserByIdDb(id)) + fine);
-		Files.write(Paths.get(GlobalUserInformation.getUserByIdDb(id)), saveData.toJSONString().getBytes());
+		saveData.put(key, getUserFine(GlobalUserInformation.filePath + id) + fine);
+		Files.write(Paths.get(GlobalUserInformation.filePath + id), saveData.toJSONString().getBytes());
 	}
 	
 	public void uwuListener(TextChannel channel, MessageAuthor author, Message message) {

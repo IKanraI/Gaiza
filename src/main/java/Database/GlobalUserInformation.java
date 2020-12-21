@@ -1,165 +1,61 @@
 package Database;
 
 import java.io.File;
+import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import Command.Command;
+import lombok.SneakyThrows;
 import org.javacord.api.DiscordApi;
+import org.javacord.api.entity.server.Server;
+import org.javacord.api.entity.user.User;
 import org.json.simple.JSONObject;
 
 import Management.BotInfo;
+import org.json.simple.parser.JSONParser;
 
-public class GlobalUserInformation 
-{
-	private static Map <String , String> userIDList = new HashMap<>();
-	private static String filePath = "E:\\Bot\\bin\\uwuData\\";
-	private String uwuAmount = "Fine Amount";
+public class GlobalUserInformation extends Command {
+	public static String filePath = "E:\\Bot\\bin\\uwuData\\";
+	private String fineTag = "Fine Amount";
 	
-	public GlobalUserInformation(DiscordApi getApi)
-	{
-		DiscordApi userApi = getApi;
-		
-		getUsersList(userApi);
-		checkForNewUsers();
-		newUserJoins(userApi);
+	public GlobalUserInformation(DiscordApi api) {
+		super(api);
+		getUsersList(api);
+		api.addServerMemberJoinListener(event ->
+				newUserJoins(event.getUser()));
 		
 	}
 
-	public static String getUserByIdDb (String id) {
-		return userIDList.get(id);
-	}
-	
-	public static Map<String, String> getUserIDList()
-	{
-		return userIDList;
-	}
-	
-	public void addToList(String ID)
-	{
-		String userID = ID;
-		String userIDPath = filePath + ID + ".json";
-		
-		userIDList.put(userID, userIDPath);
-		
-	}
-	
-	@SuppressWarnings("unchecked")
-	public void blankFileInit(String getUserID)
-	{
-		JSONObject initData = new JSONObject();
-		String userID = getUserID;
-		String userPath = "";
-		long initValue = 0;
-		
-		userPath = filePath + userID + ".json";
-		
-		initData.put(uwuAmount, initValue);
-		
-		try
-		{
-			Files.write(Paths.get(userPath), initData.toJSONString().getBytes());
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-	
-	public void checkForNewUsers()
-	{
-		File createNewFile;
-		boolean fileExists;
-		String checkFilePath = "";
-		String fileKey = "";
-		
-		for (Map.Entry<String, String> mapElement : userIDList.entrySet())
-		{
-			fileKey = mapElement.getKey();
-			checkFilePath = mapElement.getValue();
-			fileExists = new File(checkFilePath).exists();
-			
-			if (!fileExists)
-			{
-				try
-				{
-					createNewFile = new File(checkFilePath);
-					createNewFile.createNewFile();
-					blankFileInit(fileKey);
-				}
-				catch (Exception e)
-				{
-					e.printStackTrace();
+	@SneakyThrows
+	public void getUsersList(DiscordApi api) {
+		int users = 0;
+		for (Server s : api.getServers()) {
+			for (User u : s.getMembers()) {
+
+				File target = new File(filePath + u.getId() + ".json");
+				if (target.createNewFile()) {
+					JSONObject store = new JSONObject();
+					store.put(fineTag, 0);
+					Files.write(Paths.get(target.toString()), store.toJSONString().getBytes());
 				}
 			}
+			users += s.getMemberCount();
+		}
+		BotInfo.setUserCount(users);
+	}
+
+	@SneakyThrows
+	public void newUserJoins(User user) {
+		File target = new File(filePath + user.getId() + ".json");
+		if (target.createNewFile()) {
+			JSONObject store = new JSONObject();
+			store.put(fineTag, 0);
+			Files.write(Paths.get(target.toString()), store.toJSONString().getBytes());
+			System.out.println("User joined with id of " + user.getId());
 		}
 	}
-	
-	public void getUsersList(DiscordApi getApi)
-	{
-		DiscordApi userInitApi = getApi;
-		ArrayList<String> generalUserInfo = new ArrayList<String>();
-		DatabaseLL getServersLL = InitDatabase.getCurrLL();
-		
-		int usersInServer = 0;
-		int i, j;
-		
-		for (i = 0; i < BotInfo.getServerCount(); ++i)
-		{
-			for (j = 0; j < userInitApi.getServerById(getServersLL.getCurrServerID(getServersLL, i)).get().getMemberCount(); ++j)
-			{
-				generalUserInfo.add(userInitApi.getServerById(getServersLL.getCurrServerID(getServersLL, i)).get().getMembers().toArray()[j].toString());
-				usersInServer += userInitApi.getServerById(getServersLL.getCurrServerID(getServersLL, i)).get().getMemberCount();
-			}
-		}
-		
-		BotInfo.setUserCount(usersInServer);
-		
-		splitUserID(generalUserInfo);
-	}
-	
-	public void newUserJoins(DiscordApi getApi)
-	{
-		DiscordApi joinNewApi = getApi;
-		
-		joinNewApi.addServerMemberJoinListener(event ->
-		{
-			String userID;
-			String userFilePath;
-			boolean fileExists;
-			
-			userID = event.getUser().getIdAsString();
-			userFilePath = filePath + userID + ".json";
-			
-			fileExists = new File(userFilePath).exists();
-			
-			if (!fileExists)
-			{
-				addToList(userID);
-				blankFileInit(userID);
-				
-				System.out.println("User joined with ID of " + userID);
-			}	
-		});
-	}
-	
-	public void splitUserID(ArrayList<String> userInfo)
-	{
-		ArrayList<String> userInfoSplit = userInfo;
-		String splitString[] = null;
-		String userID = "";
-		
-		final int IDINDEX = 2;
-		int i;
-		
-		for (i = 0; i < userInfoSplit.size(); ++i)
-		{
-			splitString = userInfoSplit.get(i).split(" ");
-			userID = splitString[IDINDEX].replaceAll(",", "");
-			
-			addToList(userID);
-		}
-	}	
 }

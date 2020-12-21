@@ -1,10 +1,14 @@
 package Database;
 
-import Management.Prefix;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.SneakyThrows;
 import org.javacord.api.DiscordApi;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import java.io.File;
+import java.io.FileReader;
 
 public class Servers {
     @Getter @Setter public String name;
@@ -35,8 +39,11 @@ public class Servers {
 
         return obj;
     }
+    @SneakyThrows
+    public void loadJson(File target) {
+        Object info = new JSONParser().parse(new FileReader(target));
+        JSONObject obj = (JSONObject) info;
 
-    public void loadJson(JSONObject obj) {
         name = obj.get("name").toString();
         id = obj.get("id").toString();
         prefix = obj.get("prefix").toString();
