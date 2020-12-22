@@ -72,7 +72,7 @@ public class Welcome extends Command {
 					}
 
 					msg.replace(0, 8, "");
-					instance.setWMsg(msg.toString());
+					instance.setWMsg(msg.toString().trim());
 					message.addReaction("\u2705");
 					channel.sendMessage("Welcome message was set for the server!");
 				}

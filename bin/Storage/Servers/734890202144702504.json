@@ -1,8 +1,9 @@
 {
+  "uwu" : "false",
   "wChannel" : "",
   "prefix" : "$",
   "name" : "EGirl Applebees",
-  "wEnabled" : "",
+  "wEnabled" : "false",
   "id" : "734890202144702504",
   "wMsg" : ""
 }

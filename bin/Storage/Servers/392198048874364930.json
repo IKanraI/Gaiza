@@ -1,8 +1,9 @@
 {
+  "uwu" : "false",
   "wChannel" : "",
   "prefix" : "$",
   "name" : "Baby Bear's Cave",
-  "wEnabled" : "",
+  "wEnabled" : "false",
   "id" : "392198048874364930",
   "wMsg" : ""
 }

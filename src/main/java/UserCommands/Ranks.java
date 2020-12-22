@@ -2,7 +2,8 @@ package UserCommands;
 
 import Command.Command;
 import Database.GlobalUserInformation;
-import Listener.Uwu;
+import Database.InitDatabase;
+import Listener.UwuListener;
 import Management.BotInfo;
 import Management.UserFineObject;
 import lombok.Getter;
@@ -35,12 +36,16 @@ public class Ranks extends Command {
         if (!onCommand()) {
             return;
         }
+        if (!Boolean.parseBoolean(InitDatabase.getData().get(server.getIdAsString()).getUwu())) {
+            channel.sendMessage("The uwu module is disabled");
+            return;
+        }
 
         List<UserFineObject> fineList = new ArrayList();
         for (User user : server.getMembers()) {
             fineList.add(
                     new UserFineObject(user.getIdAsString(),
-                            Uwu.getUserFine(GlobalUserInformation.filePath + user.getIdAsString())));
+                            UwuListener.getUserFine(GlobalUserInformation.filePath + user.getIdAsString())));
         }
 
         Collections.sort(fineList);
