@@ -20,14 +20,16 @@ public class Servers {
     @Getter @Setter public String wMsg;
     @Getter @Setter public String wEnabled;
     @Getter @Setter public String prefix;
+    @Getter @Setter public String uwu;
 
     public Servers(String id, String name) {
         this.id = id;
         this.name = name;
         this.wChannel = "";
         this.wMsg = "";
-        this.wEnabled = "";
+        this.wEnabled = "false";
         this.prefix = "$";
+        this.uwu = "false";
     }
 
     @SuppressWarnings("unchecked")
@@ -40,6 +42,7 @@ public class Servers {
         obj.put("wEnabled", wEnabled);
         obj.put("wChannel", wChannel);
         obj.put("wMsg", wMsg);
+        obj.put("uwu", uwu);
 
         ObjectMapper map = new ObjectMapper();
         return map.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
@@ -55,6 +58,7 @@ public class Servers {
         wChannel = obj.get("wChannel").toString();
         wMsg = obj.get("wMsg").toString();
         wEnabled = obj.get("wEnabled").toString();
+        uwu = obj.get("uwu").toString();
     }
 
     public void consolePrint(DiscordApi api) {
@@ -63,6 +67,6 @@ public class Servers {
 
     @Override
     public String toString() {
-        return (id + " : " + name + " : " + wChannel + " : " + wMsg + " : " + wEnabled + " : " + prefix);
+        return ("id: " + id + " Name: " + name + " Welcome Channel: " + wChannel + " Welcome Message: " + wMsg + " Welcome Enabled: " + wEnabled + " prefix: " + prefix + " uwu: " + uwu);
     }
 }

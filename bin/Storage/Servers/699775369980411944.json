@@ -1,8 +1,9 @@
 {
+  "uwu" : "false",
   "wChannel" : "",
   "prefix" : "$",
   "name" : "mika’s weiner",
-  "wEnabled" : "",
+  "wEnabled" : "false",
   "id" : "699775369980411944",
   "wMsg" : ""
 }

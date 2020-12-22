@@ -1,8 +1,9 @@
 {
+  "uwu" : "false",
   "wChannel" : "",
   "prefix" : "$",
   "name" : "AI ROS",
-  "wEnabled" : "",
+  "wEnabled" : "false",
   "id" : "674327312434593793",
   "wMsg" : ""
 }

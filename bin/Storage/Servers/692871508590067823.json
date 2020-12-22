@@ -1,8 +1,9 @@
 {
+  "uwu" : "true",
   "wChannel" : "",
   "prefix" : "!",
   "name" : "Gaiza Dev Server",
-  "wEnabled" : "",
+  "wEnabled" : "false",
   "id" : "692871508590067823",
   "wMsg" : ""
 }
