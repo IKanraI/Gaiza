@@ -1,10 +1,10 @@
 package AdminCommands;
 
 import Command.Command;
+import Database.InitDatabase;
 import lombok.Getter;
 import org.javacord.api.DiscordApi;
 
-import Management.ServerPrefix;
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.server.Server;
 
@@ -30,10 +30,10 @@ public class Prefix extends Command {
 
 		StringBuilder prefix = new StringBuilder();
 		for (String s : args) {
-			prefix.append(s + " ");
+			prefix.append(s).append(" ");
 		}
-
-		ServerPrefix.setKey(server.getIdAsString(), prefix.toString().trim());
+		InitDatabase.getData().get(server.getIdAsString()).setPrefix(prefix.toString().trim());
+		InitDatabase.saveDatabase();
 		channel.sendMessage("Prefix was successfully updated to: " + prefix);
 	}
 }

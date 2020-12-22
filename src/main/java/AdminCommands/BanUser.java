@@ -1,10 +1,9 @@
 package AdminCommands;
 
+import Database.InitDatabase;
 import lombok.Getter;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.user.User;
-
-import Management.ServerPrefix;
 
 public class BanUser 
 {
@@ -43,7 +42,7 @@ public class BanUser
 					//Splits the message into parts to be used for later and server comparison
 					//Can only be called by admins of the server
 					serverAddress = event.getServer().get().getIdAsString();
-					myKey = ServerPrefix.getKey(serverAddress);
+					myKey = InitDatabase.getData().get(serverAddress).getPrefix();
 					
 					getWholeMessage = event.getMessageContent();
 					splitMessage = getWholeMessage.split(" ");

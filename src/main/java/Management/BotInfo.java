@@ -9,8 +9,7 @@ import org.javacord.api.entity.Icon;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class BotInfo 
-{
+public class BotInfo {
 	@Getter private static String ownerId;
 	@Getter private static String botId;
 	@Getter private static String botName;
@@ -23,8 +22,7 @@ public class BotInfo
 	@Getter @Setter private static int userCount;
 
 	@SneakyThrows
-	public BotInfo(DiscordApi api)
-	{
+	public BotInfo(DiscordApi api) {
 		ownerId = String.valueOf(api.getOwnerId());
 		botId = api.getYourself().getIdAsString();
 		botName = api.getYourself().getName();
