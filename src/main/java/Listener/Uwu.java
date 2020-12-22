@@ -38,7 +38,7 @@ public class Uwu extends Command
 	@SneakyThrows
 	public static Long getUserFine(String path) {
 		JSONParser data = new JSONParser();
-		JSONObject obj = (JSONObject) data.parse(new FileReader(path));
+		JSONObject obj = (JSONObject) data.parse(new FileReader(path + ".json"));
 
 		return (long) obj.get(key);
 	}
@@ -48,11 +48,11 @@ public class Uwu extends Command
 	public void setUserFine(String id) {
 		JSONObject saveData = new JSONObject();
 		saveData.put(key, getUserFine(GlobalUserInformation.filePath + id) + fine);
-		Files.write(Paths.get(GlobalUserInformation.filePath + id), saveData.toJSONString().getBytes());
+		Files.write(Paths.get(GlobalUserInformation.filePath + id + ".json"), saveData.toJSONString().getBytes());
 	}
 	
 	public void uwuListener(TextChannel channel, MessageAuthor author, Message message) {
-		if (author.getIdAsString().equals(BotInfo.getOwnerId()) || !author.isRegularUser() || isIgnoredChannel()) {
+		if ( !author.isRegularUser() || isIgnoredChannel()) {
 			return;
 		}
 
