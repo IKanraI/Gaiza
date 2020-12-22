@@ -16,8 +16,7 @@ import java.io.*;
 import java.lang.reflect.Constructor;
 import java.util.*;
 
-public class Library
-{
+public class Library {
 	 public boolean someLibraryMethod() {
 	        return true;
 	 }
