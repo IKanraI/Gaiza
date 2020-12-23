@@ -1,119 +1,46 @@
 package Listener;
 
 import java.io.File;
+import java.io.FileReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
+import Command.Command;
+import lombok.SneakyThrows;
 import org.javacord.api.DiscordApi;
+import org.javacord.api.entity.channel.TextChannel;
+import org.javacord.api.entity.message.Message;
+import org.javacord.api.entity.message.MessageAuthor;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
-public class BoredResponse 
-{
-	private ArrayList<String> reprimandPhrases = new ArrayList<String>();
+public class BoredResponse extends Command {
 	
-	public BoredResponse(DiscordApi getApi)
-	{
-		DiscordApi boredApi = getApi;
-		
-		setupPhrases();		
-		respondToBored(boredApi);
-		
-		System.out.println("BoredResponse.java Loaded!");
-	}
-	
-	public String pickPhrase()
-	{
-		String returnMessage = "";
-		int numPick = 0;
-		
-		numPick = pickRandomNum();
-		
-		returnMessage = reprimandPhrases.get(numPick); 
-		
-		return returnMessage;
-	}
-	
-	public int pickRandomNum()
-	{
-		Random genNum = new Random();
-		int setNum = 0;
-		
-		setNum = genNum.nextInt(reprimandPhrases.size());
-		
-		return setNum;
-	}
-	
-	public void respondToBored(DiscordApi getApi)
-	{
-		DiscordApi boredApi = getApi;		
-		
-		boredApi.addMessageCreateListener(event ->
-		{
-			String selectString;
-			
-			selectString = pickPhrase();
-			
-			if (event.getMessageAuthor().isUser())
-			{
-			
-				if (event.getMessageContent().equalsIgnoreCase("im bored") || event.getMessageContent().equalsIgnoreCase("i'm bored") || event.getMessageContent().equalsIgnoreCase("bored"))
-				{
-					event.addReactionsToMessage("🚫");
-					
-					event.getChannel().sendMessage("Hi bored, I'm dad");
-					
-					try 
-					{
-						Thread.sleep(1000);
-					
-					
-						event.getChannel().sendMessage("<@" + event.getMessageAuthor().getIdAsString() + ">" + selectString);
-					
-					
-						Thread.sleep(1000);
-					
-					
-						event.getChannel().sendMessage("I'm going out to the store for some cigs and milk. Don't tell your mother");
-					
-					
-						Thread.sleep(1000);
-					
-					}
-					catch (InterruptedException e) 
-					{	
-						e.printStackTrace();
-					}
-				}
-			}
-				
-		});
-		
+	public BoredResponse(DiscordApi api) {
+		super(api);
+		api.addMessageCreateListener(event ->
+				respondToBored(super.getChannel(), super.getMessage(), super.getMessageAuthor()));
 	}
 
-	public void setupPhrases()
-	{
-		File phraseFile;
-		Scanner phraseScan;
-		
-		try
-		{
-			phraseFile = new File("C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\bin\\Resource\\boredPhrases.txt");
-			phraseScan = new Scanner(phraseFile);
-			
-			while(phraseScan.hasNextLine())
-			{
-				reprimandPhrases.add(phraseScan.nextLine());
-			}
-			
-			phraseScan.close();
-			
+	@SneakyThrows
+	public void respondToBored(TextChannel channel, Message message, MessageAuthor author) {
+		if (message.getContent().equalsIgnoreCase("im bored") || message.getContent().equalsIgnoreCase("i'm bored") || message.getContent().equalsIgnoreCase("bored")) {
+			message.addReaction("🚫");
+			channel.sendMessage("Hi bored, I'm dad");
+			Thread.sleep(1000);
+
+			Object file = new JSONParser().parse(new FileReader("C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\bin\\Resource\\boredPhrases.json"));
+			JSONObject obj = (JSONObject) file;
+
+			channel.sendMessage("<@" + author.getIdAsString() + ">"
+					+ obj.get(String.valueOf(Math.round(Math.random() * obj.size()))));
+			Thread.sleep(1000);
+
+			channel.sendMessage("I'm going out to the store for some cigs and milk. Don't tell your mother");
 		}
-		catch(Exception e)
-		{
-			System.out.println("File not found");
-			e.printStackTrace();
-		}		
 	}
-	
-	
 }
