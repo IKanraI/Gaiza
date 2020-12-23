@@ -29,13 +29,12 @@ public class Library {
 	@SuppressWarnings("unused")
 	@SneakyThrows
 	static void commandInit(DiscordApi api) {
-	 	System.out.println();
 		BotInfo bInfoInit = new BotInfo(api);
 		InitDatabase dbInit = new InitDatabase(api);
 		GlobalUserInformation initUsers = new GlobalUserInformation(api);
 		api.updateActivity(BotInfo.getBotActivity());
 
-		System.out.println("\nManagement files loaded!");
+		System.out.println("\n\nManagement files loaded!");
 		System.out.println("--------------------------------\n");
 
 		Map<String, File> commands = new HashMap();
