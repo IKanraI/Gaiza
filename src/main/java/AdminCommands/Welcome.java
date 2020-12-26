@@ -21,7 +21,7 @@ public class Welcome extends Command {
 		api.addMessageCreateListener(event ->
 				welcomeManager(super.getServer(), super.getMessage(), super.getChannel(), super.getArgs()));
 		api.addServerMemberJoinListener(event ->
-				listenForNewMember(super.getServer(), event.getUser()));
+				listenForNewMember(event.getServer(), event.getUser()));
 	}
 
 	private void welcomeManager(Server server, Message message, TextChannel channel, List<String> args) {
@@ -112,6 +112,7 @@ public class Welcome extends Command {
 		if (!Boolean.parseBoolean(InitDatabase.getData().get(server.getIdAsString()).getWEnabled())) {
 			return;
 		}
+
 		server.getChannelById(InitDatabase.getData().get(server.getIdAsString()).getWChannel())
 				.get().asServerTextChannel().get()
 				.sendMessage(InitDatabase.getData().get(server.getIdAsString()).getWMsg().replaceAll("<<mention>>", user.getMentionTag()))

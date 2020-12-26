@@ -78,6 +78,8 @@ public class InitDatabase extends Command {
 				data.get(s.getIdAsString()).loadJson(target);
 			}
 		}
+
+		//printData();
 	}
 
 	@SneakyThrows
@@ -89,6 +91,17 @@ public class InitDatabase extends Command {
 			if (checkForChanges(currPath, s.getKey())) {
 				Files.write(Paths.get(currPath), data.get(s.getKey()).toJSONString().getBytes());
 			}
+		}
+	}
+
+	public static void printData() {
+		for (Map.Entry<String, Servers> s : data.entrySet()) {
+			System.err.println(s.getKey() + " " + s.getValue().getId());
+			System.err.println(s.getKey() + " " + s.getValue().getName());
+			System.err.println(s.getKey() + " " + s.getValue().getPrefix());
+			System.err.println(s.getKey() + " " + s.getValue().getWEnabled());
+			System.err.println(s.getKey() + " " + s.getValue().getWChannel());
+			System.err.println(s.getKey() + " " + s.getValue().getUwu());
 		}
 	}
 }
