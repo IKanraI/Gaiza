@@ -1,3 +1,3 @@
 :a
-java -jar Gaiza.jar
+java -jar gaiza.jar
 goto:a

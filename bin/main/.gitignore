@@ -1,5 +1,8 @@
 /AdminCommands/
+/Command/
 /Database/
-/Listener/
-/UserCommands/
 /Gaiza/
+/Listener/
+/Management/
+/UserCommands/
+/UserMentions/

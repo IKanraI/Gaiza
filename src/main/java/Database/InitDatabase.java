@@ -19,7 +19,7 @@ import Management.BotInfo;
 
 public class InitDatabase extends Command {
 	@Getter private static Map<String, Servers> data = new HashMap();
-	@Getter private static String dbPath = "C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\bin\\Storage\\Servers\\";
+	@Getter private static String dbPath = "C:\\Users\\joelm\\Documents\\JavaProjects\\Gaiza\\bin\\Storage\\Servers\\";
 
 	public InitDatabase(DiscordApi api) {
 		super(api);
