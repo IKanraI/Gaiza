@@ -19,7 +19,7 @@ public class AdminHelp extends Command {
 	private static File folder;
 	public AdminHelp(DiscordApi api) {
 		super(api);
-		folder = new File("C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\AdminCommands\\");
+		folder = new File("C:\\Users\\joelm\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\AdminCommands\\");
 		api.addMessageCreateListener(event ->
 				displayHelp(super.getChannel(), super.getMessageAuthor(), super.getArgs()));
 
