@@ -38,24 +38,24 @@ public class CountingEnforcement extends Command {
             return;
         }
 
-        Integer compare;
+        Integer input;
         User user;
         if (channel.getMessages(2).get().getOldestMessage().get().getAuthor().getIdAsString().equals(BotInfo.getBotId())) {
-            compare = Integer.parseInt(channel.getMessages(3).get().getOldestMessage().get().getContent()) + 1;
+            input = Integer.parseInt(channel.getMessages(3).get().getOldestMessage().get().getContent()) + 1;
             user = channel.getMessages(3).get().getOldestMessage().get().getAuthor().asUser().get();
         } else {
-            compare = Integer.parseInt(channel.getMessages(2).get().getOldestMessage().get().getContent()) + 1;
+            input = Integer.parseInt(channel.getMessages(2).get().getOldestMessage().get().getContent()) + 1;
             user = channel.getMessages(2).get().getOldestMessage().get().getAuthor().asUser().get();
         }
 
-        if (!compare.equals(Integer.parseInt(message.getContent()))) {
-            channel.sendMessage("<@" + author.getIdAsString() + ">" + ", do you know how to fucking count cunt?");
+        if (!input.equals(Integer.parseInt(message.getContent()))) {
+            channel.sendMessage("<@" + author.getIdAsString() + ">" + ", please input the correct next number");
             Thread.sleep(1250);
             message.delete();
             Thread.sleep(2000);
             channel.getMessages(1).get().getNewestMessage().get().delete();
         } else if (author.getIdAsString().equals(user.getIdAsString())) {
-            channel.sendMessage("<@" + author.getIdAsString() + ">" + ", stop being a greedy cunt and wait your turn");
+            channel.sendMessage("<@" + author.getIdAsString() + ">" + ", double counting isn't allowed. Please wait until someone else has counted");
             Thread.sleep(1250);
             message.delete();
             Thread.sleep(2000);
