@@ -12,6 +12,7 @@ import org.javacord.api.entity.server.Server;
 import org.javacord.api.entity.user.User;
 
 import java.util.List;
+import java.util.Locale;
 
 public class Welcome extends Command {
 	@Getter public static String help = "Welcome module. Make sure to set the channel and message before enabling the module. Use [prefix] welcome message|channel|enable|disable to modify the module If you want to mention a user please use <<mention>>";
@@ -34,20 +35,22 @@ public class Welcome extends Command {
 		}
 
 		Servers instance = InitDatabase.getData().get(server.getIdAsString());
+		args.set(0, args.get(0).toLowerCase(Locale.ROOT));
 		switch (args.get(0)) {
 			case "enable": {
 				if (Boolean.parseBoolean(instance.getWEnabled())) {
 					channel.sendMessage("The welcome is already enabled >:(");
 					return;
 				}
-				if (!instance.getWChannel().equals("") || !instance.getWMsg().equals("")) {
-					instance.setWEnabled("true");
-					message.addReaction("\u2705");
-					channel.sendMessage("The welcome module has been enabled!");
-				} else {
+				if (instance.getWChannel().equals("") || instance.getWMsg().equals("")) {
 					channel.sendMessage("Please set the message and channel before enabling the welcome module");
 					return;
 				}
+
+				instance.setWEnabled("true");
+				message.addReaction("\u2705");
+				channel.sendMessage("The welcome module has been enabled!");
+
 				break;
 			}
 			case "disable": {

@@ -1,9 +1,13 @@
 {
   "uwu" : "false",
   "wChannel" : "",
+  "lsEnabled" : "false",
   "prefix" : "$",
+  "lsChannel" : "",
   "name" : "Baby Bear's Cave",
   "wEnabled" : "false",
+  "lsMessage" : "",
   "id" : "392198048874364930",
+  "lsRole" : "",
   "wMsg" : ""
 }

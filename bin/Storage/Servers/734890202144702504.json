@@ -1,9 +1,13 @@
 {
   "uwu" : "false",
   "wChannel" : "",
+  "lsEnabled" : "false",
   "prefix" : "$",
+  "lsChannel" : "",
   "name" : "EGirl Applebees",
   "wEnabled" : "false",
+  "lsMessage" : "",
   "id" : "734890202144702504",
+  "lsRole" : "",
   "wMsg" : ""
 }

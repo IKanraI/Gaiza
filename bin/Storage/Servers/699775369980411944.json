@@ -1,9 +1,13 @@
 {
   "uwu" : "false",
   "wChannel" : "",
+  "lsEnabled" : "false",
   "prefix" : "$",
+  "lsChannel" : "",
   "name" : "mika’s weiner",
   "wEnabled" : "false",
+  "lsMessage" : "",
   "id" : "699775369980411944",
+  "lsRole" : "",
   "wMsg" : ""
 }

@@ -1,9 +1,13 @@
 {
-  "uwu" : "true",
+  "uwu" : "false",
   "wChannel" : "",
+  "lsEnabled" : "true",
   "prefix" : "!",
+  "lsChannel" : "704704571578253363",
   "name" : "Gaiza Dev Server",
   "wEnabled" : "false",
+  "lsMessage" : "look someone is alive <<mention>> at: ",
   "id" : "692871508590067823",
+  "lsRole" : "698747163257208834",
   "wMsg" : ""
 }

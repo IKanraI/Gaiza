@@ -1,9 +1,13 @@
 {
   "uwu" : "false",
   "wChannel" : "",
+  "lsEnabled" : "false",
   "prefix" : "$",
+  "lsChannel" : "",
   "name" : "AI ROS",
   "wEnabled" : "false",
+  "lsMessage" : "",
   "id" : "674327312434593793",
+  "lsRole" : "",
   "wMsg" : ""
 }
