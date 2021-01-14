@@ -10,17 +10,16 @@ import org.javacord.api.entity.message.MessageAuthor;
 
 import java.util.List;
 
-public class Poke extends Command {
-    public static String help = "Get another user's attention by poking them";
+public class Laugh extends Command {
+    public static String help = "Laugh at a mentioned user";
 
-    public Poke(DiscordApi api) {
+    public Laugh(DiscordApi api) {
         super(api);
-
         api.addMessageCreateListener(event ->
-            patCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs()));
+                laughCommand(super.getChannel(), super.getMessage(), super.getMessageAuthor(), super.getArgs()));
     }
 
-    public void patCommand(TextChannel channel, Message message, MessageAuthor author, List<String> args) {
+    public void laughCommand(TextChannel channel, Message message, MessageAuthor author, List<String> args) {
         if (!onCommand()) {
             return;
         }
@@ -29,14 +28,14 @@ public class Poke extends Command {
             return;
         }
         if (message.getMentionedUsers().get(0).getIdAsString().equals(author.getIdAsString())) {
-            channel.sendMessage("This is strange, but okay I guess");
+            channel.sendMessage("It's always healthy to laugh at yourself :) ");
         }
 
         if (message.getMentionedUsers().get(0).getIdAsString().equals(BotInfo.getBotId())) {
-            channel.sendMessage("Hello :) How may I help you?");
+            channel.sendMessage(":( why are you laughing at me? I.. I'm sorry :(");
         }
 
-        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), Gif.searchGif("Anime-poke"), "poked"))
+        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), Gif.searchGif("Anime-laugh"), "laughed"))
                 .exceptionally(error -> {
                     channel.sendMessage("Message could not be sent");
                     return null;
