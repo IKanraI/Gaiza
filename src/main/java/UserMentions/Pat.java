@@ -39,7 +39,7 @@ public class Pat extends Command {
 
         channel.sendMessage(buildEmbed(author, message.getMentionedUsers().get(0), Gif.searchGif("Anime-pat"), "patted"))
         .exceptionally(error -> {
-            error.getCause().getMessage();
+            channel.sendMessage("Message could not be sent");
             return null;
         });
     }
