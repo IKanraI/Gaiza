@@ -19,15 +19,15 @@ import Management.BotInfo;
 
 public class InitDatabase extends Command {
 	@Getter private static Map<String, Servers> data = new HashMap();
-	@Getter private static String dbPath = "C:\\Users\\joelm\\Documents\\JavaProjects\\Gaiza\\bin\\Storage\\Servers\\";
+	@Getter private static final String dbPath = "C:\\Users\\joelm\\Documents\\JavaProjects\\Gaiza\\bin\\Storage\\Servers\\";
 
 	public InitDatabase(DiscordApi api) {
 		super(api);
 		initializeServers(api);
 		api.addServerJoinListener(event ->
-			serverJoin(super.getServer()));
+			serverJoin(event.getServer()));
 		api.addServerLeaveListener(event ->
-				serverLeave(super.getServer()));
+				serverLeave(event.getServer()));
 	}
 
 	@SneakyThrows
