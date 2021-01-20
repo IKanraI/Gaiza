@@ -78,8 +78,6 @@ public class InitDatabase extends Command {
 				data.get(s.getIdAsString()).loadJson(target);
 			}
 		}
-
-		//printData();
 	}
 
 	@SneakyThrows
