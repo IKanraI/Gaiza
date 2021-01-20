@@ -16,7 +16,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public abstract class Command {
+public class Command {
     private DiscordApi api;
     private TextChannel channel;
     private Message message;
