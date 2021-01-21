@@ -22,7 +22,7 @@ public class Library {
 	 }
 
 	public static void main(String[] args) {
-		DiscordApi api = new DiscordApiBuilder().setToken(new Token().getToken()).login().join();
+		DiscordApi api = new DiscordApiBuilder().setToken(new Token().getToken()).setAllIntents().login().join();
 		commandInit(api);
 	}
 	
