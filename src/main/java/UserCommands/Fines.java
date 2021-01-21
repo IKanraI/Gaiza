@@ -42,8 +42,8 @@ public class Fines extends Command {
                     + NumberFormat.getCurrencyInstance(Locale.US).format(UwuListener.getUserFine(GlobalUserInformation.filePath + author.getIdAsString())));
 
         } else {
-            channel.sendMessage("<@" + message.getMentionedUsers().get(0).getIdAsString()
-                    + "> currently owes: "
+            channel.sendMessage(message.getMentionedUsers().get(0).getName()
+                    + " currently owes: "
                     + NumberFormat.getCurrencyInstance(Locale.US).format(UwuListener
                     .getUserFine(GlobalUserInformation.filePath + message.getMentionedUsers().get(0).getIdAsString())));
         }

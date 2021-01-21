@@ -74,6 +74,8 @@ public class UwuListener extends Command {
 
 					channel.sendMessage(violationEmbed(author.asUser().get()));
 					setUserFine(author.getIdAsString());
+					Thread.sleep(1500);
+					message.delete();
 					break;
 				}
 			}
