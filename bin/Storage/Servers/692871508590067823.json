@@ -1,9 +1,9 @@
 {
   "uwu" : "false",
-  "wChannel" : "",
+  "wChannel" : "801600974790721567",
   "prefix" : "!",
   "name" : "Gaiza Dev Server",
-  "wEnabled" : "false",
+  "wEnabled" : "true",
   "id" : "692871508590067823",
-  "wMsg" : ""
+  "wMsg" : "Hello! Welcome to the Gaiza dev server, <<mention>>! We're in the works of working on the bot and if you have any problems feel free to bring it up in <#786307330962620436> or put in a [prefix]report [message] for me to look over. Enjoy your stay!"
 }

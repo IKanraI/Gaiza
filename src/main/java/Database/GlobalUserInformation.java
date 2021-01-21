@@ -26,7 +26,7 @@ public class GlobalUserInformation extends Command {
 		super(api);
 		getUsersList(api);
 		api.addServerMemberJoinListener(event ->
-				newUserJoins(event.getUser()));
+				newUserJoins(event.getUser(), event.getServer()));
 		
 	}
 
@@ -49,7 +49,7 @@ public class GlobalUserInformation extends Command {
 	}
 
 	@SneakyThrows
-	public void newUserJoins(User user) {
+	public void newUserJoins(User user, Server server) {
 		File target = new File(filePath + user.getId() + ".json");
 		if (target.createNewFile()) {
 			JSONObject store = new JSONObject();
@@ -57,5 +57,15 @@ public class GlobalUserInformation extends Command {
 			Files.write(Paths.get(target.toString()), store.toJSONString().getBytes());
 			System.out.println("User joined with id of " + user.getId());
 		}
+		if (!Boolean.parseBoolean(InitDatabase.getData().get(server.getIdAsString()).getWEnabled())) {
+			return;
+		}
+		server.getChannelById(InitDatabase.getData().get(server.getIdAsString()).getWChannel())
+				.get().asServerTextChannel().get()
+				.sendMessage(InitDatabase.getData().get(server.getIdAsString()).getWMsg().replaceAll("<<mention>>", user.getMentionTag()))
+				.exceptionally(e -> {
+					System.err.println("Something went wrong with this welcome");
+					return null;
+				});
 	}
 }
