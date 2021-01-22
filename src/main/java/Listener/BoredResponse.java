@@ -15,6 +15,7 @@ import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.message.MessageAuthor;
+import org.javacord.api.entity.server.Server;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -23,11 +24,14 @@ public class BoredResponse extends Command {
 	public BoredResponse(DiscordApi api) {
 		super(api);
 		api.addMessageCreateListener(event ->
-				respondToBored(super.getChannel(), super.getMessage(), super.getMessageAuthor()));
+				respondToBored(super.getChannel(), super.getServer(), super.getMessage(), super.getMessageAuthor()));
 	}
 
 	@SneakyThrows
-	public void respondToBored(TextChannel channel, Message message, MessageAuthor author) {
+	public void respondToBored(TextChannel channel, Server server, Message message, MessageAuthor author) {
+		if (server.getIdAsString().equals("672702222789902355")) {
+			return;
+		}
 		if (message.getContent().equalsIgnoreCase("im bored") || message.getContent().equalsIgnoreCase("i'm bored") || message.getContent().equalsIgnoreCase("bored")) {
 			message.addReaction("🚫");
 			channel.sendMessage("Hi bored, I'm dad");

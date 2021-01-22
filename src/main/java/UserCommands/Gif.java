@@ -41,6 +41,10 @@ public class Gif extends Command
 		for (String s : args) {
 			term.append(s + " ");
 		}
+		if (!channel.asServerTextChannel().get().isNsfw()) {
+			channel.sendMessage("Channel is not marked NSFW");
+			return;
+		}
 
 		channel.sendMessage(buildEmbed(searchGif(term.toString()), author)).exceptionally(e -> {
 			channel.sendMessage("Gif could not be returned");

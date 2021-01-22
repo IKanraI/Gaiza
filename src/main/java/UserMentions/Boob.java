@@ -28,6 +28,10 @@ public class Boob extends Command {
             channel.sendMessage("Please mention a user");
             return;
         }
+        if (!channel.asServerTextChannel().get().isNsfw()) {
+            channel.sendMessage("Channel is not marked NSFW");
+            return;
+        }
         if (message.getMentionedUsers().get(0).getIdAsString().equals(author.getIdAsString())) {
             channel.sendMessage("Sending boobs to yourself? Oof...");
         }
