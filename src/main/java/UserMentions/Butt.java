@@ -28,12 +28,15 @@ public class Butt extends Command {
             channel.sendMessage("Please mention a user");
             return;
         }
+        if (!channel.asServerTextChannel().get().isNsfw()) {
+            channel.sendMessage("Channel is not marked NSFW");
+            return;
+        }
         if (message.getMentionedUsers().get(0).getIdAsString().equals(author.getIdAsString())) {
             channel.sendMessage("Isn't there a place for this?");
         }
         if (message.getMentionedUsers().get(0).getIdAsString().equals(BotInfo.getBotId())) {
             channel.sendMessage("B00ty 8)");
-
         }
 
         channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), Gif.searchGif("Anime-booty"), "bootified"))

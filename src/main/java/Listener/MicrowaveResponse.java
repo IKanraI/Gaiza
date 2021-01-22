@@ -4,6 +4,7 @@ import Command.Command;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.Message;
+import org.javacord.api.entity.server.Server;
 
 public class MicrowaveResponse extends Command {
 	
@@ -11,11 +12,14 @@ public class MicrowaveResponse extends Command {
 		super(api);
 		
 		api.addMessageCreateListener(event ->
-				listenMicrowave(super.getChannel(), super.getMessage()));
+				listenMicrowave(super.getChannel(), super.getServer(), super.getMessage()));
 
 	}
 	
-	public void listenMicrowave(TextChannel channel, Message message) {
+	public void listenMicrowave(TextChannel channel, Server server, Message message) {
+		if (server.getIdAsString().equals("672702222789902355")) {
+			return;
+		}
 		if (message.getContent().equalsIgnoreCase("microwave")) {
 			channel.sendMessage("https://www.youtube.com/watch?v=js71WSAos5M&t=25s");
 		}
