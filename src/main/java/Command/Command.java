@@ -74,4 +74,8 @@ public class Command {
     public boolean isIgnoredChannel() {
        return channel.getIdAsString().equals("519563130603307018");
     }
+
+    public boolean isUniyServer() {
+        return server.getIdAsString().equals("672702222789902355");
+    }
 }

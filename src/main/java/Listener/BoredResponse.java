@@ -29,7 +29,7 @@ public class BoredResponse extends Command {
 
 	@SneakyThrows
 	public void respondToBored(TextChannel channel, Server server, Message message, MessageAuthor author) {
-		if (server.getIdAsString().equals("672702222789902355")) {
+		if (isUniyServer()) {
 			return;
 		}
 		if (message.getContent().equalsIgnoreCase("im bored") || message.getContent().equalsIgnoreCase("i'm bored") || message.getContent().equalsIgnoreCase("bored")) {

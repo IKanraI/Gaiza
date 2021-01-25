@@ -17,7 +17,7 @@ public class MicrowaveResponse extends Command {
 	}
 	
 	public void listenMicrowave(TextChannel channel, Server server, Message message) {
-		if (server.getIdAsString().equals("672702222789902355")) {
+		if (isUniyServer()) {
 			return;
 		}
 		if (message.getContent().equalsIgnoreCase("microwave")) {
