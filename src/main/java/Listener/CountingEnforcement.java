@@ -56,7 +56,7 @@ public class CountingEnforcement extends Command {
             message.delete();
         }
 
-        for (Message m : channel.getMessages(5).get()) {
+        for (Message m : channel.getMessages(10).get()) {
             if (m.getAuthor().getIdAsString().equals(BotInfo.getBotId())) {
                 Thread.sleep(1500);
                 m.delete();
