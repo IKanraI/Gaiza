@@ -30,8 +30,8 @@ public class UniyCounting extends Command {
         if (!channel.getIdAsString().equals("794780598895902811")) {
             return;
         }
-        if (message.getCustomEmojis().size() == 0 ||!message.getCustomEmojis().get(0).getIdAsString().equals("784276817166729216") && !message.getCustomEmojis().get(0).getIdAsString().equals("779986124197855253")) {
-            channel.sendMessage("Please make sure to use <:chaos_McUnit:784276817166729216> or <:chaos_McyUnit:779986124197855253>");
+        if (message.getCustomEmojis().size() == 0 ||!message.getCustomEmojis().get(0).getIdAsString().equals("784276817166729216")) {
+            channel.sendMessage("Please make sure to use <:chaos_McUnit:784276817166729216> at the end of the number");
             Thread.sleep(1250);
             message.delete();
 
