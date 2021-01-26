@@ -39,10 +39,10 @@ public class CountingEnforcement extends Command {
         Integer input;
         User user;
         if (channel.getMessages(2).get().getOldestMessage().get().getAuthor().getIdAsString().equals(BotInfo.getBotId())) {
-            input = Integer.parseInt(channel.getMessages(3).get().getOldestMessage().get().getContent()) + 1;
+            input = Integer.parseInt(channel.getMessages(3).get().getOldestMessage().get().getContent().replaceAll("\\*", "")) + 1;
             user = channel.getMessages(3).get().getOldestMessage().get().getAuthor().asUser().get();
         } else {
-            input = Integer.parseInt(channel.getMessages(2).get().getOldestMessage().get().getContent()) + 1;
+            input = Integer.parseInt(channel.getMessages(2).get().getOldestMessage().get().getContent().replaceAll("\\*", "")) + 1;
             user = channel.getMessages(2).get().getOldestMessage().get().getAuthor().asUser().get();
         }
 
