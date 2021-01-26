@@ -45,12 +45,11 @@ public class Pat extends Command {
     }
 
     public static EmbedBuilder buildEmbed(MessageAuthor author, User mentioned, String gif, String command) {
-        EmbedBuilder embed = new EmbedBuilder()
+        return new EmbedBuilder()
                 .setTitle(mentioned.getName() + ", you have been " + command + " by " + author.getName())
                 .setImage(gif)
                 .setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
                 .setColor(Color.MAGENTA)
                 .setTimestampToNow();
-        return embed;
     }
 }
