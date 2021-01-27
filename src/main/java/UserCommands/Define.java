@@ -58,7 +58,7 @@ public class Define extends Command {
 		definition.add(css.parents().select("div.example").get(0).text());
 		definition.add(css.parents().select("div.contributor").get(0).text());
 
-		channel.sendMessage(buildEmbed(term.toString(),
+		channel.sendMessage(buildEmbed(term.toString().replaceAll("\\+", " ").trim(),
 				"https://www.urbandictionary.com/define.php?term=" + term.replace(term.toString().length() - 1, term.toString().length(), ""),
 				definition))
 				.exceptionally(e -> {
