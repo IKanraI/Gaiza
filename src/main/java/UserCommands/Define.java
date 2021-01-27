@@ -39,7 +39,7 @@ public class Define extends Command {
 
 		StringBuilder term = new StringBuilder();
 		for (String s : args) {
-			term.append(s + " ");
+			term.append(s + "+");
 		}
 		Elements css = Jsoup.connect("https://www.urbandictionary.com/define.php?term=" + term.toString())
 				.followRedirects(true)
@@ -58,10 +58,13 @@ public class Define extends Command {
 		definition.add(css.parents().select("div.example").get(0).text());
 		definition.add(css.parents().select("div.contributor").get(0).text());
 
-		channel.sendMessage(buildEmbed(term.toString(), "https://www.urbandictionary.com/define.php?term=" + term.toString(), definition)).exceptionally(e -> {
-			channel.sendMessage(definition.get(0));
-			channel.sendMessage("Credit: Contributed " + definition.get(2));
-			return null;
+		channel.sendMessage(buildEmbed(term.toString(),
+				"https://www.urbandictionary.com/define.php?term=" + term.replace(term.toString().length() - 1, term.toString().length(), ""),
+				definition))
+				.exceptionally(e -> {
+					channel.sendMessage(definition.get(0));
+					channel.sendMessage("Credit: Contributed " + definition.get(2));
+					return null;
 		});
 	}
 
