@@ -33,7 +33,7 @@ public class Ban extends Command {
 			return;
 		}
 		if (!author.canBanUserFromServer(message.getMentionedUsers().get(0))) {
-			channel.sendMessage("User cannot be kicked");
+			channel.sendMessage("User cannot be banned");
 			return;
 		}
 		try {
