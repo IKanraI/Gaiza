@@ -28,7 +28,7 @@ import Management.*;
 public class UwuListener extends Command {
 	private static String key = "Fine Amount";
 	private static final int fine = 350;
-	
+
 	public UwuListener(DiscordApi api) {
 		super(api);
 		api.addMessageCreateListener(event ->
@@ -42,7 +42,7 @@ public class UwuListener extends Command {
 
 		return (long) obj.get(key);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@SneakyThrows
 	public void setUserFine(String id) {
@@ -61,6 +61,10 @@ public class UwuListener extends Command {
 		}
 
 		StringBuilder msg = new StringBuilder(message.getContent().replaceAll("\\s", ""));
+		if (msg.toString().toLowerCase().contains("fuckmeuwu.com")) {
+			return;
+		}
+
 		if (msg.toString().equalsIgnoreCase("uwu")) {
 			channel.sendMessage(violationEmbed(author.asUser().get()));
 			setUserFine(author.getIdAsString());
