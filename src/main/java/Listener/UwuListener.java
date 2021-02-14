@@ -61,7 +61,7 @@ public class UwuListener extends Command {
 		}
 
 		StringBuilder msg = new StringBuilder(message.getContent().replaceAll("\\s", ""));
-		if (msg.toString().contains("fuckmeuwu.com")) {
+		if (msg.toString().contains(equalsIgnoreCase("fuckmeuwu.com"))) {
 			return;
 		}
 
