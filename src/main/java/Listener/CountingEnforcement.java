@@ -9,6 +9,8 @@ import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.entity.user.User;
 
+import java.util.Locale;
+
 public class CountingEnforcement extends Command {
 
     public CountingEnforcement (DiscordApi api) {
@@ -25,8 +27,9 @@ public class CountingEnforcement extends Command {
         if (!channel.getIdAsString().equals("519563130603307018")) {
             return;
         }
+        String msg = message.getContent().replaceAll("\\*", "");
         try {
-            Integer.parseInt(message.getContent());
+            Integer.parseInt(msg);
         } catch (Exception e) {
             channel.sendMessage("<@" + author.getIdAsString() + ">" + ", did you forget what a number is?");
             Thread.sleep(1250);
@@ -46,7 +49,7 @@ public class CountingEnforcement extends Command {
             user = channel.getMessages(2).get().getOldestMessage().get().getAuthor().asUser().get();
         }
 
-        if (!input.equals(Integer.parseInt(message.getContent()))) {
+        if (!input.equals(Integer.parseInt(msg))) {
             channel.sendMessage("<@" + author.getIdAsString() + ">" + ", please input the correct next number");
             Thread.sleep(1250);
             message.delete();
