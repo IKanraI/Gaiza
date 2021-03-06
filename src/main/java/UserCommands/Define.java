@@ -3,6 +3,7 @@ package UserCommands;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import Command.Command;
 import lombok.Getter;

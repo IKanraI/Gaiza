@@ -35,6 +35,8 @@ public class Avatar extends Command {
 			return;
 		}
 
+		message.toString().toLowerCase();
+
 		if (args.size() == 0) {
 			channel.sendMessage(buildOutputMessage(messageAuthor.asUser().get()))
 					.exceptionally(e -> {
