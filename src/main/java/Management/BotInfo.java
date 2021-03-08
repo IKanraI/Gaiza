@@ -18,8 +18,10 @@ public class BotInfo {
 	@Getter private static Icon botImage;
 	@Getter private static String botInvite;
 	@Getter private static String botRepo;
+	@Getter @Setter private static String foxxId;
 	@Getter @Setter private static int serverCount;
 	@Getter @Setter private static int userCount;
+
 
 	@SneakyThrows
 	public BotInfo(DiscordApi api) {
@@ -32,5 +34,6 @@ public class BotInfo {
 		botInvite = "https://discordapp.com/oauth2/authorize?client_id=369295519576489984&scope=bot&permissions=2146561111";
 		botRepo = "https://github.com/IKanraI/Gaiza";
 		serverCount = api.getServers().size();
+		foxxId = "426978239475613696";
 	}
 }
