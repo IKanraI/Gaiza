@@ -37,7 +37,8 @@ public class BoredResponse extends Command {
 			channel.sendMessage("Hi bored, I'm dad");
 			Thread.sleep(1000);
 
-			Object file = new JSONParser().parse(new FileReader("C:\\Users\\17244\\Documents\\JavaProjects\\Gaiza\\bin\\Resource\\boredPhrases.json"));
+			Object file = new JSONParser().parse(new FileReader("C:\\Users\\joelm\\Documents\\JavaProjects\\Gaiza\\bin\\Resource\\boredPhrases.json"));
+
 			JSONObject obj = (JSONObject) file;
 
 			channel.sendMessage("<@" + author.getIdAsString() + ">"
