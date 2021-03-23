@@ -7,15 +7,9 @@ import lombok.Getter;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.channel.TextChannel;
 
-public class Roll extends Command
-{
+public class Roll extends Command {
 	@Getter
 	public static String help = "Does a roll for a specified amount [prefix]roll [roll amount]";
-	private String commandCoin = "flip";
-	private String commandRoll = "roll";
-	private String command6 = "6";
-	private String command10 = "10";
-	private String command20 = "20";
 	
 	public Roll(DiscordApi api) {
 		super(api);
