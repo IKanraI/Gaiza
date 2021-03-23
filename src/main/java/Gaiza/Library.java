@@ -38,10 +38,10 @@ public class Library {
 		System.out.println("--------------------------------\n");
 
 		Map<String, File> commands = new HashMap();
-		commands.put("UserCommands", new File("C:\\Users\\joelm\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\UserCommands\\"));
-		commands.put("AdminCommands", new File("C:\\Users\\joelm\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\AdminCommands\\"));
-		commands.put("Listener", new File("C:\\Users\\joelm\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\Listener\\"));
-		commands.put("UserMentions", new File("C:\\Users\\joelm\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\UserMentions\\"));
+		commands.put("UserCommands", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\UserCommands"));
+		commands.put("AdminCommands", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\AdminCommands"));
+		commands.put("Listener", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\Listener"));
+		commands.put("UserMentions", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\UserMentions"));
 
 
 		for (Map.Entry<String, File> command : commands.entrySet()) {
