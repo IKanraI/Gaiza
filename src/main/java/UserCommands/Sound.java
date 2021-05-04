@@ -60,7 +60,7 @@ public class Sound extends Command {
             connection.setAudioSource(source);
             player.setVolume(1000);
 
-            manager.loadItem("C:\\Users\\joelm\\Documents\\JavaProjects\\Gaiza\\bin\\Sound\\Eargasm.mp3", new AudioLoadResultHandler() {
+            manager.loadItem("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\bin\\Sound\\Eargasm.mp3", new AudioLoadResultHandler() {
                 @Override
                 public void trackLoaded(AudioTrack track) {
                     player.playTrack(track);
