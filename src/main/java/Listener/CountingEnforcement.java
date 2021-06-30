@@ -7,6 +7,7 @@ import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.message.MessageAuthor;
+import org.javacord.api.entity.message.MessageSet;
 import org.javacord.api.entity.user.User;
 
 import java.lang.Exception;
@@ -43,29 +44,36 @@ public class CountingEnforcement extends Command {
         }
 
         Integer previousNum;
-        User user;
+        User previousUser;
+        MessageSet lastTwoMessages = channel.getMessages(2).get();
+        Boolean previousMessageAuthorIsTheBot = lastTwoMessages.getOldestMessage().get().getAuthor().getIdAsString().equals(BotInfo.getBotId());
+        Message previousHumanMessage;
+        if (previousMessageAuthorIsTheBot) {
+            // assumes the econd to last message is not written by the bot implicitly
+            // there's probably a good pattern for scrolling up the last few message to find a non-bot message
+            // but i'm getting bored
+            previousHumanMessage = channel.getMessages(3).get().getOldestMessage().get();
+        } else {
+            previousHumanMessage = lastTwoMessages.getOldestMessage().get();
+        }  
+        previousUser = previousHumanMessage.getAuthor().asUser().get();
+        if (author.getIdAsString().equals(previousUser.getIdAsString())) {
+            channel.sendMessage("<@" + author.getIdAsString() + ">" + ", double counting isn't allowed. Please wait until someone else has counted");
+            Thread.sleep(1250);
+            message.delete();
+        }
+        
         try {
-            if (channel.getMessages(2).get().getOldestMessage().get().getAuthor().getIdAsString().equals(BotInfo.getBotId())) {
-                previousNum = parseIntFromMessage(channel.getMessages(3).get().getOldestMessage().get().getContent().replaceAll("\\*", "")); 
-                user = channel.getMessages(3).get().getOldestMessage().get().getAuthor().asUser().get();
-            } else {
-                previousNum = parseIntFromMessage(channel.getMessages(2).get().getOldestMessage().get().getContent().replaceAll("\\*", ""));
-                user = channel.getMessages(2).get().getOldestMessage().get().getAuthor().asUser().get();
-            }
-
+            previousNum = parseIntFromMessage(previousHumanMessage.getContent().replaceAll("\\*", ""));
             if (!previousNum.equals(msgNum - 1)) {
                 channel.sendMessage("<@" + author.getIdAsString() + ">" + ", please input the correct next number");
-                Thread.sleep(1250);
-                message.delete();
-            } else if (author.getIdAsString().equals(user.getIdAsString())) {
-                channel.sendMessage("<@" + author.getIdAsString() + ">" + ", double counting isn't allowed. Please wait until someone else has counted");
                 Thread.sleep(1250);
                 message.delete();
             }
         } catch (BadInputException bie) {
             // if we can't parse numbers from the previous messages
             // trust the user and ask for help
-            channel.sendMessage("<@" + author.getIdAsString() + ">" + ", I can't read the previous input, so I am trusting you, please call my dad uwu");
+            channel.sendMessage("<@" + author.getIdAsString() + ">" + ", I can't read the number from the previous messages, so I am trusting you, please call my dad uwu");
         }
 
         for (Message m : channel.getMessages(10).get()) {
