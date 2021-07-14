@@ -89,10 +89,11 @@ public class CountingEnforcement extends Command {
         Exception hopefullyNot = null;
         // https://regex101.com/r/fwHchU/1
         Pattern beginsWithInteger = Pattern.compile("^([0-9]+)");
-        Matcher matchBeginsWithInt = pattern.matcher(message);
+        Matcher matchBeginsWithInt = beginsWithInteger.matcher(message);
         if (matchBeginsWithInt.find()) {
             try {
                 msgNum = Integer.parseInt(matchBeginsWithInt.group(1));
+                return msgNum;
             } catch (Exception e) {
                 throw new BadInputException("Somehow failed to parse a series of numbers as an Int", e);
             }
