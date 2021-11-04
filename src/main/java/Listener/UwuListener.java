@@ -53,36 +53,27 @@ public class UwuListener extends Command {
 
 	@SneakyThrows
 	public void uwuListener(TextChannel channel, Server server, MessageAuthor author, Message message) {
+		// ignore cases we want to ignore
 		if (author.getIdAsString().equals(BotInfo.getOwnerId()) || !author.isRegularUser() || isIgnoredChannel()) {
 			return;
 		}
+		// ensure uwu is enabled
 		if (!Boolean.parseBoolean(InitDatabase.getData().get(server.getIdAsString()).getUwu())) {
 			return;
 		}
 
-		StringBuilder msg = new StringBuilder(message.getContent().replaceAll("\\s", ""));
-		if (msg.toString().toLowerCase().contains("fuckmeuwu.com")) {
+		String msg = message.getContent().toLowerCase().replaceAll("\\s", "");
+		
+		// ignore links to classy websites
+		if (msg.contains("fuckmeuwu.com")) {
 			return;
 		}
 
-		if (msg.toString().equalsIgnoreCase("uwu")) {
+		if (msg.contains("uwu")) {
 			channel.sendMessage(violationEmbed(author.asUser().get()));
 			setUserFine(author.getIdAsString());
 			Thread.sleep(1500);
 			message.delete();
-		} else {
-			for (int i = 0; i < msg.length() - 2; ++i) {
-				if (msg.charAt(i) == 'u'
-						&& msg.charAt(i + 1) == 'w'
-						&& (msg.charAt(i + 2) == 'u')) {
-
-					channel.sendMessage(violationEmbed(author.asUser().get()));
-					setUserFine(author.getIdAsString());
-					Thread.sleep(1500);
-					message.delete();
-					break;
-				}
-			}
 		}
 	}
 
