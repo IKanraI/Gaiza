@@ -53,7 +53,7 @@ public class UwuListener extends Command {
 
 	@SneakyThrows
 	public void uwuListener(TextChannel channel, Server server, MessageAuthor author, Message message) {
-		if (author.getIdAsString().equals(BotInfo.getOwnerId()) || !author.isRegularUser() || isIgnoredChannel()) {
+		if (author.getIdAsString().equals(BotInfo.getOwnerId()) || author.getIdAsString().equals(BotInfo.getFoxxId()) || !author.isRegularUser() || isIgnoredChannel()) {
 			return;
 		}
 		if (!Boolean.parseBoolean(InitDatabase.getData().get(server.getIdAsString()).getUwu())) {
