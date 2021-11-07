@@ -38,10 +38,15 @@ public class Library {
 		System.out.println("--------------------------------\n");
 
 		Map<String, File> commands = new HashMap();
-		commands.put("UserCommands", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\UserCommands"));
-		commands.put("AdminCommands", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\AdminCommands"));
-		commands.put("Listener", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\Listener"));
-		commands.put("UserMentions", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\UserMentions"));
+		commands.put("UserCommands", new File("/home/kanra/projects/Gaiza/src/main/java/UserCommands"));
+		commands.put("AdminCommands", new File("/home/kanra/projects/Gaiza/src/main/java/AdminCommands"));
+		commands.put("Listener", new File("/home/kanra/projects/Gaiza/src/main/java/Listener"));
+		commands.put("UserMentions", new File("/home/kanra/projects/Gaiza/src/main/java/UserMentions"));
+
+//		commands.put("UserCommands", new File("C:\\Users\\joelm\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\UserCommands"));
+//		commands.put("AdminCommands", new File("C:\\Users\\joelm\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\AdminCommands"));
+//		commands.put("Listener", new File("C:\\Users\\joelm\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\Listener"));
+//		commands.put("UserMentions", new File("C:\\Users\\joelm\\Documents\\JavaProjects\\Gaiza\\src\\main\\java\\UserMentions")); /home/kanra/projects/data/userData
 
 
 		for (Map.Entry<String, File> command : commands.entrySet()) {

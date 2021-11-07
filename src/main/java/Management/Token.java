@@ -18,7 +18,7 @@ public class Token
 	}
 	@SneakyThrows
 	static public void setToken() {
-		token = Files.readAllLines(Paths.get("C:\\Users\\joelm\\IdeaProjects\\Hidden\\Token.txt")).get(0);
+		token = Files.readAllLines(Paths.get("/home/kanra/projects/data/hidden/token")).get(0);
 	}
 	
 	public String getToken() {

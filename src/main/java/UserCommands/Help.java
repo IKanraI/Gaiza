@@ -25,8 +25,8 @@ public class Help extends Command {
 
 	public Help(DiscordApi api) {
 		super(api);
-		folders.put("UserCommands.", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\UserCommands"));
-		folders.put("UserMentions.", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\UserMentions"));
+		folders.put("UserCommands.", new File("/home/kanra/projects/Gaiza/src/main/java/UserCommands"));
+		folders.put("UserMentions.", new File("/home/kanra/projects/Gaiza/src/main/java/UserMentions"));
 
 		api.addMessageCreateListener(e ->
 			helpCommand(getChannel(), getMessageAuthor(), getArgs()));
