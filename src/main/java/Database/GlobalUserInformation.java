@@ -19,7 +19,7 @@ import Management.BotInfo;
 import org.json.simple.parser.JSONParser;
 
 public class GlobalUserInformation extends Command {
-	public static String filePath = "D:\\Bot\\bin\\uwuData\\";
+	public static String filePath = "/home/kanra/projects/data/userData";
 	private String fineTag = "Fine Amount";
 	
 	public GlobalUserInformation(DiscordApi api) {

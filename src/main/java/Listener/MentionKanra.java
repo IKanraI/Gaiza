@@ -33,7 +33,7 @@ public class MentionKanra {
 
 
             try {
-                FileWriter file = new FileWriter("/home/kanra/projects/data/hidden", true);
+                FileWriter file = new FileWriter("/home/kanra/projects/data/hidden/mentions", true);
                 StringBuilder message = new StringBuilder();
                 message.append(event.getMessage().getAuthor().getDisplayName()
                         + ": " + event.getMessageContent()
