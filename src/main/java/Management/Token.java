@@ -1,5 +1,6 @@
 package Management;
 
+import lombok.Getter;
 import lombok.SneakyThrows;
 
 import java.io.File;
@@ -11,7 +12,7 @@ import java.util.Scanner;
 
 public class Token 
 {
-	private static String token = "";
+	@Getter private static String token = "";
 	
 	public Token() {
 		setToken();
@@ -19,9 +20,6 @@ public class Token
 	@SneakyThrows
 	static public void setToken() {
 		token = Files.readAllLines(Paths.get("/home/kanra/projects/data/hidden/token")).get(0);
-	}
-	
-	public String getToken() {
-		return token;
+//		token = Files.readAllLines(Paths.get("C:\\Users\\joelm\\Documents\\JavaProjects\\Hidden\\Token.txt")).get(0);
 	}
 }

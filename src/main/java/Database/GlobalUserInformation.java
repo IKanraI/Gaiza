@@ -19,8 +19,9 @@ import Management.BotInfo;
 import org.json.simple.parser.JSONParser;
 
 public class GlobalUserInformation extends Command {
-	public static String filePath = "/home/kanra/projects/data/userData";
-	private String fineTag = "Fine Amount";
+	public static String filePath = "/home/kanra/projects/data/userData/";
+//	public static String filePath = "C:\\Users\\joelm\\Documents\\JavaProjects\\Hidden\\userData\\";
+	private final String fineTag = "Fine Amount";
 	
 	public GlobalUserInformation(DiscordApi api) {
 		super(api);

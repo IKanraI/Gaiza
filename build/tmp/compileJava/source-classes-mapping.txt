@@ -1,5 +1,5 @@
-Listener/MentionKanra.java
- Listener.MentionKanra
+Database/GlobalUserInformation.java
+ Database.GlobalUserInformation
 UserCommands/Report.java
  UserCommands.Report
 UserMentions/Meow.java
@@ -8,20 +8,22 @@ UserCommands/Define.java
  UserCommands.Define
 UserMentions/Slap.java
  UserMentions.Slap
+Management/Tenor.java
+ Management.Tenor
 Listener/MicrowaveResponse.java
  Listener.MicrowaveResponse
 UserCommands/Github.java
  UserCommands.Github
-Management/BotInfo.java
- Management.BotInfo
+UserCommands/Ranks.java
+ UserCommands.Ranks
 UserCommands/Roll.java
  UserCommands.Roll
 Listener/MarcoPolo.java
  Listener.MarcoPolo
 AdminCommands/Prefix.java
  AdminCommands.Prefix
-UserMentions/Snuggle.java
- UserMentions.Snuggle
+Gaiza/Library.java
+ Gaiza.Library
 Database/Servers.java
  Database.Servers
 UserCommands/Avatar.java
@@ -54,12 +56,12 @@ Listener/BoredResponse.java
  Listener.BoredResponse
 UserMentions/Poke.java
  UserMentions.Poke
-UserMentions/Pat.java
- UserMentions.Pat
+Listener/UwuListener.java
+ Listener.UwuListener
 UserMentions/Kiss.java
  UserMentions.Kiss
-Command/Command.java
- Command.Command
+UserCommands/Fines.java
+ UserCommands.Fines
 UserCommands/Ping.java
  UserCommands.Ping
 AdminCommands/AdminHelp.java
@@ -92,13 +94,13 @@ AdminCommands/MusicIntro.java
  AdminCommands.MusicIntro
 AdminCommands/Kick.java
  AdminCommands.Kick
-Database/GlobalUserInformation.java
- Database.GlobalUserInformation
-Gaiza/Library.java
- Gaiza.Library
-Listener/UwuListener.java
- Listener.UwuListener
-UserCommands/Ranks.java
- UserCommands.Ranks
-UserCommands/Fines.java
- UserCommands.Fines
+Command/Command.java
+ Command.Command
+Management/BotInfo.java
+ Management.BotInfo
+Listener/MentionKanra.java
+ Listener.MentionKanra
+UserMentions/Snuggle.java
+ UserMentions.Snuggle
+UserMentions/Pat.java
+ UserMentions.Pat

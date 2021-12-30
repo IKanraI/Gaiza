@@ -18,6 +18,7 @@ public class BotInfo {
 	@Getter private static Icon botImage;
 	@Getter private static String botInvite;
 	@Getter private static String botRepo;
+	@Getter private static String tenorApiKey;
 	@Getter @Setter private static int serverCount;
 	@Getter @Setter private static int userCount;
 
@@ -29,9 +30,14 @@ public class BotInfo {
 		botName = api.getYourself().getName();
 		botImageStr = api.getYourself().getAvatar().getUrl().toString();
 		botImage = api.getYourself().getAvatar();
-		botActivity = Files.readAllLines(Paths.get("/home/kanra/projects/data/botActivity")).get(0);
 		botInvite = "https://discordapp.com/oauth2/authorize?client_id=369295519576489984&scope=bot&permissions=2146561111";
 		botRepo = "https://github.com/IKanraI/Gaiza";
 		serverCount = api.getServers().size();
+
+		botActivity = Files.readAllLines(Paths.get("/home/kanra/projects/data/botActivity")).get(0);
+		tenorApiKey = Files.readAllLines(Paths.get("/home/kanra/projects/data/tenor")).get(0);
+
+//		tenorApiKey = Files.readAllLines(Paths.get("C:\\Users\\joelm\\Documents\\JavaProjects\\Hidden\\tenor.txt")).get(0);
+//		botActivity = Files.readAllLines(Paths.get("C:\\Users\\joelm\\Documents\\JavaProjects\\Hidden\\botActivity.txt")).get(0);
 	}
 }

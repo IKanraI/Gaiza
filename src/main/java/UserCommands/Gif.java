@@ -5,13 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Command.Command;
+import Management.Tenor;
 import lombok.Getter;
 import lombok.SneakyThrows;
+import org.apache.commons.lang3.ObjectUtils;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -22,7 +26,7 @@ public class Gif extends Command
 {
 	@Getter
 	public static String help = "Searches for a specified gif. Returns a random results from the search. Usage [prefix]gif [query]";
-	
+
 	public Gif(DiscordApi api) {
 		super(api);
 		api.addMessageCreateListener(event ->
@@ -48,7 +52,7 @@ public class Gif extends Command
 		});
 
 	}
-	
+
 	public EmbedBuilder buildEmbed(String url, MessageAuthor author) {
 		EmbedBuilder message = new EmbedBuilder()
 				.setTitle("A gif for your viewing")
@@ -57,57 +61,26 @@ public class Gif extends Command
 				.setImage(url)
 				.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
 				.setTimestampToNow();
-		
+
 		return message;
 	}
-	
+
 	@SneakyThrows
 	public static String searchGif(String term) {
-		Elements css = Jsoup.connect("https://tenor.com/search/" + term)
-				.followRedirects(true)
-				.ignoreHttpErrors(true)
-				.userAgent("Chrome/74.0.3729.157")
-				.get()
-				.select("Figure.GifListItem")
-				.select("a[href]");
+		JSONObject searchResult = Tenor.getSearchResults(term, 25);
+		JSONArray results;
+		JSONObject selectedGif;
 
-		if (css.isEmpty()) {
+		if (ObjectUtils.isNotEmpty(searchResult)) {
+			results = searchResult.getJSONArray("results");
+			selectedGif = (JSONObject) results.get((int) Math.floor(Math.random() * results.length()));
+		} else {
+			System.err.println("Nothing came back");
 			return null;
 		}
 
-		List<String> validElements = new ArrayList();
-		for (Element e : css) {
-			for (Element a : e.children()) {
-				if (a.className().equals("Gif")) {
-					validElements.add(a.parent().attr("href"));
-				}
-			}
-		}
+		JSONObject selectMediaType = (JSONObject) selectedGif.getJSONArray("media").getJSONObject(0).get("gif");
 
-		String searchUrl = "";
-		int select = (int) Math.floor(Math.random() * (validElements.size() > 30 ? validElements.size() / 2 : validElements.size()));
-		searchUrl = "https://tenor.com" + validElements.get(select);
-
-		if (searchUrl.equalsIgnoreCase("https://tenor.com/gif-maker?utm_source=search-page&utm_medium=internal&utm_campaign=gif-maker-entrypoints")) {
-			if (select == 0) {
-				select += 1;
-			} else if (select == validElements.size()) {
-				select -= 1;
-			} else {
-				select += 1;
-			}
-			searchUrl = "https://tenor.com" + validElements.get(select);
-		}
-
-		Elements search = Jsoup.connect(searchUrl)
-				.followRedirects(true)
-				.ignoreHttpErrors(true)
-				.userAgent("Chrome/74.0.3729.157")
-				.get()
-				.select("div.Gif")
-				.get(0)
-				.select("img");
-
-		return search.attr("abs:src");
+		return String.valueOf(selectMediaType.get("url"));
 	}
 }
