@@ -70,8 +70,9 @@ public class Gif extends Command
 		JSONObject searchResult = Tenor.getSearchResults(term, 25);
 		JSONArray results;
 		JSONObject selectedGif;
-
+		System.err.println(searchResult);
 		if (ObjectUtils.isNotEmpty(searchResult)) {
+
 			results = searchResult.getJSONArray("results");
 			selectedGif = (JSONObject) results.get((int) Math.floor(Math.random() * results.length()));
 		} else {
