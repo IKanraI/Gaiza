@@ -67,7 +67,7 @@ public class Gif extends Command
 
 	@SneakyThrows
 	public static String searchGif(String term) {
-		JSONObject searchResult = Tenor.getSearchResults(term, 25);
+		JSONObject searchResult = Tenor.getSearchResults(term, 13);
 		JSONArray results;
 		JSONObject selectedGif;
 		System.err.println(searchResult);
