@@ -37,7 +37,7 @@ public class Boop extends Command {
             channel.sendMessage("*honk*!");
         }
         System.err.println("1");
-        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), Gif.searchGif("Anime-boop"), "booped"))
+        channel.sendMessage(Pat.buildEmbed(author, message.getMentionedUsers().get(0), Gif.searchGif("boop"), "booped"))
                 .exceptionally(error -> {
                     channel.sendMessage("Message could not be sent");
                     return null;
