@@ -12,6 +12,7 @@ import java.util.concurrent.ExecutionException;
 import Command.Command;
 import Database.InitDatabase;
 import lombok.SneakyThrows;
+import org.apache.commons.lang3.StringUtils;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.Message;
@@ -53,7 +54,7 @@ public class UwuListener extends Command {
 
 	@SneakyThrows
 	public void uwuListener(TextChannel channel, Server server, MessageAuthor author, Message message) {
-		if (author.getIdAsString().equals(BotInfo.getOwnerId()) || !author.isRegularUser() || isIgnoredChannel()) {
+		if (author.getIdAsString().equals(BotInfo.getOwnerId()) || author.getIdAsString().equals("685000228050436110") || !author.isRegularUser() || isIgnoredChannel()) {
 			return;
 		}
 		if (!Boolean.parseBoolean(InitDatabase.getData().get(server.getIdAsString()).getUwu())) {
@@ -72,9 +73,9 @@ public class UwuListener extends Command {
 			message.delete();
 		} else {
 			for (int i = 0; i < msg.length() - 2; ++i) {
-				if (msg.charAt(i) == 'u'
-						&& msg.charAt(i + 1) == 'w'
-						&& (msg.charAt(i + 2) == 'u')) {
+				if (StringUtils.equalsIgnoreCase(String.valueOf(msg.charAt(i)),"u")
+						&& StringUtils.equalsIgnoreCase(String.valueOf(msg.charAt(i)),"w")
+						&& StringUtils.equalsIgnoreCase(String.valueOf(msg.charAt(i)),"u")) {
 
 					channel.sendMessage(violationEmbed(author.asUser().get()));
 					setUserFine(author.getIdAsString());

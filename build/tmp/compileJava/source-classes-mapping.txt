@@ -1,82 +1,90 @@
-UserCommands/Support.java
- UserCommands.Support
-UserCommands/Report.java
- UserCommands.Report
-Listener/BoredResponse.java
- Listener.BoredResponse
-AdminCommands/Kick.java
- AdminCommands.Kick
-AdminCommands/MusicIntro.java
- AdminCommands.MusicIntro
-Management/UserFineObject.java
- Management.UserFineObject
-Listener/MicrowaveResponse.java
- Listener.MicrowaveResponse
-UserCommands/Disconnect.java
- UserCommands.Disconnect
-UserCommands/Ping.java
- UserCommands.Ping
-UserCommands/Roll.java
- UserCommands.Roll
-Listener/MarcoPolo.java
- Listener.MarcoPolo
-Management/AudioPlayerSource.java
- Management.AudioPlayerSource
-AdminCommands/Ban.java
- AdminCommands.Ban
-Database/Servers.java
- Database.Servers
 Database/GlobalUserInformation.java
  Database.GlobalUserInformation
+UserCommands/Report.java
+ UserCommands.Report
 UserMentions/Meow.java
  UserMentions.Meow
-UserMentions/Poke.java
- UserMentions.Poke
-Listener/UwuListener.java
- Listener.UwuListener
-UserMentions/Kiss.java
- UserMentions.Kiss
 UserCommands/Define.java
  UserCommands.Define
 UserMentions/Slap.java
  UserMentions.Slap
 Management/Tenor.java
  Management.Tenor
+Listener/MicrowaveResponse.java
+ Listener.MicrowaveResponse
 UserCommands/Github.java
  UserCommands.Github
 UserCommands/Ranks.java
  UserCommands.Ranks
-UserCommands/Fines.java
- UserCommands.Fines
-AdminCommands/AdminHelp.java
- AdminCommands.AdminHelp
-UserMentions/Stare.java
- UserMentions.Stare
+UserCommands/Roll.java
+ UserCommands.Roll
+Listener/MarcoPolo.java
+ Listener.MarcoPolo
 AdminCommands/Prefix.java
  AdminCommands.Prefix
-Management/Token.java
- Management.Token
 Gaiza/Library.java
  Gaiza.Library
-UserCommands/Invite.java
- UserCommands.Invite
+Database/Servers.java
+ Database.Servers
 UserCommands/Avatar.java
  UserCommands.Avatar
 UserMentions/Boop.java
  UserMentions.Boop
-UserMentions/Lewd.java
- UserMentions.Lewd
 AdminCommands/Welcome.java
  AdminCommands.Welcome
+UserCommands/Help.java
+ UserCommands.Help
+UserMentions/Hug.java
+ UserMentions.Hug
+AdminCommands/Ban.java
+ AdminCommands.Ban
+UserMentions/Bite.java
+ UserMentions.Bite
+AdminCommands/Uwu.java
+ AdminCommands.Uwu
+Management/UserFineObject.java
+ Management.UserFineObject
+UserMentions/Butt.java
+ UserMentions.Butt
+Listener/Dio.java
+ Listener.Dio
+UserMentions/Smug.java
+ UserMentions.Smug
+UserCommands/Disconnect.java
+ UserCommands.Disconnect
+UserMentions/Laugh.java
+ UserMentions.Laugh
+Listener/BoredResponse.java
+ Listener.BoredResponse
+UserMentions/Poke.java
+ UserMentions.Poke
+Listener/UwuListener.java
+ Listener.UwuListener
+UserMentions/Kiss.java
+ UserMentions.Kiss
+UserCommands/Fines.java
+ UserCommands.Fines
+UserCommands/Ping.java
+ UserCommands.Ping
+AdminCommands/AdminHelp.java
+ AdminCommands.AdminHelp
+UserMentions/Stare.java
+ UserMentions.Stare
+UserCommands/Support.java
+ UserCommands.Support
+Management/Token.java
+ Management.Token
+UserCommands/Invite.java
+ UserCommands.Invite
+Management/AudioPlayerSource.java
+ Management.AudioPlayerSource
+UserMentions/Lewd.java
+ UserMentions.Lewd
 Listener/CountingEnforcement.java
  Listener.CountingEnforcement
  Listener.CountingEnforcement$BadInputException
 Database/InitDatabase.java
  Database.InitDatabase
-UserCommands/Help.java
- UserCommands.Help
-UserMentions/Hug.java
- UserMentions.Hug
 UserCommands/Gif.java
  UserCommands.Gif
 UserCommands/Sound.java
@@ -84,25 +92,17 @@ UserCommands/Sound.java
  UserCommands.Sound$1
 UserMentions/Boob.java
  UserMentions.Boob
-UserMentions/Bite.java
- UserMentions.Bite
+AdminCommands/MusicIntro.java
+ AdminCommands.MusicIntro
+AdminCommands/Kick.java
+ AdminCommands.Kick
 Command/Command.java
  Command.Command
 Management/BotInfo.java
  Management.BotInfo
-AdminCommands/Uwu.java
- AdminCommands.Uwu
 Listener/MentionKanra.java
  Listener.MentionKanra
-UserMentions/Butt.java
- UserMentions.Butt
 UserMentions/Snuggle.java
  UserMentions.Snuggle
-Listener/Dio.java
- Listener.Dio
-UserMentions/Smug.java
- UserMentions.Smug
-UserMentions/Laugh.java
- UserMentions.Laugh
 UserMentions/Pat.java
  UserMentions.Pat
