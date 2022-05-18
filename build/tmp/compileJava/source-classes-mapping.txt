@@ -100,11 +100,11 @@ Command/Command.java
  Command.Command
 Management/BotInfo.java
  Management.BotInfo
-Listener/Yare.java
- Listener.Yare
+UserCommands/Fines.java
+ UserCommands.Fines
 Listener/UwuListener.java
  Listener.UwuListener
 UserCommands/Ranks.java
  UserCommands.Ranks
-UserCommands/Fines.java
- UserCommands.Fines
+Listener/Yare.java
+ Listener.Yare

@@ -2,6 +2,7 @@ package Listener;
 
 import Command.Command;
 import Management.BotInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.Message;
@@ -24,7 +25,7 @@ public class Yare extends Command {
             return;
         } //Puppos tag
 
-        if (message.getContent().equals("Yare Yare Daze")) {
+        if (StringUtils.equalsIgnoreCase(message.getContent(), "yare yare daze")) {
             channel.sendMessage(new EmbedBuilder()
                     .setImage("https://b.catgirlsare.sexy/Fi5kF_gN8x_y.gif")
                     .setColor(Color.YELLOW)
