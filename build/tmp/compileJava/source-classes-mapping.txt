@@ -14,8 +14,8 @@ Listener/MicrowaveResponse.java
  Listener.MicrowaveResponse
 UserCommands/Github.java
  UserCommands.Github
-UserCommands/Ranks.java
- UserCommands.Ranks
+UserMentions/Snuggle.java
+ UserMentions.Snuggle
 UserCommands/Roll.java
  UserCommands.Roll
 Listener/MarcoPolo.java
@@ -58,12 +58,12 @@ Listener/BoredResponse.java
  Listener.BoredResponse
 UserMentions/Poke.java
  UserMentions.Poke
-Listener/UwuListener.java
- Listener.UwuListener
+UserMentions/Pat.java
+ UserMentions.Pat
 UserMentions/Kiss.java
  UserMentions.Kiss
-UserCommands/Fines.java
- UserCommands.Fines
+Listener/MentionKanra.java
+ Listener.MentionKanra
 UserCommands/Ping.java
  UserCommands.Ping
 AdminCommands/AdminHelp.java
@@ -100,9 +100,11 @@ Command/Command.java
  Command.Command
 Management/BotInfo.java
  Management.BotInfo
-Listener/MentionKanra.java
- Listener.MentionKanra
-UserMentions/Snuggle.java
- UserMentions.Snuggle
-UserMentions/Pat.java
- UserMentions.Pat
+Listener/Yare.java
+ Listener.Yare
+Listener/UwuListener.java
+ Listener.UwuListener
+UserCommands/Ranks.java
+ UserCommands.Ranks
+UserCommands/Fines.java
+ UserCommands.Fines
