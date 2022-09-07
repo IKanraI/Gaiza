@@ -1,5 +1,7 @@
 Database/GlobalUserInformation.java
  Database.GlobalUserInformation
+Listener/Yare.java
+ Listener.Yare
 UserCommands/Report.java
  UserCommands.Report
 UserMentions/Meow.java
@@ -8,14 +10,16 @@ UserCommands/Define.java
  UserCommands.Define
 UserMentions/Slap.java
  UserMentions.Slap
+UserCommands/Birthday.java
+ UserCommands.Birthday
 Management/Tenor.java
  Management.Tenor
 Listener/MicrowaveResponse.java
  Listener.MicrowaveResponse
 UserCommands/Github.java
  UserCommands.Github
-UserMentions/Snuggle.java
- UserMentions.Snuggle
+UserCommands/Ranks.java
+ UserCommands.Ranks
 UserCommands/Roll.java
  UserCommands.Roll
 Listener/MarcoPolo.java
@@ -38,14 +42,12 @@ UserMentions/Hug.java
  UserMentions.Hug
 AdminCommands/Ban.java
  AdminCommands.Ban
-UserMentions/Bite.java
- UserMentions.Bite
+UserMentions/Pat.java
+ UserMentions.Pat
 AdminCommands/Uwu.java
  AdminCommands.Uwu
 Management/UserFineObject.java
  Management.UserFineObject
-UserMentions/Butt.java
- UserMentions.Butt
 Listener/Dio.java
  Listener.Dio
 UserMentions/Smug.java
@@ -58,12 +60,12 @@ Listener/BoredResponse.java
  Listener.BoredResponse
 UserMentions/Poke.java
  UserMentions.Poke
-UserMentions/Pat.java
- UserMentions.Pat
+Listener/UwuListener.java
+ Listener.UwuListener
 UserMentions/Kiss.java
  UserMentions.Kiss
-Listener/MentionKanra.java
- Listener.MentionKanra
+UserCommands/Fines.java
+ UserCommands.Fines
 UserCommands/Ping.java
  UserCommands.Ping
 AdminCommands/AdminHelp.java
@@ -90,8 +92,6 @@ UserCommands/Gif.java
 UserCommands/Sound.java
  UserCommands.Sound
  UserCommands.Sound$1
-UserMentions/Boob.java
- UserMentions.Boob
 AdminCommands/MusicIntro.java
  AdminCommands.MusicIntro
 AdminCommands/Kick.java
@@ -100,11 +100,7 @@ Command/Command.java
  Command.Command
 Management/BotInfo.java
  Management.BotInfo
-UserCommands/Fines.java
- UserCommands.Fines
-Listener/UwuListener.java
- Listener.UwuListener
-UserCommands/Ranks.java
- UserCommands.Ranks
-Listener/Yare.java
- Listener.Yare
+Listener/MentionKanra.java
+ Listener.MentionKanra
+UserMentions/Snuggle.java
+ UserMentions.Snuggle
