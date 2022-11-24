@@ -42,8 +42,6 @@ UserMentions/Hug.java
  UserMentions.Hug
 AdminCommands/Ban.java
  AdminCommands.Ban
-UserMentions/Pat.java
- UserMentions.Pat
 AdminCommands/Uwu.java
  AdminCommands.Uwu
 Management/UserFineObject.java
@@ -104,3 +102,5 @@ Listener/MentionKanra.java
  Listener.MentionKanra
 UserMentions/Snuggle.java
  UserMentions.Snuggle
+UserMentions/Pat.java
+ UserMentions.Pat
