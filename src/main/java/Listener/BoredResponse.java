@@ -29,15 +29,12 @@ public class BoredResponse extends Command {
 
 	@SneakyThrows
 	public void respondToBored(TextChannel channel, Server server, Message message, MessageAuthor author) {
-		if (isUniyServer()) {
-			return;
-		}
 		if (message.getContent().equalsIgnoreCase("im bored") || message.getContent().equalsIgnoreCase("i'm bored") || message.getContent().equalsIgnoreCase("bored")) {
 			message.addReaction("🚫");
 			channel.sendMessage("Hi bored, I'm dad");
 			Thread.sleep(1000);
 
-			Object file = new JSONParser().parse(new FileReader("/home/kanra/projects/Gaiza/bin/Resource/boredPhrases.json"));
+			Object file = new JSONParser().parse(new FileReader("/home/kanra/projects/Gaiza/bin/Resource/boredPhrases.json")); //TODO reroute this
 
 			JSONObject obj = (JSONObject) file;
 

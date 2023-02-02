@@ -25,13 +25,13 @@ public class BotInfo {
 
 	@SneakyThrows
 	public BotInfo(DiscordApi api) {
-		ownerId = String.valueOf(api.getOwnerId());
-		botId = api.getYourself().getIdAsString();
-		botName = api.getYourself().getName();
+		//ownerId = String.valueOf(api.getOwnerId());
+		//botId = api.getYourself().getIdAsString();
+		//botName = api.getYourself().getName();
 		botImageStr = api.getYourself().getAvatar().getUrl().toString();
 		botImage = api.getYourself().getAvatar();
-		botInvite = "https://discordapp.com/oauth2/authorize?client_id=369295519576489984&scope=bot&permissions=2146561111";
-		botRepo = "https://github.com/IKanraI/Gaiza";
+		//botInvite = "https://discordapp.com/oauth2/authorize?client_id=369295519576489984&scope=bot&permissions=2146561111";
+		//botRepo = "https://github.com/IKanraI/Gaiza";
 		serverCount = api.getServers().size();
 
 		botActivity = Files.readAllLines(Paths.get("/home/kanra/projects/data/botActivity")).get(0);

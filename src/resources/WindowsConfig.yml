@@ -1,0 +1,42 @@
+app:
+  name: "Gaiza"
+  id: "369295519576489984"
+  repo: "https://github.com/IKanraI/Gaiza"
+  invite: "https://discordapp.com/oauth2/authorize?client_id=369295519576489984&scope=bot&permissions=2146561111"
+
+owner:
+  name: "Kanra"
+  discordTag: "Kanra#4986"
+  id: 150415472028811264
+
+util:
+  tenor:
+    url: "https://g.tenor.com/v1/search?q=%1$s&key=%2$s&limit=%3$s"
+  urban:
+    url: "https://www.urbandictionary.com/define.php?term="
+
+commands:
+  userCommandUrl: "C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\UserCommands"
+  adminCommandUrl: "C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\AdminCommands"
+  listenerUrl: "C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\Listener"
+  mentionUrl: "C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\UserMentions"
+
+misc:
+  gifs:
+    dio: "https://b.catgirlsare.sexy/b3P755aD.gif"
+    yare: "https://b.catgirlsare.sexy/Fi5kF_gN8x_y.gif"
+  video:
+    microwave: "https://www.youtube.com/watch?v=js71WSAos5M&t=25s"
+  users:
+    cake:
+      id: 136785961622306816
+    puppo:
+      id: 824853199998418985
+    asuka:
+      id: 88720392293711872
+  servers:
+    supportServer:
+      serverInvite: https://discord.gg/Zpr5qTzKmd\
+      serverId: 692871508590067823
+  channels:
+    reportChannelId: 704097798102057071
