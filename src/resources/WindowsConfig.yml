@@ -40,3 +40,6 @@ misc:
       serverId: 692871508590067823
   channels:
     reportChannelId: 704097798102057071
+
+  database:
+    uriPath: "C:\\Users\\joelm\\IdeaProjects\\Gaiza\\bin\\Storage\\Servers\\"

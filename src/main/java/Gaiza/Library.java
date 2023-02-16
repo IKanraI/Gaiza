@@ -23,7 +23,10 @@ public class Library {
 	@SneakyThrows
 	static void commandInit(DiscordApi api) {
 		BotInfo bInfoInit = new BotInfo(api);
-		InitDatabase dbInit = new InitDatabase(api);
+
+		InitDatabase dbInit = new InitDatabase();
+		dbInit.initializeServers(api);
+
 		GlobalUserInformation initUsers = new GlobalUserInformation(api);
 		api.updateActivity(BotInfo.getBotActivity());
 
