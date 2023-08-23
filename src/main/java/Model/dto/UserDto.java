@@ -14,8 +14,10 @@ import java.util.List;
 public class UserDto implements Serializable {
     String id;
 
+    Integer timesFined;
     Integer uwuFineAmount;//TODO add amount of times fined and other metrics
     LocalDate birthday;
 
     List<String> sharedServerList;
+    List<String> previousRoles;
 }

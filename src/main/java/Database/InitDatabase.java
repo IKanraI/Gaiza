@@ -9,11 +9,8 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 import org.bson.Document;
 import org.javacord.api.DiscordApi;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import org.javacord.api.entity.server.Server;
 
-import java.io.FileReader;
-import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -27,16 +24,21 @@ public class InitDatabase {
 
     private final String uriPath = "C:\\Users\\joelm\\Documents\\JavaProjects\\Hidden\\sqlConnection.txt";
 
-    @SneakyThrows
-    public static boolean checkForChanges(String path, String id) {
-        Object obj = new JSONParser().parse(new FileReader(path));
-        JSONObject read = (JSONObject) obj;
+//    @SneakyThrows
+//    public static boolean checkForChanges(String path, String id) {
+//        Object obj = new JSONParser().parse(new FileReader(path));
+//        JSONObject read = (JSONObject) obj;
+//
+//        for (Field f : data.get(id).getClass().getDeclaredFields()) {
+//            if (!read.get(f.getName()).equals(f.get(data.get(id)))) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
-        for (Field f : data.get(id).getClass().getDeclaredFields()) {
-            if (!read.get(f.getName()).equals(f.get(data.get(id)))) {
-                return true;
-            }
-        }
+    public static boolean checkForChanges(Server server, Document cachedServer) {
+
         return false;
     }
 
@@ -50,19 +52,14 @@ public class InitDatabase {
             MongoCollection<Document> collection = database.getCollection("Server");
 
             api.getServers().forEach((server) -> {
-                data.put(server.getIdAsString(), ServerDto.prepareNewServer(server));
                 Document doc = collection.find(eq("id", server.getIdAsString())).first();
 
-                if (doc == null)
+                if (doc == null) {
                     collection.insertOne(new Document("Server", ServerDto.prepareNewServer(server)));
-
-                if (target.createNewFile()) {
-                    Files.write(Paths.get(target.toString()), data.get(server.getIdAsString()).toJSONString().getBytes());
-                } else {
-                    data.get(server.getIdAsString()).loadJson(target);
+                    data.put(server.getIdAsString(), ServerDto.prepareNewServer(server));
                 }
-
-
+                else
+                    data.put(server.getIdAsString(), ServerDto.mapDocumentToServerDto(doc));
             });
         }
     }

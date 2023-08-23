@@ -3,10 +3,13 @@ package Model.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
+import org.bson.Document;
 import org.javacord.api.entity.server.Server;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Data
@@ -47,5 +50,29 @@ public class ServerDto implements Serializable {
         serverDto.setAutoRoles(new ArrayList<>());
 
         return serverDto;
+    }
+
+    public static ServerDto mapDocumentToServerDto(Document doc) {
+        ServerDto dto = new ServerDto();
+
+        dto.setId(String.valueOf(doc.get("id")));
+        dto.setPrefix(String.valueOf(doc.get("prefix")));
+
+        dto.setWelcomeEnabled(Boolean.getBoolean(String.valueOf(doc.get("welcomeEnabled"))));
+        dto.setWelcomeChannel(String.valueOf(doc.get("welcomeChannel")));
+        dto.setWelcomeMessage(String.valueOf(doc.get("welcomeMessage")));
+
+        dto.setCountingChannelId(String.valueOf(doc.get("countingChannelId")));
+
+        dto.setUwuEnabled(Boolean.getBoolean(String.valueOf(doc.get("uwuEnabled"))));
+        dto.setUwuIgnoredChannels( -> {
+
+        }));
+
+        dto.setAutoRoleEnabled(Boolean.getBoolean(String.valueOf(doc.get("autoRoleEnabled"))));
+        //dto.setAutoRoles(String.valueOf(doc.get("id")));
+
+        return dto;
+
     }
 }
