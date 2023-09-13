@@ -25,7 +25,7 @@ public class Dio extends Command {
             return;
         }
 
-        if (message.getContent().equals("KONO DIO DA")) {
+        if (message.getContent().equalsIgnoreCase("KONO DIO DA")) {
             channel.sendMessage(new EmbedBuilder()
                     .setImage("https://b.catgirlsare.sexy/b3P755aD.gif")
                     .setColor(Color.YELLOW)
