@@ -40,10 +40,6 @@ UserCommands/Help.java
  UserCommands.Help
 UserMentions/Hug.java
  UserMentions.Hug
-AdminCommands/Ban.java
- AdminCommands.Ban
-UserMentions/Pat.java
- UserMentions.Pat
 AdminCommands/Uwu.java
  AdminCommands.Uwu
 Management/UserFineObject.java
@@ -94,8 +90,6 @@ UserCommands/Sound.java
  UserCommands.Sound$1
 AdminCommands/MusicIntro.java
  AdminCommands.MusicIntro
-AdminCommands/Kick.java
- AdminCommands.Kick
 Command/Command.java
  Command.Command
 Management/BotInfo.java
@@ -104,3 +98,5 @@ Listener/MentionKanra.java
  Listener.MentionKanra
 UserMentions/Snuggle.java
  UserMentions.Snuggle
+UserMentions/Pat.java
+ UserMentions.Pat

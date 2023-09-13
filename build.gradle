@@ -33,7 +33,7 @@ dependencies {
     api 'org.apache.commons:commons-math3:3.6.1'
     compileOnly 'org.projectlombok:lombok:1.18.16'
     implementation 'com.google.guava:guava:28.2-jre'
-    implementation 'org.javacord:javacord:3.1.2'
+    implementation 'org.javacord:javacord:3.8.0'
     //implementation 'org.javacord:javacord:audio-3.0.4'
     implementation 'org.apache.commons:commons-text:1.7'
     implementation 'org.jsoup:jsoup:1.9.1'

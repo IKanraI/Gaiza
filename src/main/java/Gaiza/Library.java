@@ -8,6 +8,7 @@ import org.javacord.api.DiscordApiBuilder;
 
 import Database.*;
 import Management.*;
+import org.javacord.api.entity.intent.Intent;
 
 import java.io.*;
 import java.util.*;
@@ -15,7 +16,7 @@ import java.util.*;
 public class Library {
 
 	public static void main(String[] args) {
-		DiscordApi api = new DiscordApiBuilder().setToken(new Token().getToken()).setAllIntents().login().join();
+		DiscordApi api = new DiscordApiBuilder().setToken(new Token().getToken()).addIntents(Intent.MESSAGE_CONTENT).login().join();
 		commandInit(api);
 	}
 	
