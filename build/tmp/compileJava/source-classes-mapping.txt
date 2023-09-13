@@ -32,8 +32,8 @@ Database/Servers.java
  Database.Servers
 UserCommands/Avatar.java
  UserCommands.Avatar
-UserMentions/Boop.java
- UserMentions.Boop
+UserMentions/Pat.java
+ UserMentions.Pat
 AdminCommands/Welcome.java
  AdminCommands.Welcome
 UserCommands/Help.java
@@ -44,8 +44,8 @@ AdminCommands/Uwu.java
  AdminCommands.Uwu
 Management/UserFineObject.java
  Management.UserFineObject
-Listener/Dio.java
- Listener.Dio
+Listener/MentionKanra.java
+ Listener.MentionKanra
 UserMentions/Smug.java
  UserMentions.Smug
 UserCommands/Disconnect.java
@@ -76,8 +76,8 @@ UserCommands/Invite.java
  UserCommands.Invite
 Management/AudioPlayerSource.java
  Management.AudioPlayerSource
-UserMentions/Lewd.java
- UserMentions.Lewd
+UserMentions/Snuggle.java
+ UserMentions.Snuggle
 Listener/CountingEnforcement.java
  Listener.CountingEnforcement
  Listener.CountingEnforcement$BadInputException
@@ -94,9 +94,5 @@ Command/Command.java
  Command.Command
 Management/BotInfo.java
  Management.BotInfo
-Listener/MentionKanra.java
- Listener.MentionKanra
-UserMentions/Snuggle.java
- UserMentions.Snuggle
-UserMentions/Pat.java
- UserMentions.Pat
+Listener/Dio.java
+ Listener.Dio
