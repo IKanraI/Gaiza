@@ -16,24 +16,25 @@ Management/Tenor.java
  Management.Tenor
 Listener/MicrowaveResponse.java
  Listener.MicrowaveResponse
+UserMentions/Pat.java
+ UserMentions.Pat
 UserCommands/Github.java
  UserCommands.Github
 UserCommands/Ranks.java
  UserCommands.Ranks
+Database/Model/Series.java
+ Database.Model.Series
 UserCommands/Roll.java
  UserCommands.Roll
 Listener/MarcoPolo.java
  Listener.MarcoPolo
 AdminCommands/Prefix.java
  AdminCommands.Prefix
-Gaiza/Library.java
- Gaiza.Library
-Database/Servers.java
- Database.Servers
+UserCommands/Sound.java
+ UserCommands.Sound
+ UserCommands.Sound$1
 UserCommands/Avatar.java
  UserCommands.Avatar
-UserMentions/Pat.java
- UserMentions.Pat
 AdminCommands/Welcome.java
  AdminCommands.Welcome
 UserCommands/Help.java
@@ -44,8 +45,8 @@ AdminCommands/Uwu.java
  AdminCommands.Uwu
 Management/UserFineObject.java
  Management.UserFineObject
-Listener/MentionKanra.java
- Listener.MentionKanra
+Listener/Dio.java
+ Listener.Dio
 UserMentions/Smug.java
  UserMentions.Smug
 UserCommands/Disconnect.java
@@ -76,6 +77,8 @@ UserCommands/Invite.java
  UserCommands.Invite
 Management/AudioPlayerSource.java
  Management.AudioPlayerSource
+UserCommands/Series.java
+ UserCommands.Series
 UserMentions/Snuggle.java
  UserMentions.Snuggle
 Listener/CountingEnforcement.java
@@ -85,14 +88,22 @@ Database/InitDatabase.java
  Database.InitDatabase
 UserCommands/Gif.java
  UserCommands.Gif
-UserCommands/Sound.java
- UserCommands.Sound
- UserCommands.Sound$1
+Listener/MentionKanra.java
+ Listener.MentionKanra
 AdminCommands/MusicIntro.java
  AdminCommands.MusicIntro
+Database/Model/Servers.java
+ Database.Model.Servers
 Command/Command.java
  Command.Command
 Management/BotInfo.java
  Management.BotInfo
-Listener/Dio.java
- Listener.Dio
+Database/SeriesTrackerInformation.java
+ Database.SeriesTrackerInformation
+ Database.SeriesTrackerInformation$1
+Gaiza/Library.java
+ Gaiza.Library
+Database/Model/Media.java
+ Database.Model.Media
+UserCommands/Movie.java
+ UserCommands.Movie

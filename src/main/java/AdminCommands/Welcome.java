@@ -1,7 +1,7 @@
 package AdminCommands;
 
 import Command.Command;
-import Database.Servers;
+import Database.Model.Servers;
 import lombok.Getter;
 import org.javacord.api.DiscordApi;
 
@@ -9,7 +9,6 @@ import Database.InitDatabase;
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.server.Server;
-import org.javacord.api.entity.user.User;
 
 import java.util.List;
 

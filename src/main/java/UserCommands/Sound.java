@@ -13,6 +13,7 @@ import com.sedmelluq.discord.lavaplayer.source.local.LocalAudioSourceManager;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+import lombok.Getter;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.audio.AudioSource;
 import org.javacord.api.audio.AudioSourceBase;
@@ -24,6 +25,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Sound extends Command {
+
+    @Getter public static String help = "Include something in this later";
 
     public Sound(DiscordApi api) {
         super(api);
