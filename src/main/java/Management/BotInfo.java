@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class BotInfo {
+    //Improve upon this somehow. I should probably add a way to inject variables into classes
 	@Getter private static String ownerId;
 	@Getter private static String botId;
 	@Getter private static String botName;
@@ -21,6 +22,7 @@ public class BotInfo {
 	@Getter private static String tenorApiKey;
 	@Getter @Setter private static int serverCount;
 	@Getter @Setter private static int userCount;
+    @Getter private static String zaraiUserId;
 
 
 	@SneakyThrows
@@ -33,11 +35,12 @@ public class BotInfo {
 		botInvite = "https://discordapp.com/oauth2/authorize?client_id=369295519576489984&scope=bot&permissions=2146561111";
 		botRepo = "https://github.com/IKanraI/Gaiza";
 		serverCount = api.getServers().size();
+		zaraiUserId = "422153253170708490";
 
-		botActivity = Files.readAllLines(Paths.get("/home/kanra/projects/data/botActivity")).get(0);
-		tenorApiKey = Files.readAllLines(Paths.get("/home/kanra/projects/data/tenor")).get(0);
+//		botActivity = Files.readAllLines(Paths.get("/home/kanra/projects/data/botActivity")).get(0);
+//		tenorApiKey = Files.readAllLines(Paths.get("/home/kanra/projects/data/tenor")).get(0);
 
-//		tenorApiKey = Files.readAllLines(Paths.get("C:\\Users\\joelm\\Documents\\JavaProjects\\Hidden\\tenor.txt")).get(0);
-//		botActivity = Files.readAllLines(Paths.get("C:\\Users\\joelm\\Documents\\JavaProjects\\Hidden\\botActivity.txt")).get(0);
+		tenorApiKey = Files.readAllLines(Paths.get("C:\\Users\\joelm\\Documents\\JavaProjects\\Hidden\\tenor.txt")).get(0);
+		botActivity = Files.readAllLines(Paths.get("C:\\Users\\joelm\\Documents\\JavaProjects\\Hidden\\botActivity.txt")).get(0);
 	}
 }

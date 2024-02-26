@@ -17,9 +17,6 @@ public class MicrowaveResponse extends Command {
 	}
 	
 	public void listenMicrowave(TextChannel channel, Server server, Message message) {
-		if (isUniyServer()) {
-			return;
-		}
 		if (message.getContent().equalsIgnoreCase("microwave")) {
 			channel.sendMessage("https://www.youtube.com/watch?v=js71WSAos5M&t=25s");
 		}

@@ -2,7 +2,7 @@ package AdminCommands;
 
 import Command.Command;
 import Database.InitDatabase;
-import Database.Servers;
+import Database.Model.Servers;
 import lombok.Getter;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.channel.TextChannel;

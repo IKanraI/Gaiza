@@ -8,8 +8,8 @@ import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.channel.TextChannel;
 
 public class Roll extends Command {
-	@Getter
-	public static String help = "Does a roll for a specified amount [prefix]roll [roll amount]";
+
+	@Getter public static String help = "Does a roll for a specified amount [prefix]roll [roll amount]";
 	
 	public Roll(DiscordApi api) {
 		super(api);
