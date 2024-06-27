@@ -1,109 +1,109 @@
-Database/GlobalUserInformation.java
- Database.GlobalUserInformation
-Listener/Yare.java
- Listener.Yare
-UserCommands/Report.java
- UserCommands.Report
-UserMentions/Meow.java
- UserMentions.Meow
-UserCommands/Define.java
- UserCommands.Define
-UserMentions/Slap.java
- UserMentions.Slap
-UserCommands/Birthday.java
- UserCommands.Birthday
-Management/Tenor.java
- Management.Tenor
-Listener/MicrowaveResponse.java
- Listener.MicrowaveResponse
-UserMentions/Pat.java
- UserMentions.Pat
-UserCommands/Github.java
- UserCommands.Github
-UserCommands/Ranks.java
- UserCommands.Ranks
-Database/Model/Series.java
- Database.Model.Series
-UserCommands/Roll.java
- UserCommands.Roll
-Listener/MarcoPolo.java
- Listener.MarcoPolo
-AdminCommands/Prefix.java
- AdminCommands.Prefix
-UserCommands/Sound.java
- UserCommands.Sound
- UserCommands.Sound$1
-UserCommands/Avatar.java
- UserCommands.Avatar
-AdminCommands/Welcome.java
- AdminCommands.Welcome
-UserCommands/Help.java
- UserCommands.Help
-UserMentions/Hug.java
- UserMentions.Hug
-AdminCommands/Uwu.java
- AdminCommands.Uwu
-Management/UserFineObject.java
- Management.UserFineObject
-Listener/Dio.java
- Listener.Dio
-UserMentions/Smug.java
- UserMentions.Smug
-UserCommands/Disconnect.java
- UserCommands.Disconnect
-UserMentions/Laugh.java
- UserMentions.Laugh
-Listener/BoredResponse.java
- Listener.BoredResponse
-UserMentions/Poke.java
- UserMentions.Poke
-Listener/UwuListener.java
- Listener.UwuListener
-UserMentions/Kiss.java
- UserMentions.Kiss
-UserCommands/Fines.java
- UserCommands.Fines
-UserCommands/Ping.java
- UserCommands.Ping
-AdminCommands/AdminHelp.java
- AdminCommands.AdminHelp
-UserMentions/Stare.java
- UserMentions.Stare
-UserCommands/Support.java
- UserCommands.Support
-Management/Token.java
- Management.Token
-UserCommands/Invite.java
- UserCommands.Invite
-Management/AudioPlayerSource.java
- Management.AudioPlayerSource
-UserCommands/Series.java
- UserCommands.Series
-UserMentions/Snuggle.java
- UserMentions.Snuggle
-Listener/CountingEnforcement.java
- Listener.CountingEnforcement
- Listener.CountingEnforcement$BadInputException
-Database/InitDatabase.java
- Database.InitDatabase
-UserCommands/Gif.java
- UserCommands.Gif
-Listener/MentionKanra.java
- Listener.MentionKanra
-AdminCommands/MusicIntro.java
- AdminCommands.MusicIntro
-Database/Model/Servers.java
- Database.Model.Servers
-Command/Command.java
- Command.Command
-Management/BotInfo.java
- Management.BotInfo
-Database/SeriesTrackerInformation.java
- Database.SeriesTrackerInformation
- Database.SeriesTrackerInformation$1
-Gaiza/Library.java
- Gaiza.Library
-UserCommands/Movie.java
- UserCommands.Movie
-Database/Model/Media.java
- Database.Model.Media
+management/Tenor.java
+ management.Tenor
+model/common/Servers.java
+ model.common.Servers
+management/UserFineObject.java
+ management.UserFineObject
+management/BotInfo.java
+ management.BotInfo
+model/common/Media.java
+ model.common.Media
+listener/MarcoPolo.java
+ listener.MarcoPolo
+listener/MentionKanra.java
+ listener.MentionKanra
+model/SeriesTrackerInformation.java
+ model.SeriesTrackerInformation
+ model.SeriesTrackerInformation$1
+management/AudioPlayerSource.java
+ management.AudioPlayerSource
+management/Token.java
+ management.Token
+userCommands/Ping.java
+ userCommands.Ping
+model/common/Series.java
+ model.common.Series
+adminCommands/Prefix.java
+ adminCommands.Prefix
+userCommands/Avatar.java
+ userCommands.Avatar
+userCommands/Series.java
+ userCommands.Series
+userCommands/Birthday.java
+ userCommands.Birthday
+listener/CountingEnforcement.java
+ listener.CountingEnforcement
+ listener.CountingEnforcement$BadInputException
+adminCommands/MusicIntro.java
+ adminCommands.MusicIntro
+userMentions/Laugh.java
+ userMentions.Laugh
+userMentions/Smug.java
+ userMentions.Smug
+adminCommands/AdminHelp.java
+ adminCommands.AdminHelp
+userMentions/Snuggle.java
+ userMentions.Snuggle
+userCommands/Report.java
+ userCommands.Report
+listener/Dio.java
+ listener.Dio
+userCommands/Sound.java
+ userCommands.Sound
+ userCommands.Sound$1
+userCommands/Ranks.java
+ userCommands.Ranks
+command/Command.java
+ command.Command
+userCommands/Help.java
+ userCommands.Help
+adminCommands/Welcome.java
+ adminCommands.Welcome
+model/GlobalUserInformation.java
+ model.GlobalUserInformation
+userCommands/Roll.java
+ userCommands.Roll
+adminCommands/Uwu.java
+ adminCommands.Uwu
+userMentions/Poke.java
+ userMentions.Poke
+userMentions/Slap.java
+ userMentions.Slap
+userMentions/Hug.java
+ userMentions.Hug
+userCommands/Gif.java
+ userCommands.Gif
+userCommands/Support.java
+ userCommands.Support
+listener/UwuListener.java
+ listener.UwuListener
+listener/Yare.java
+ listener.Yare
+userCommands/Invite.java
+ userCommands.Invite
+model/InitDatabase.java
+ model.InitDatabase
+userMentions/Stare.java
+ userMentions.Stare
+listener/MicrowaveResponse.java
+ listener.MicrowaveResponse
+gaizaMain.java
+ gaizaMain
+userCommands/Define.java
+ userCommands.Define
+listener/BoredResponse.java
+ listener.BoredResponse
+userMentions/Kiss.java
+ userMentions.Kiss
+userCommands/Disconnect.java
+ userCommands.Disconnect
+userCommands/Github.java
+ userCommands.Github
+userCommands/Movie.java
+ userCommands.Movie
+userMentions/Pat.java
+ userMentions.Pat
+userMentions/Meow.java
+ userMentions.Meow
+userCommands/Fines.java
+ userCommands.Fines
