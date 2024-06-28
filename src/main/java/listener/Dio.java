@@ -1,4 +1,4 @@
-package fixThese;
+package listener;
 
 import command.Command;
 import management.BotInfo;
@@ -8,21 +8,25 @@ import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
+import org.javacord.api.event.message.MessageCreateEvent;
+import org.javacord.api.listener.message.MessageCreateListener;
 
 import java.awt.*;
 import java.util.concurrent.TimeUnit;
 
-public class Yare {
+public class Dio implements MessageCreateListener {
 
-
-    private void listenForYare(TextChannel channel, Message message, MessageAuthor author) {
-        if (!author.getIdAsString().equals("824853199998418985")) {
+    @Override
+    public void onMessageCreate(MessageCreateEvent event) {
+        if (!StringUtils.equalsIgnoreCase(event.getMessageAuthor().getIdAsString(), BotInfo.getOwnerId()))
             return;
-        } //Puppos tag
 
-        if (StringUtils.equalsIgnoreCase(message.getContent(), "yare yare daze")) {
+        Message message = event.getMessage();
+        TextChannel channel = event.getChannel();
+
+        if (message.getContent().equalsIgnoreCase("KONO DIO DA")) {
             channel.sendMessage(new EmbedBuilder()
-                    .setImage("https://b.catgirlsare.sexy/Fi5kF_gN8x_y.gif")
+                    .setImage("https://b.catgirlsare.sexy/b3P755aD.gif")
                     .setColor(Color.YELLOW)
                     .setTimestampToNow()).thenAccept(msg -> {
                 msg.addReaction("\u274C");

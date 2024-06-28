@@ -27,7 +27,7 @@ public class BotInfo {
 
 	@SneakyThrows
 	public BotInfo(DiscordApi api) {
-		ownerId = String.valueOf(api.getOwnerId());
+		ownerId = api.getOwnerId().isPresent() ? String.valueOf(api.getOwnerId().get()) : null;
 		botId = api.getYourself().getIdAsString();
 		botName = api.getYourself().getName();
 		botImageStr = api.getYourself().getAvatar().getUrl().toString();
