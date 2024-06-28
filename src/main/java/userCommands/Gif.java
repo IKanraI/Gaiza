@@ -8,67 +8,61 @@ import management.Tenor;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 
+import org.javacord.api.entity.user.User;
+import org.javacord.api.event.interaction.SlashCommandCreateEvent;
+import org.javacord.api.interaction.Interaction;
+import org.javacord.api.interaction.SlashCommandInteraction;
+import org.javacord.api.listener.interaction.SlashCommandCreateListener;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import management.BotInfo;
+import util.GaizaUtil;
 
-public class Gif extends Command
-{
+public class Gif implements SlashCommandCreateListener {
 	@Getter
 	public static String help = "Searches for a specified gif. Returns a random results from the search. Usage [prefix]gif [query]";
+	private final String command = "gif";
+	private static final int resultLimit = 13;
 
-	public Gif(DiscordApi api) {
-		super(api);
-		api.addMessageCreateListener(event ->
-				userGifSearch(super.getChannel(), super.getMessageAuthor(), super.getArgs()));
-	}
+	@Override
+	public void onSlashCommandCreate(SlashCommandCreateEvent event) {
+		SlashCommandInteraction interaction = event.getSlashCommandInteraction();
 
-	private void userGifSearch(TextChannel channel, MessageAuthor author, List<String> args) {
-		if (!onCommand()) {
+		if (!StringUtils.equalsIgnoreCase(interaction.getCommandName(), command))
 			return;
-		}
-		if (args.size() == 0) {
-			channel.sendMessage("Please enter a search term");
-			return;
-		}
-		StringBuilder term = new StringBuilder();
-		for (String s : args) {
-			term.append(s + " ");
-		}
 
-		channel.sendMessage(buildEmbed(searchGif(term.toString()), author)).exceptionally(e -> {
-			channel.sendMessage("Gif could not be returned");
-			return null;
-		});
+		String term = GaizaUtil.getPassedArgument(interaction.getArguments());
 
+		interaction.createImmediateResponder()
+				.addEmbed(userGifSearch(term, interaction.getUser()))
+				.respond()
+				.exceptionally(e -> {
+					interaction.createImmediateResponder()
+							.setContent("Could not find the search term")
+							.respond();
+					return null;
+				});
 	}
 
-	public EmbedBuilder buildEmbed(String url, MessageAuthor author) {
-		EmbedBuilder message = new EmbedBuilder()
-				.setTitle("A gif for your viewing")
-				.setAuthor(author.getName(), author.getAvatar().getUrl().toString(), author.getAvatar())
-				.setColor(Color.magenta)
-				.setImage(url)
-				.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
-				.setTimestampToNow();
+	private EmbedBuilder userGifSearch(String searchTerm, User author) {
+		String term = searchTerm.replaceAll(" ", "+");
 
-		return message;
+		return buildEmbed(searchGif(term), author);
 	}
 
-	@SneakyThrows
 	public static String searchGif(String term) {
-		JSONObject searchResult = Tenor.getSearchResults(term, 13);
+		JSONObject searchResult = Tenor.getSearchResults(term, resultLimit);
 		JSONArray results;
 		JSONObject selectedGif;
-		System.err.println(searchResult);
-		if (ObjectUtils.isNotEmpty(searchResult)) {
 
+		if (ObjectUtils.isNotEmpty(searchResult)) {
 			results = searchResult.getJSONArray("results");
 			selectedGif = (JSONObject) results.get((int) Math.floor(Math.random() * results.length()));
 		} else {
@@ -77,7 +71,16 @@ public class Gif extends Command
 		}
 
 		JSONObject selectMediaType = (JSONObject) selectedGif.getJSONArray("media").getJSONObject(0).get("gif");
-
 		return String.valueOf(selectMediaType.get("url"));
+	}
+
+	public EmbedBuilder buildEmbed(String url, User author) {
+		return new EmbedBuilder()
+				.setTitle("A gif for your viewing")
+				.setAuthor(author.getName(), author.getAvatar().getUrl().toString(), author.getAvatar())
+				.setColor(Color.magenta)
+				.setImage(url)
+				.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
+				.setTimestampToNow();
 	}
 }

@@ -4,23 +4,22 @@ import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.javacord.api.DiscordApi;
 
+import org.javacord.api.event.interaction.SlashCommandCreateEvent;
 import org.javacord.api.interaction.Interaction;
+import org.javacord.api.listener.interaction.SlashCommandCreateListener;
 
-public class Ping {
+public class Ping implements SlashCommandCreateListener {
 	@Getter
 	public static String help = "Typical test command. Returns pong normally.";
 
-	public Ping(DiscordApi api) {
-		//super(api);
-		api.addSlashCommandCreateListener(e ->
-			pingCommand(e.getSlashCommandInteraction().getFullCommandName(), e.getSlashCommandInteraction().getUser().getIdAsString(), e.getInteraction()));
-	}
-
-	private void pingCommand(String command, String messageAuthorId, Interaction event) {
-		if (!StringUtils.equalsIgnoreCase(command, "ping"))
+	@Override
+	public void onSlashCommandCreate(SlashCommandCreateEvent event) {
+		if (!StringUtils.equalsIgnoreCase(event.getSlashCommandInteraction().getCommandName(), "ping"))
 			return;
 
-		event.createImmediateResponder()
+		String messageAuthorId = event.getSlashCommandInteraction().getUser().getIdAsString();
+
+		event.getSlashCommandInteraction().createImmediateResponder()
 				.setContent("<@" + messageAuthorId + "> rules! ... well pong i guess")
 				.respond();
 	}

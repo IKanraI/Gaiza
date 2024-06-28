@@ -11,23 +11,17 @@ import org.javacord.api.entity.server.Server;
 
 import java.util.List;
 
-public class Uwu extends Command {
+public class Uwu {
     @Getter public static String help = "This module will toggle the uwu module from being active. Using [enable|disable|status] after the initial [prefix]uwu";
 
-    public Uwu(DiscordApi api) {
-        super(api);
-        api.addMessageCreateListener(event ->
-                uwuManager(super.getServer(), super.getMessage(), super.getChannel(), super.getArgs()));
-    }
-
     private void uwuManager(Server server, Message message, TextChannel channel, List<String> args) {
-        if (!onAdminCommand()) {
-            return;
-        }
-        if (args.size() == 0) {
-            channel.sendMessage("Please include another argument with this. " + super.getKey() + " enable|disable|status");
-            return;
-        }
+//        if (!onAdminCommand()) {
+//            return;
+//        }
+//        if (args.size() == 0) {
+//            channel.sendMessage("Please include another argument with this. " + super.getKey() + " enable|disable|status");
+//            return;
+//        }
 
         Servers instance = InitDatabase.getData().get(server.getIdAsString());
         switch (args.get(0)) {

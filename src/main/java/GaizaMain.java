@@ -3,57 +3,198 @@
  */
 
 import lombok.SneakyThrows;
+import management.BotInfo;
+import management.Token;
+import model.GlobalUserInformation;
+import model.InitDatabase;
+import model.SeriesTrackerInformation;
+import org.apache.commons.lang3.StringUtils;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
-
-import model.*;
-import management.*;
 import org.javacord.api.entity.intent.Intent;
+import org.javacord.api.interaction.SlashCommand;
+import org.javacord.api.interaction.SlashCommandOption;
+import org.javacord.api.interaction.SlashCommandOptionBuilder;
+import org.javacord.api.interaction.SlashCommandOptionType;
+import org.javacord.api.listener.interaction.SlashCommandCreateListener;
+import org.javacord.api.listener.message.MessageCreateListener;
 
-import java.io.*;
+import java.io.File;
 import java.util.*;
 
 public class GaizaMain {
 
-	public static void main(String[] args) {
-		DiscordApi api = new DiscordApiBuilder().setToken(new Token().getToken()).addIntents(Intent.MESSAGE_CONTENT).login().join();
-		commandInit(api);
-	}
-	
-	@SuppressWarnings("unused")
-	@SneakyThrows
-	static void commandInit(DiscordApi api) {
-		BotInfo bInfoInit = new BotInfo(api);
-		InitDatabase dbInit = new InitDatabase(api);
-		GlobalUserInformation initUsers = new GlobalUserInformation(api);
-		SeriesTrackerInformation seriesTracker = new SeriesTrackerInformation();
-		api.updateActivity(BotInfo.getBotActivity());
+    public static void main(String[] args) {
+        DiscordApi api = new DiscordApiBuilder().setToken(new Token().getToken()).addIntents(Intent.MESSAGE_CONTENT).login().join();
+        commandInit(api);
+    }
 
-		System.out.println("\n\nManagement files loaded!");
-		System.out.println("--------------------------------\n");
+    @SuppressWarnings("unused")
+    @SneakyThrows
+    static void commandInit(DiscordApi api) {
+        BotInfo bInfoInit = new BotInfo(api);
+        InitDatabase dbInit = new InitDatabase(api);
+        GlobalUserInformation initUsers = new GlobalUserInformation(api);
+        SeriesTrackerInformation seriesTracker = new SeriesTrackerInformation();
+        api.updateActivity(BotInfo.getBotActivity());
 
-		Map<String, File> commands = new HashMap();
+        createSlashCommands(api);
+
+        System.out.println("\n\nManagement files loaded!");
+        System.out.println("--------------------------------\n");
+
+        Map<String, File> commands = new HashMap<>();
 //		commands.put("UserCommands", new File("/home/kanra/projects/Gaiza/src/main/java/UserCommands"));
 //		commands.put("AdminCommands", new File("/home/kanra/projects/Gaiza/src/main/java/AdminCommands"));
 //		commands.put("Listener", new File("/home/kanra/projects/Gaiza/src/main/java/Listener"));
-//		commands.put("UserMentions", new File("/home/kanra/projects/Gaiza/src/main/java/UserMentions"));
 
-		commands.put("userCommands", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\UserCommands"));
-		commands.put("adminCommands", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\AdminCommands"));
-		commands.put("listener", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\Listener"));
-		commands.put("userMentions", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\UserMentions"));
+        commands.put("userCommands", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\UserCommands"));
+//        commands.put("adminCommands", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\AdminCommands"));
+        commands.put("listener", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\Listener"));
+//        commands.put("userMentions", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\UserMentions"));
 
 
-		for (Map.Entry<String, File> command : commands.entrySet()) {
-			for (final File commandName : command.getValue().listFiles()) {
-				if (!commandName.isDirectory()) {
-					Class.forName(command.getKey() + "." + commandName.getName().replace(".java", ""))
-							.getDeclaredConstructor(DiscordApi.class).newInstance(api);
-					System.out.println(commandName.getName() + " loaded!");
-				}
-			}
-			System.out.println("\n" + command.getKey() + " files loaded!");
-			System.out.println("--------------------------------\n");
-		}
-	}
+        for (Map.Entry<String, File> command : commands.entrySet()) {
+            for (final File commandName : Objects.requireNonNull(command.getValue().listFiles())) {
+                String formattedCommand = command.getKey() + "." + commandName.getName().replace(".java", "");
+                if (!commandName.isDirectory() && StringUtils.equalsAnyIgnoreCase(command.getKey(), "userCommands", "adminCommands")) {
+                    api.addSlashCommandCreateListener((SlashCommandCreateListener) Class.forName(formattedCommand).getDeclaredConstructor().newInstance());
+                    System.out.println(commandName.getName() + " loaded!");
+                } else if (!commandName.isDirectory() && StringUtils.equalsIgnoreCase(command.getKey(), "listener")) {
+                    api.addMessageCreateListener((MessageCreateListener) Class.forName(formattedCommand).getDeclaredConstructor().newInstance());
+                    System.out.println(commandName.getName() + " loaded!");
+                }
+            }
+            System.out.println("\n" + command.getKey() + " files loaded!");
+            System.out.println("--------------------------------\n");
+        }
+    }
+
+    private static void createSlashCommands(DiscordApi api) {
+//        SlashCommand avatar = SlashCommand.with("avatar", "Return image of mentioned users avatar",
+//                        Collections.singletonList(SlashCommandOption.create(SlashCommandOptionType.USER, "user", "Image of user avatar you would like to see", false))
+//
+//                )
+//                .createGlobal(api)
+//                .join();
+//
+        Set<SlashCommand> commands = api.getGlobalSlashCommands().join();
+//
+//        SlashCommand define = SlashCommand.with("define", "Return urban dictionary definition",
+//                        Collections.singletonList(SlashCommandOption.create(SlashCommandOptionType.STRING, "term", "Term you would like to search in urban dictionary", true))
+//
+//                )
+//                .createGlobal(api)
+//                .join();
+//
+//        SlashCommand gif = SlashCommand.with("gif", "Return a random gif from tenor",
+//                        Collections.singletonList(SlashCommandOption.create(SlashCommandOptionType.STRING, "searchTerm", "Type of gif you would like to search", true))
+//
+//                )
+//                .createGlobal(api)
+//                .join();
+//
+//        SlashCommand github = SlashCommand.with("github", "Return the github link to view all my pretty parts")
+//                .createGlobal(api)
+//                .join();
+//
+//        SlashCommand invite = SlashCommand.with("invite", "Returns an invite for the bot to join your server")
+//                .createGlobal(api)
+//                .join();
+//
+//        SlashCommand report = SlashCommand.with("report", "Send a message to the support channel about a bug or issue",
+//                        Collections.singletonList(SlashCommandOption.create(SlashCommandOptionType.STRING, "message", "Write a descriptive message about the issue or a nice message :)", true))
+//
+//                )
+//                .createGlobal(api)
+//                .join();
+
+//        SlashCommand roll =
+//                SlashCommand.with("roll", "Roll a random number between 1 and the number you choose",
+//                        Arrays.asList(
+//                                SlashCommandOption.create(SlashCommandOptionType.STRING, "MaxNumber", "Pick a number greater than 1)", true)))
+//                        .createGlobal(api)
+//                        .join();
+
+
+
+//        SlashCommand flip = SlashCommand.with("flip", "Flip a coin")
+//                .createGlobal(api)
+//                .join();
+//
+//        SlashCommand support = SlashCommand.with("support", "Sends an invite to the support server")
+//                .createGlobal(api)
+//                .join();
+//
+//        SlashCommand hug = SlashCommand.with("hug", "Hug a mentioned user",
+//                        Collections.singletonList(SlashCommandOption.create(SlashCommandOptionType.USER, "user", "User you would like to hug", false))
+//
+//                )
+//                .createGlobal(api)
+//                .join();
+//
+//        SlashCommand kiss = SlashCommand.with("kiss", "Kiss a mentioned user",
+//                        Collections.singletonList(SlashCommandOption.create(SlashCommandOptionType.USER, "user", "User you would like to kiss", false))
+//
+//                )
+//                .createGlobal(api)
+//                .join();
+//
+//        SlashCommand laugh = SlashCommand.with("laugh", "Laugh at a mentioned user",
+//                        Collections.singletonList(SlashCommandOption.create(SlashCommandOptionType.USER, "user", "User you would like to laugh at", false))
+//
+//                )
+//                .createGlobal(api)
+//                .join();
+//
+//        SlashCommand meow = SlashCommand.with("meow", "Meow at a mentioned user",
+//                        Collections.singletonList(SlashCommandOption.create(SlashCommandOptionType.USER, "user", "User you would like to meow at", false))
+//
+//                )
+//                .createGlobal(api)
+//                .join();
+//
+//        SlashCommand pat = SlashCommand.with("pat", "Pat a mentioned user",
+//                        Collections.singletonList(SlashCommandOption.create(SlashCommandOptionType.USER, "user", "User you would like to pat", false))
+//
+//                )
+//                .createGlobal(api)
+//                .join();
+//
+//        SlashCommand poke = SlashCommand.with("poke", "Poke a mentioned user",
+//                        Collections.singletonList(SlashCommandOption.create(SlashCommandOptionType.USER, "user", "User you would like to poke", false))
+//
+//                )
+//                .createGlobal(api)
+//                .join();
+//
+//        SlashCommand slap = SlashCommand.with("slap", "Slap a mentioned user",
+//                        Collections.singletonList(SlashCommandOption.create(SlashCommandOptionType.USER, "user", "User you would like to slap", false))
+//
+//                )
+//                .createGlobal(api)
+//                .join();
+//
+//        SlashCommand smug = SlashCommand.with("smug", "Look smugly at a mentioned user",
+//                        Collections.singletonList(SlashCommandOption.create(SlashCommandOptionType.USER, "user", "User you would like to look at smugly", false))
+//
+//                )
+//                .createGlobal(api)
+//                .join();
+//
+//        SlashCommand cuddle = SlashCommand.with("cuddle", "Cuddle a mentioned user",
+//                        Collections.singletonList(SlashCommandOption.create(SlashCommandOptionType.USER, "user", "User you would like to cuddle", false))
+//
+//                )
+//                .createGlobal(api)
+//                .join();
+//
+//        SlashCommand stare = SlashCommand.with("stare", "Stare at a mentioned user",
+//                        Collections.singletonList(SlashCommandOption.create(SlashCommandOptionType.USER, "user", "User you would like to stare at", false))
+//
+//                )
+//                .createGlobal(api)
+//                .join();
+
+    }
 }

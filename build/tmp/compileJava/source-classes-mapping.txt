@@ -1,109 +1,92 @@
 management/Tenor.java
  management.Tenor
+adminCommands/Prefix.java
+ adminCommands.Prefix
+util/GaizaUtil.java
+ util.GaizaUtil
 model/common/Servers.java
  model.common.Servers
-management/UserFineObject.java
- management.UserFineObject
-management/BotInfo.java
- management.BotInfo
+userCommands/Avatar.java
+ userCommands.Avatar
+fixThese/Sound.java
+ fixThese.Sound
+ fixThese.Sound$1
 model/common/Media.java
  model.common.Media
-listener/MarcoPolo.java
- listener.MarcoPolo
-listener/MentionKanra.java
- listener.MentionKanra
+adminCommands/AdminHelp.java
+ adminCommands.AdminHelp
+management/BotInfo.java
+ management.BotInfo
+management/Token.java
+ management.Token
+userCommands/Report.java
+ userCommands.Report
+listener/CountingEnforcement.java
+ listener.CountingEnforcement
+fixThese/Movie.java
+ fixThese.Movie
 model/SeriesTrackerInformation.java
  model.SeriesTrackerInformation
  model.SeriesTrackerInformation$1
-management/AudioPlayerSource.java
- management.AudioPlayerSource
-management/Token.java
- management.Token
-userCommands/Ping.java
- userCommands.Ping
-model/common/Series.java
- model.common.Series
-adminCommands/Prefix.java
- adminCommands.Prefix
-userCommands/Avatar.java
- userCommands.Avatar
-userCommands/Series.java
- userCommands.Series
-userCommands/Birthday.java
- userCommands.Birthday
-listener/CountingEnforcement.java
- listener.CountingEnforcement
- listener.CountingEnforcement$BadInputException
-adminCommands/MusicIntro.java
- adminCommands.MusicIntro
-userMentions/Laugh.java
- userMentions.Laugh
-userMentions/Smug.java
- userMentions.Smug
-adminCommands/AdminHelp.java
- adminCommands.AdminHelp
-userMentions/Snuggle.java
- userMentions.Snuggle
-userCommands/Report.java
- userCommands.Report
-listener/Dio.java
- listener.Dio
-userCommands/Sound.java
- userCommands.Sound
- userCommands.Sound$1
-userCommands/Ranks.java
- userCommands.Ranks
 command/Command.java
  command.Command
-userCommands/Help.java
- userCommands.Help
+userCommands/Github.java
+ userCommands.Github
 adminCommands/Welcome.java
  adminCommands.Welcome
+management/AudioPlayerSource.java
+ management.AudioPlayerSource
+userCommands/UserMentions.java
+ userCommands.UserMentions
+userCommands/Ping.java
+ userCommands.Ping
+model/InitDatabase.java
+ model.InitDatabase
+model/common/Series.java
+ model.common.Series
 model/GlobalUserInformation.java
  model.GlobalUserInformation
 userCommands/Roll.java
  userCommands.Roll
+fixThese/Help.java
+ fixThese.Help
 adminCommands/Uwu.java
  adminCommands.Uwu
-userMentions/Poke.java
- userMentions.Poke
-userMentions/Slap.java
- userMentions.Slap
-userMentions/Hug.java
- userMentions.Hug
+management/UserFineObject.java
+ management.UserFineObject
+fixThese/Birthday.java
+ fixThese.Birthday
 userCommands/Gif.java
  userCommands.Gif
 userCommands/Support.java
  userCommands.Support
-listener/UwuListener.java
- listener.UwuListener
-listener/Yare.java
- listener.Yare
-userCommands/Invite.java
- userCommands.Invite
-model/InitDatabase.java
- model.InitDatabase
-userMentions/Stare.java
- userMentions.Stare
-listener/MicrowaveResponse.java
- listener.MicrowaveResponse
-gaizaMain.java
- gaizaMain
+fixThese/Series.java
+ fixThese.Series
 userCommands/Define.java
  userCommands.Define
-listener/BoredResponse.java
- listener.BoredResponse
-userMentions/Kiss.java
- userMentions.Kiss
-userCommands/Disconnect.java
- userCommands.Disconnect
-userCommands/Github.java
- userCommands.Github
-userCommands/Movie.java
- userCommands.Movie
-userMentions/Pat.java
- userMentions.Pat
-userMentions/Meow.java
- userMentions.Meow
-userCommands/Fines.java
- userCommands.Fines
+fixThese/Disconnect.java
+ fixThese.Disconnect
+userCommands/Invite.java
+ userCommands.Invite
+exception/BadInputException.java
+ exception.BadInputException
+fixThese/BoredResponse.java
+ fixThese.BoredResponse
+fixThese/Fines.java
+ fixThese.Fines
+fixThese/MicrowaveResponse.java
+ fixThese.MicrowaveResponse
+fixThese/Yare.java
+ fixThese.Yare
+fixThese/MentionKanra.java
+ fixThese.MentionKanra
+fixThese/Ranks.java
+ fixThese.Ranks
+fixThese/MarcoPolo.java
+ fixThese.MarcoPolo
+fixThese/UwuListener.java
+ fixThese.UwuListener
+GaizaMain.java
+ GaizaMain
+fixThese/Dio.java
+ fixThese.Dio

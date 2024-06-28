@@ -1,25 +1,33 @@
 package userCommands;
 
-import command.Command;
-import management.BotInfo;
 import lombok.Getter;
-import org.javacord.api.DiscordApi;
-import org.javacord.api.entity.channel.TextChannel;
+import management.BotInfo;
+import org.apache.commons.lang3.StringUtils;
+import org.javacord.api.event.interaction.SlashCommandCreateEvent;
+import org.javacord.api.interaction.SlashCommandInteraction;
+import org.javacord.api.listener.interaction.SlashCommandCreateListener;
 
-public class Github extends Command {
+public class Github implements SlashCommandCreateListener {
     @Getter
     public static String help = "Returns the repo of the bot";
+    public final String command = "github";
 
-    public Github(DiscordApi api) {
-        super(api);
-        api.addMessageCreateListener(event ->
-            inviteBot(super.getChannel()));
-    }
+    @Override
+    public void onSlashCommandCreate(SlashCommandCreateEvent event) {
+        SlashCommandInteraction interaction = event.getSlashCommandInteraction();
 
-    private void inviteBot(TextChannel channel) {
-        if (!onCommand()) {
+        if (!StringUtils.equalsIgnoreCase(interaction.getCommandName(), command))
             return;
-        }
-        channel.sendMessage("Here is the repo! : " + BotInfo.getBotRepo());
+
+        interaction.createImmediateResponder()
+                .setContent("Here is the repo : " + BotInfo.getBotRepo())
+                .respond()
+                .exceptionally(e -> {
+                    interaction.createImmediateResponder()
+                            .setContent("Something broke")
+                            .respond();
+
+                    return null;
+                });
     }
 }

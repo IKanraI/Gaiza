@@ -14,21 +14,21 @@ import org.javacord.api.entity.message.embed.EmbedBuilder;
 import management.BotInfo;
 import org.javacord.api.entity.user.User;
 
-public class AdminHelp extends Command {
+public class AdminHelp {
 	public static String help = "Admin panel help menu. Usage: [prefix]AdminHelp";
 	private static File folder;
-	public AdminHelp(DiscordApi api) {
-		super(api);
-		folder = new File("/home/kanra/projects/Gaiza/src/main/java/AdminCommands");
-		api.addMessageCreateListener(event ->
-				displayHelp(super.getChannel(), super.getMessageAuthor(), super.getArgs()));
-
-	}
+//	public AdminHelp(DiscordApi api) {
+//		super(api);
+//		folder = new File("/home/kanra/projects/Gaiza/src/main/java/AdminCommands");
+//		api.addMessageCreateListener(event ->
+//				displayHelp(super.getChannel(), super.getMessageAuthor(), super.getArgs()));
+//
+//	}
 	@SneakyThrows
 	private void displayHelp(TextChannel channel, MessageAuthor author, List<String> args) {
-		if (!onAdminCommand()) {
-			return;
-		}
+//		if (!onAdminCommand()) {
+//			return;
+//		}
 		if (args.size() == 0) {
 			channel.sendMessage(buildEmbed(author.asUser().get()));
 		} else if (args.size() == 1) {
@@ -57,8 +57,8 @@ public class AdminHelp extends Command {
 				continue;
 			}
 
-			embed.addInlineField(getKey().replace("adminhelp", "")
-					+ currCommand, Class.forName("AdminCommands." + currCommand).getDeclaredField("help").get(0).toString());
+//			embed.addInlineField(getKey().replace("adminhelp", "")
+//					+ currCommand, Class.forName("AdminCommands." + currCommand).getDeclaredField("help").get(0).toString());
 
 		}
 		return embed;

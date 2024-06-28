@@ -12,19 +12,15 @@ import org.javacord.api.entity.server.Server;
 
 import java.util.List;
 
-public class Welcome extends Command {
+public class Welcome {
 	@Getter public static String help = "Welcome module. Make sure to set the channel and message before enabling the module. Use [prefix] welcome message|channel|enable|disable to modify the module If you want to mention a user please use <<mention>>";
 	
-	public Welcome(DiscordApi api) {
-		super(api);
-		api.addMessageCreateListener(event ->
-				welcomeManager(super.getServer(), super.getMessage(), super.getChannel(), super.getArgs()));
-	}
+
 
 	private void welcomeManager(Server server, Message message, TextChannel channel, List<String> args) {
-		if (!onAdminCommand()) {
-			return;
-		}
+//		if (!onAdminCommand()) {
+//			return;
+//		}
 		if (args.size() < 1) {
 			channel.sendMessage("Please send a message with an argument for a value to change: [enable|disable|message|channel|status]");
 			return;

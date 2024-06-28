@@ -10,23 +10,17 @@ import org.javacord.api.entity.server.Server;
 
 import java.util.List;
 
-public class Prefix extends Command {
+public class Prefix {
 	@Getter public static String help = "Changes the prefix of the server";
 	
-	public Prefix(DiscordApi api) {
-		super(api);
-		api.addMessageCreateListener(event ->
-				changePrefix(super.getServer(), super.getChannel(), super.getArgs()));
-	}
-	
 	public void changePrefix(Server server, TextChannel channel, List<String> args) {
-		if (!onAdminCommand()) {
-			return;
-		}
-		if (args.size() == 0) {
-			channel.sendMessage("Please enter a prefix to change to: " + getKey() + "[prefix]");
-			return;
-		}
+//		if (!onAdminCommand()) {
+//			return;
+//		}
+//		if (args.size() == 0) {
+//			channel.sendMessage("Please enter a prefix to change to: " + getKey() + "[prefix]");
+//			return;
+//		}
 
 		StringBuilder prefix = new StringBuilder();
 		for (String s : args) {

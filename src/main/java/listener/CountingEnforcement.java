@@ -1,36 +1,35 @@
 package listener;
 
-import command.Command;
-import management.BotInfo;
+import exception.BadInputException;
 import lombok.SneakyThrows;
-import org.javacord.api.DiscordApi;
+import management.BotInfo;
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.entity.message.MessageSet;
 import org.javacord.api.entity.user.User;
+import org.javacord.api.event.message.MessageCreateEvent;
+import org.javacord.api.listener.message.MessageCreateListener;
 
-import java.lang.Exception;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CountingEnforcement extends Command {
+public class CountingEnforcement implements MessageCreateListener {
 
-    public CountingEnforcement (DiscordApi api) {
-        super(api);
-
-        api.addMessageCreateListener(event ->
-                countCheck(super.getChannel(), super.getMessage(), super.getMessageAuthor()));
-    }
+    @Override
     @SneakyThrows
-    private void countCheck(TextChannel channel, Message message, MessageAuthor author) {
+    public void onMessageCreate(MessageCreateEvent event) {
+        TextChannel channel = event.getChannel();
+        Message message = event.getMessage();
+        MessageAuthor author = event.getMessageAuthor();
+
         // ignore messages not in this one hardcoded channel or from the bot
         if (!channel.getIdAsString().equals("519563130603307018") ||
-            author.getIdAsString().equals(BotInfo.getBotId())) {
+                author.getIdAsString().equals(BotInfo.getBotId())) {
             return;
         }
         String msg = message.getContent().replaceAll("\\*", "");
-        Integer msgNum;
+        int msgNum;
         try {
             msgNum = parseIntFromMessage(msg);
         } catch (Exception e) {
@@ -45,7 +44,7 @@ public class CountingEnforcement extends Command {
         Integer previousNum;
         User previousUser;
         MessageSet lastTwoMessages = channel.getMessages(2).get();
-        Boolean previousMessageAuthorIsTheBot = lastTwoMessages.getOldestMessage().get().getAuthor().getIdAsString().equals(BotInfo.getBotId());
+        boolean previousMessageAuthorIsTheBot = lastTwoMessages.getOldestMessage().get().getAuthor().getIdAsString().equals(BotInfo.getBotId());
         Message previousHumanMessage;
         if (previousMessageAuthorIsTheBot) {
             // assumes the econd to last message is not written by the bot implicitly
@@ -54,14 +53,14 @@ public class CountingEnforcement extends Command {
             previousHumanMessage = channel.getMessages(3).get().getOldestMessage().get();
         } else {
             previousHumanMessage = lastTwoMessages.getOldestMessage().get();
-        }  
+        }
         previousUser = previousHumanMessage.getAuthor().asUser().get();
         if (author.getIdAsString().equals(previousUser.getIdAsString())) {
             channel.sendMessage("<@" + author.getIdAsString() + ">" + ", double counting isn't allowed. Please wait until someone else has counted");
             Thread.sleep(1250);
             message.delete();
         }
-        
+
         try {
             previousNum = parseIntFromMessage(previousHumanMessage.getContent().replaceAll("\\*", ""));
             if (!previousNum.equals(msgNum - 1)) {
@@ -82,6 +81,7 @@ public class CountingEnforcement extends Command {
             }
         }
     }
+
     private Integer parseIntFromMessage(String message) throws BadInputException {
         Integer msgNum;
         // idk if this will cause issues when I throw a null error into the Throwable
@@ -99,11 +99,6 @@ public class CountingEnforcement extends Command {
         } else {
             throw new BadInputException("User input did not begin with an int", hopefullyNot);
         }
-            
-    }
-    private class BadInputException extends Exception {
-        public BadInputException(String errorMessage, Throwable err) {
-            super(errorMessage, err);
-        }
+
     }
 }
