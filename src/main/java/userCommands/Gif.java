@@ -1,28 +1,21 @@
 package userCommands;
 
 import java.awt.Color;
-import java.util.List;
 
-import command.Command;
-import management.Tenor;
+import client.Tenor;
 import lombok.Getter;
-import lombok.SneakyThrows;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.javacord.api.DiscordApi;
-import org.javacord.api.entity.channel.TextChannel;
-import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 
 import org.javacord.api.entity.user.User;
 import org.javacord.api.event.interaction.SlashCommandCreateEvent;
-import org.javacord.api.interaction.Interaction;
 import org.javacord.api.interaction.SlashCommandInteraction;
 import org.javacord.api.listener.interaction.SlashCommandCreateListener;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import management.BotInfo;
+import util.BotInfo;
 import util.GaizaUtil;
 
 public class Gif implements SlashCommandCreateListener {
@@ -80,7 +73,7 @@ public class Gif implements SlashCommandCreateListener {
 				.setAuthor(author.getName(), author.getAvatar().getUrl().toString(), author.getAvatar())
 				.setColor(Color.magenta)
 				.setImage(url)
-				.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
+				.setFooter(BotInfo.getInstance().getBotName(), BotInfo.getInstance().getBotImage())
 				.setTimestampToNow();
 	}
 }

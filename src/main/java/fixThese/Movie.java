@@ -1,8 +1,7 @@
 package fixThese;
 
-import command.Command;
 import model.common.Media;
-import management.BotInfo;
+import util.BotInfo;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.javacord.api.DiscordApi;
@@ -16,7 +15,6 @@ import org.javacord.api.interaction.MessageComponentInteraction;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 public class Movie {
 
@@ -24,7 +22,7 @@ public class Movie {
 
 
     public void movieListManagement(DiscordApi api, TextChannel channel, Server server, Message message, MessageAuthor author, List<String> args) {
-        if (StringUtils.equalsAny(BotInfo.getOwnerId(), BotInfo.getZaraiUserId()))
+        if (StringUtils.equalsAny(BotInfo.getInstance().getOwnerId(), BotInfo.getInstance().getZaraiUserId()))
             return;
         Media media = new Media();
 

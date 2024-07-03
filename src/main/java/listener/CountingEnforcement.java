@@ -2,7 +2,7 @@ package listener;
 
 import exception.BadInputException;
 import lombok.SneakyThrows;
-import management.BotInfo;
+import util.BotInfo;
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.message.MessageAuthor;
@@ -25,7 +25,7 @@ public class CountingEnforcement implements MessageCreateListener {
 
         // ignore messages not in this one hardcoded channel or from the bot
         if (!channel.getIdAsString().equals("519563130603307018") ||
-                author.getIdAsString().equals(BotInfo.getBotId())) {
+                author.getIdAsString().equals(BotInfo.getInstance().getBotId())) {
             return;
         }
         String msg = message.getContent().replaceAll("\\*", "");
@@ -44,7 +44,7 @@ public class CountingEnforcement implements MessageCreateListener {
         Integer previousNum;
         User previousUser;
         MessageSet lastTwoMessages = channel.getMessages(2).get();
-        boolean previousMessageAuthorIsTheBot = lastTwoMessages.getOldestMessage().get().getAuthor().getIdAsString().equals(BotInfo.getBotId());
+        boolean previousMessageAuthorIsTheBot = lastTwoMessages.getOldestMessage().get().getAuthor().getIdAsString().equals(BotInfo.getInstance().getBotId());
         Message previousHumanMessage;
         if (previousMessageAuthorIsTheBot) {
             // assumes the econd to last message is not written by the bot implicitly
@@ -75,7 +75,7 @@ public class CountingEnforcement implements MessageCreateListener {
         }
 
         for (Message m : channel.getMessages(10).get()) {
-            if (m.getAuthor().getIdAsString().equals(BotInfo.getBotId())) {
+            if (m.getAuthor().getIdAsString().equals(BotInfo.getInstance().getBotId())) {
                 Thread.sleep(1500);
                 m.delete();
             }

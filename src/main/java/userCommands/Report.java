@@ -41,11 +41,14 @@ public class Report implements SlashCommandCreateListener {
     }
 
     private boolean sendToReportChannel(String message, User author, DiscordApi api) {
-        if (api.getServerById("692871508590067823").isPresent()) {
-            Server server = api.getServerById("692871508590067823").get();
+        String serverId = "692871508590067823";
+        String channelId = "704097798102057071";
+        
+        if (api.getServerById(serverId).isPresent()) {
+            Server server = api.getServerById(serverId).get();
 
-            if (server.getChannelById("704097798102057071").isPresent()) {
-                ServerChannel serverChannel = server.getChannelById("704097798102057071").get();
+            if (server.getChannelById(channelId).isPresent()) {
+                ServerChannel serverChannel = server.getChannelById(channelId).get();
 
                 if (serverChannel.asTextChannel().isPresent()) {
                     TextChannel textChannel = serverChannel.asTextChannel().get();

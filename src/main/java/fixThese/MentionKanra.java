@@ -1,6 +1,6 @@
 package fixThese;
 
-import management.BotInfo;
+import util.BotInfo;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.user.User;
 
@@ -15,7 +15,7 @@ public class MentionKanra {
         api.addMessageCreateListener(event -> {
             boolean mentioned = false;
             for (User user : event.getMessage().getMentionedUsers()) {
-                if (user.getIdAsString().equals(BotInfo.getOwnerId())) {
+                if (user.getIdAsString().equals(BotInfo.getInstance().getOwnerId())) {
                     mentioned = true;
                     break;
                 }

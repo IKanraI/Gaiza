@@ -2,8 +2,8 @@ package fixThese;
 
 import model.GlobalUserInformation;
 import model.InitDatabase;
-import management.BotInfo;
-import management.UserFineObject;
+import util.BotInfo;
+import util.UserFineObject;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import org.javacord.api.DiscordApi;
@@ -49,7 +49,7 @@ public class Ranks{
     private EmbedBuilder buildEmbed(List<UserFineObject> users, DiscordApi api) {
         EmbedBuilder embed = new EmbedBuilder()
                 .setTitle("UWU Degeneracy Leaderboards")
-                .setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
+                .setFooter(BotInfo.getInstance().getBotName(), BotInfo.getInstance().getBotImage())
                 .setTimestampToNow()
                 .setColor(Color.MAGENTA);
 

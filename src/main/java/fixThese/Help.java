@@ -1,6 +1,5 @@
 package fixThese;
 
-import command.Command;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
@@ -9,7 +8,7 @@ import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 
-import management.BotInfo;
+import util.BotInfo;
 import org.javacord.api.entity.user.User;
 
 import java.awt.*;
@@ -61,7 +60,7 @@ public class Help {
 		EmbedBuilder embed = new EmbedBuilder()
 				.setAuthor(user.getDiscriminatedName(), user.getAvatar().getUrl().toString(), user.getAvatar())
 				.setColor(Color.MAGENTA)
-				.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
+				.setFooter(BotInfo.getInstance().getBotName(), BotInfo.getInstance().getBotImage())
 				.setTimestampToNow();
 
 		folders.forEach((folder, file) -> {

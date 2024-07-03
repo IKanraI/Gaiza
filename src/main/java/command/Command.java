@@ -1,7 +1,7 @@
 package command;
 
 import model.InitDatabase;
-import management.BotInfo;
+import util.BotInfo;
 import lombok.Getter;
 import lombok.Setter;
 import org.javacord.api.DiscordApi;
@@ -67,7 +67,7 @@ public class Command {
     }
 
     public boolean onAdminCommand() {
-            return (messageAuthor.isServerAdmin() || messageAuthor.getIdAsString().equals(BotInfo.getOwnerId()))
+            return (messageAuthor.isServerAdmin() || messageAuthor.getIdAsString().equals(BotInfo.getInstance().getOwnerId()))
                     && onCommand(this.api, this.message, this.server, (ArrayList) this.args);
     }
 

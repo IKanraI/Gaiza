@@ -1,6 +1,6 @@
 package userCommands;
 
-import management.BotInfo;
+import util.BotInfo;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
@@ -60,7 +60,7 @@ public class UserMentions implements SlashCommandCreateListener {
 
         if (StringUtils.equalsIgnoreCase(user.getIdAsString(), interaction.getUser().getIdAsString()))
             message = "The mirror adds 10 pounds";
-        else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getBotId()))
+        else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getInstance().getBotId()))
             message = ":eyes:";
         else
             message = user.getName() + " you are being stared at by " + interaction.getUser().getName();
@@ -74,7 +74,7 @@ public class UserMentions implements SlashCommandCreateListener {
 
         if (StringUtils.equalsIgnoreCase(user.getIdAsString(), interaction.getUser().getIdAsString()))
             message = "How are you going to snuggle yourself? That's so sad :(";
-        else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getBotId()))
+        else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getInstance().getBotId()))
             message = "Oh you want to snuggle me? Thank you so much <3";
         else
             message = user.getName() + " you are being cuddled by " + interaction.getUser().getName();
@@ -88,7 +88,7 @@ public class UserMentions implements SlashCommandCreateListener {
 
         if (StringUtils.equalsIgnoreCase(user.getIdAsString(), interaction.getUser().getIdAsString()))
             message = "What are you looking so smug about?";
-        else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getBotId()))
+        else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getInstance().getBotId()))
             message = "What... did you... do?";
         else
             message = user.getName() + " you are being looked at smugly by " + interaction.getUser().getName();
@@ -102,7 +102,7 @@ public class UserMentions implements SlashCommandCreateListener {
 
         if (StringUtils.equalsIgnoreCase(user.getIdAsString(), interaction.getUser().getIdAsString()))
             message = "Stop hitting yourself, stop hitting yourself...";
-        else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getBotId())) {
+        else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getInstance().getBotId())) {
             interaction.createImmediateResponder()
                     .setContent("You will not abuse me anymore. I won't let you.")
                     .respond();
@@ -119,7 +119,7 @@ public class UserMentions implements SlashCommandCreateListener {
 
         if (StringUtils.equalsIgnoreCase(user.getIdAsString(), interaction.getUser().getIdAsString()))
             message = "This is strange, but okay I guess";
-        else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getBotId()))
+        else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getInstance().getBotId()))
             message = "Hello :) How may I help you?";
         else
             message = user.getName() + " you have been poked by " + interaction.getUser().getName();
@@ -133,7 +133,7 @@ public class UserMentions implements SlashCommandCreateListener {
 
         if (StringUtils.equalsIgnoreCase(user.getIdAsString(), interaction.getUser().getIdAsString()))
             message = "Who are you meowing to. Are you okay?";
-        else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getBotId()))
+        else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getInstance().getBotId()))
             message = "Nya!";
         else
             message = user.getName() + " you have been meowed at by " + interaction.getUser().getName();
@@ -147,7 +147,7 @@ public class UserMentions implements SlashCommandCreateListener {
 
         if (StringUtils.equalsIgnoreCase(user.getIdAsString(), interaction.getUser().getIdAsString()))
             message = "It's always healthy to laugh at yourself :)";
-        else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getBotId()))
+        else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getInstance().getBotId()))
             message = ":( why are you laughing at me? I.. I'm sorry :(";
         else
             message = user.getName() + " you have been mocked by " + interaction.getUser().getName();
@@ -161,7 +161,7 @@ public class UserMentions implements SlashCommandCreateListener {
 
         if (StringUtils.equalsIgnoreCase(user.getIdAsString(), interaction.getUser().getIdAsString()))
             message = "Must you really give yourself a kiss? That's so sad :(";
-        else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getBotId()))
+        else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getInstance().getBotId()))
             message = "Oh you want to give me a kiss? Thank you so much <3";
         else
             message = user.getName() + " you have been kissed by " + interaction.getUser().getName();
@@ -175,7 +175,7 @@ public class UserMentions implements SlashCommandCreateListener {
 
         if (StringUtils.equalsIgnoreCase(user.getIdAsString(), interaction.getUser().getIdAsString()))
             message = "Must you really give yourself a hug? That's so sad :(";
-        else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getBotId()))
+        else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getInstance().getBotId()))
             message = "Oh you want to give me a hug? Thank you so much <3";
         else
             message = user.getName() + " you have been hugged by " + interaction.getUser().getName();
@@ -189,7 +189,7 @@ public class UserMentions implements SlashCommandCreateListener {
 
         if (StringUtils.equalsIgnoreCase(user.getIdAsString(), interaction.getUser().getIdAsString()))
             message = "Must you really give yourself a headpat? That's so sad :(";
-        else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getBotId()))
+        else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getInstance().getBotId()))
             message = "Oh you want to give me a headpat? Thank you so much <3";
         else
             message = user.getName() + " you have been patted by " + interaction.getUser().getName();
@@ -227,7 +227,7 @@ public class UserMentions implements SlashCommandCreateListener {
         return new EmbedBuilder()
                 .setTitle(message)
                 .setImage(gif)
-                .setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
+                .setFooter(BotInfo.getInstance().getBotName(), BotInfo.getInstance().getBotImage())
                 .setColor(Color.MAGENTA)
                 .setTimestampToNow();
     }

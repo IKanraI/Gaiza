@@ -1,10 +1,6 @@
 package userCommands;
 
-import command.Command;
-import management.BotInfo;
 import org.apache.commons.lang3.StringUtils;
-import org.javacord.api.DiscordApi;
-import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.event.interaction.SlashCommandCreateEvent;
 import org.javacord.api.interaction.SlashCommandInteraction;
 import org.javacord.api.listener.interaction.SlashCommandCreateListener;

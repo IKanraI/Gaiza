@@ -2,14 +2,9 @@ package userCommands;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
-import management.BotInfo;
-import org.apache.commons.collections4.CollectionUtils;
+import util.BotInfo;
 import org.apache.commons.lang3.StringUtils;
-import org.javacord.api.DiscordApi;
-import org.javacord.api.entity.channel.TextChannel;
-import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
-import org.javacord.api.entity.user.User;
 import org.javacord.api.event.interaction.SlashCommandCreateEvent;
 import org.javacord.api.interaction.SlashCommandInteraction;
 import org.javacord.api.listener.interaction.SlashCommandCreateListener;
@@ -39,7 +34,7 @@ public class Define implements SlashCommandCreateListener {
 		term = GaizaUtil.getPassedArgument(interaction.getArguments());
 
 		interaction.createImmediateResponder()
-				.addEmbed(urbanSearch(term, interaction))
+				.addEmbed(urbanSearch(term))
 				.respond()
 				.exceptionally(e -> {
 					interaction.createImmediateResponder()
@@ -51,7 +46,7 @@ public class Define implements SlashCommandCreateListener {
 	}
 
 	@SneakyThrows
-	private EmbedBuilder urbanSearch(String requestedTerm, SlashCommandInteraction interaction) {
+	private EmbedBuilder urbanSearch(String requestedTerm) {
 		String term = requestedTerm.replaceAll(" ", "+");
 
 		Elements css = Jsoup.connect(urbanDictionaryUrl + term)
@@ -79,6 +74,6 @@ public class Define implements SlashCommandCreateListener {
 				.addField("Credit:", "Contributed " + def.get(2))
 				.addField("Link", link)
 				.setTimestampToNow()
-				.setFooter(BotInfo.getBotName(), BotInfo.getBotImage());
+				.setFooter(BotInfo.getInstance().getBotName(), BotInfo.getInstance().getBotImage());
 	}
 }

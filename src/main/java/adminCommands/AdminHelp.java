@@ -4,14 +4,12 @@ import java.awt.Color;
 import java.io.File;
 import java.util.List;
 
-import command.Command;
 import lombok.SneakyThrows;
-import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 
-import management.BotInfo;
+import util.BotInfo;
 import org.javacord.api.entity.user.User;
 
 public class AdminHelp {
@@ -48,7 +46,7 @@ public class AdminHelp {
 				.setAuthor(user.getDiscriminatedName(), user.getAvatar().getUrl().toString(), user.getAvatar())
 				.addField("Attention", "Most of these are incorrect and being worked on")
 				.setColor(Color.MAGENTA)
-				.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
+				.setFooter(BotInfo.getInstance().getBotName(), BotInfo.getInstance().getBotImage())
 				.setTimestampToNow();
 
 		for (File f : folder.listFiles()) {

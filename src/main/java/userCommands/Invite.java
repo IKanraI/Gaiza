@@ -1,17 +1,12 @@
 package userCommands;
 
-import command.Command;
-import management.BotInfo;
+import util.BotInfo;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
-import org.javacord.api.DiscordApi;
 
-import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.event.interaction.SlashCommandCreateEvent;
 import org.javacord.api.interaction.SlashCommandInteraction;
 import org.javacord.api.listener.interaction.SlashCommandCreateListener;
-
-import java.io.Serializable;
 
 public class Invite implements SlashCommandCreateListener {
 	@Getter
@@ -26,7 +21,7 @@ public class Invite implements SlashCommandCreateListener {
 			return;
 
 		interaction.createImmediateResponder()
-				.setContent("Here is your invite : " + BotInfo.getBotInvite())
+				.setContent("Here is your invite : " + BotInfo.getInstance().getBotInvite())
 				.respond()
 				.exceptionally(e -> {
 					interaction.createImmediateResponder()

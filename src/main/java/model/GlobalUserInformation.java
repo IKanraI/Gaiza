@@ -11,15 +11,15 @@ import org.javacord.api.entity.server.Server;
 import org.javacord.api.entity.user.User;
 import org.json.simple.JSONObject;
 
-import management.BotInfo;
+import util.BotInfo;
 
 public class GlobalUserInformation extends Command {
-	public static String filePath = "/home/kanra/projects/data/userData/";
-//	public static String filePath = "C:\\Users\\joelm\\Documents\\JavaProjects\\Hidden\\userData\\";
+	public static String filePath;
 	private final String fineTag = "Fine Amount";
 	
 	public GlobalUserInformation(DiscordApi api) {
 		super(api);
+		filePath = BotInfo.getInstance().getValue("userDataPath");
 		getUsersList(api);
 		api.addServerMemberJoinListener(event ->
 				newUserJoins(event.getUser(), event.getServer()));
@@ -41,7 +41,7 @@ public class GlobalUserInformation extends Command {
 			}
 			users += s.getMemberCount();
 		}
-		BotInfo.setUserCount(users);
+		BotInfo.getInstance().setUserCount(users);
 	}
 
 	@SneakyThrows

@@ -5,11 +5,10 @@ import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import command.Command;
+import util.BotInfo;
 import model.InitDatabase;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
-import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.message.MessageAuthor;
@@ -20,7 +19,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import model.GlobalUserInformation;
-import management.*;
 
 public class UwuListener {
 	private static String key = "Fine Amount";
@@ -81,7 +79,7 @@ public class UwuListener {
 		return new EmbedBuilder()
 				.setTitle("Stop " + user.getName() + "! You have violated the law for the last time")
 				.setImage("https://b.catgirlsare.sexy/oWAgq-fc.png")
-				.setFooter(BotInfo.getBotName(), BotInfo.getBotImage())
+				.setFooter(BotInfo.getInstance().getBotName(), BotInfo.getInstance().getBotImage())
 				.setTimestampToNow()
 				.setColor(Color.MAGENTA);
 	}

@@ -1,5 +1,6 @@
 package model;
 
+import util.BotInfo;
 import model.common.Media;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -19,13 +20,13 @@ import java.util.List;
 
 public class SeriesTrackerInformation {
 
-    @Getter private static final String dbPath = "/home/kanra/projects/Gaiza/bin/Storage/Series/";
-//	@Getter private static final String dbPath = "C:\\Users\\joelm\\IdeaProjects\\Gaiza\\bin\\Storage\\Series\\";
-    @Getter private  List<Media> movies = new ArrayList<>();
+	@Getter private static String dbPath;
+    @Getter private List<Media> movies = new ArrayList<>();
     private final String fileName = "seriesTracker.json";
 
 
     public SeriesTrackerInformation() {
+        dbPath = BotInfo.getInstance().getValue("seriesTrackerPath");
         initializeTrackerFile();
     }
 

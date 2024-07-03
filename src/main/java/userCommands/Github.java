@@ -1,7 +1,7 @@
 package userCommands;
 
 import lombok.Getter;
-import management.BotInfo;
+import util.BotInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.javacord.api.event.interaction.SlashCommandCreateEvent;
 import org.javacord.api.interaction.SlashCommandInteraction;
@@ -20,7 +20,7 @@ public class Github implements SlashCommandCreateListener {
             return;
 
         interaction.createImmediateResponder()
-                .setContent("Here is the repo : " + BotInfo.getBotRepo())
+                .setContent("Here is the repo : " + BotInfo.getInstance().getBotRepo())
                 .respond()
                 .exceptionally(e -> {
                     interaction.createImmediateResponder()

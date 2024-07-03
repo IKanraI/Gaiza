@@ -14,6 +14,7 @@ import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.listener.message.MessageCreateListener;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import util.BotInfo;
 
 public class BoredResponse implements MessageCreateListener {
 
@@ -29,7 +30,7 @@ public class BoredResponse implements MessageCreateListener {
 			channel.sendMessage("Hi bored, I'm dad");
 			Thread.sleep(1000);
 
-			Object file = new JSONParser().parse(new FileReader("/home/kanra/projects/Gaiza/bin/Resource/boredPhrases.json"));
+			Object file = new JSONParser().parse(new FileReader(BotInfo.getInstance().getValue("boredPhrases")));
 
 			JSONObject obj = (JSONObject) file;
 
