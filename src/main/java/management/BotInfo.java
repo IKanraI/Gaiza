@@ -37,10 +37,10 @@ public class BotInfo {
 		serverCount = api.getServers().size();
 		zaraiUserId = "422153253170708490";
 
-//		botActivity = Files.readAllLines(Paths.get("/home/kanra/projects/data/botActivity")).get(0);
-//		tenorApiKey = Files.readAllLines(Paths.get("/home/kanra/projects/data/tenor")).get(0);
+		botActivity = Files.readAllLines(Paths.get("/home/kanra/projects/data/botActivity")).get(0);
+		tenorApiKey = Files.readAllLines(Paths.get("/home/kanra/projects/data/tenor")).get(0);
 
-		tenorApiKey = Files.readAllLines(Paths.get("C:\\Users\\joelm\\Documents\\JavaProjects\\Hidden\\tenor.txt")).get(0);
-		botActivity = Files.readAllLines(Paths.get("C:\\Users\\joelm\\Documents\\JavaProjects\\Hidden\\botActivity.txt")).get(0);
+//		tenorApiKey = Files.readAllLines(Paths.get("C:\\Users\\joelm\\Documents\\JavaProjects\\Hidden\\tenor.txt")).get(0);
+//		botActivity = Files.readAllLines(Paths.get("C:\\Users\\joelm\\Documents\\JavaProjects\\Hidden\\botActivity.txt")).get(0);
 	}
 }

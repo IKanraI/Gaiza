@@ -19,8 +19,8 @@ import java.util.List;
 
 public class SeriesTrackerInformation {
 
-//    @Getter private static final String dbPath = "/home/kanra/projects/Gaiza/bin/Storage/Series/";
-	@Getter private static final String dbPath = "C:\\Users\\joelm\\IdeaProjects\\Gaiza\\bin\\Storage\\Series\\";
+    @Getter private static final String dbPath = "/home/kanra/projects/Gaiza/bin/Storage/Series/";
+//	@Getter private static final String dbPath = "C:\\Users\\joelm\\IdeaProjects\\Gaiza\\bin\\Storage\\Series\\";
     @Getter private  List<Media> movies = new ArrayList<>();
     private final String fileName = "seriesTracker.json";
 

@@ -9,10 +9,12 @@ import model.InitDatabase;
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.server.Server;
+import org.javacord.api.event.interaction.SlashCommandCreateEvent;
+import org.javacord.api.listener.interaction.SlashCommandCreateListener;
 
 import java.util.List;
 
-public class Welcome {
+public class Welcome implements SlashCommandCreateListener {
 	@Getter public static String help = "Welcome module. Make sure to set the channel and message before enabling the module. Use [prefix] welcome message|channel|enable|disable to modify the module If you want to mention a user please use <<mention>>";
 	
 
@@ -99,6 +101,11 @@ public class Welcome {
 		}
 
 		InitDatabase.saveDatabase();
+	}
+
+	@Override
+	public void onSlashCommandCreate(SlashCommandCreateEvent event) {
+
 	}
 }
 

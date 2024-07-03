@@ -1,13 +1,13 @@
 listener/BoredResponse.java
  listener.BoredResponse
-adminCommands/Prefix.java
- adminCommands.Prefix
+fixThese/Series.java
+ fixThese.Series
 util/GaizaUtil.java
  util.GaizaUtil
 model/common/Servers.java
  model.common.Servers
-fixThese/Fines.java
- fixThese.Fines
+fixThese/Disconnect.java
+ fixThese.Disconnect
 management/UserFineObject.java
  management.UserFineObject
 model/common/Media.java
@@ -16,77 +16,77 @@ exception/BadInputException.java
  exception.BadInputException
 listener/MarcoPolo.java
  listener.MarcoPolo
-management/Token.java
- management.Token
+userCommands/Support.java
+ userCommands.Support
 userCommands/Report.java
  userCommands.Report
-adminCommands/Uwu.java
- adminCommands.Uwu
+model/common/Series.java
+ model.common.Series
 listener/MicrowaveResponse.java
  listener.MicrowaveResponse
-model/SeriesTrackerInformation.java
- model.SeriesTrackerInformation
- model.SeriesTrackerInformation$1
+userCommands/Ping.java
+ userCommands.Ping
 fixThese/Birthday.java
  fixThese.Birthday
 userCommands/Roll.java
  userCommands.Roll
-adminCommands/Welcome.java
- adminCommands.Welcome
 management/AudioPlayerSource.java
  management.AudioPlayerSource
-fixThese/Disconnect.java
- fixThese.Disconnect
-userCommands/Ping.java
- userCommands.Ping
-userCommands/Support.java
- userCommands.Support
-model/common/Series.java
- model.common.Series
-fixThese/Series.java
- fixThese.Series
 fixThese/MentionKanra.java
  fixThese.MentionKanra
-fixThese/Ranks.java
- fixThese.Ranks
 management/Tenor.java
  management.Tenor
-model/GlobalUserInformation.java
- model.GlobalUserInformation
-fixThese/Help.java
- fixThese.Help
+adminCommands/Prefix.java
+ adminCommands.Prefix
 userCommands/Avatar.java
  userCommands.Avatar
-userCommands/Gif.java
- userCommands.Gif
 listener/CountingEnforcement.java
  listener.CountingEnforcement
-listener/Yare.java
- listener.Yare
-userCommands/Invite.java
- userCommands.Invite
 adminCommands/AdminHelp.java
  adminCommands.AdminHelp
 management/BotInfo.java
  management.BotInfo
-userCommands/UserMentions.java
- userCommands.UserMentions
-model/InitDatabase.java
- model.InitDatabase
+management/Token.java
+ management.Token
 listener/Dio.java
  listener.Dio
-userCommands/Define.java
- userCommands.Define
 fixThese/Movie.java
  fixThese.Movie
+model/SeriesTrackerInformation.java
+ model.SeriesTrackerInformation
+ model.SeriesTrackerInformation$1
 command/Command.java
  command.Command
-fixThese/Sound.java
- fixThese.Sound
- fixThese.Sound$1
 fixThese/UwuListener.java
  fixThese.UwuListener
 GaizaMain.java
  GaizaMain
+adminCommands/Welcome.java
+ adminCommands.Welcome
+fixThese/Fines.java
+ fixThese.Fines
+fixThese/Ranks.java
+ fixThese.Ranks
+model/GlobalUserInformation.java
+ model.GlobalUserInformation
+fixThese/Help.java
+ fixThese.Help
+adminCommands/Uwu.java
+ adminCommands.Uwu
+userCommands/Gif.java
+ userCommands.Gif
+listener/Yare.java
+ listener.Yare
+userCommands/Invite.java
+ userCommands.Invite
+userCommands/UserMentions.java
+ userCommands.UserMentions
+model/InitDatabase.java
+ model.InitDatabase
+userCommands/Define.java
+ userCommands.Define
+fixThese/Sound.java
+ fixThese.Sound
+ fixThese.Sound$1
 userCommands/Github.java
  userCommands.Github

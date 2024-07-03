@@ -52,10 +52,6 @@ public class UserMentions implements SlashCommandCreateListener {
                 stareMentionedUser(interaction);
                 break;
             default:
-                interaction.createImmediateResponder()
-                        .setFlags(MessageFlag.EPHEMERAL)
-                        .setContent("How did you end up here? Stay a while won't you?")
-                        .respond();
         }
     }
 

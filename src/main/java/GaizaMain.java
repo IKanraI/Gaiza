@@ -12,10 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 import org.javacord.api.entity.intent.Intent;
-import org.javacord.api.interaction.SlashCommand;
-import org.javacord.api.interaction.SlashCommandOption;
-import org.javacord.api.interaction.SlashCommandOptionBuilder;
-import org.javacord.api.interaction.SlashCommandOptionType;
+import org.javacord.api.interaction.*;
 import org.javacord.api.listener.interaction.SlashCommandCreateListener;
 import org.javacord.api.listener.message.MessageCreateListener;
 
@@ -39,18 +36,20 @@ public class GaizaMain {
         api.updateActivity(BotInfo.getBotActivity());
 
         createSlashCommands(api);
+        createAdminSlashCommands(api);
+        Set<SlashCommand> slashCommands = api.getGlobalSlashCommands().join();
 
         System.out.println("\n\nManagement files loaded!");
         System.out.println("--------------------------------\n");
 
         Map<String, File> commands = new HashMap<>();
-//		commands.put("UserCommands", new File("/home/kanra/projects/Gaiza/src/main/java/UserCommands"));
+		commands.put("userCommands", new File("/home/kanra/projects/Gaiza/src/main/java/UserCommands"));
 //		commands.put("AdminCommands", new File("/home/kanra/projects/Gaiza/src/main/java/AdminCommands"));
-//		commands.put("Listener", new File("/home/kanra/projects/Gaiza/src/main/java/Listener"));
+		commands.put("listener", new File("/home/kanra/projects/Gaiza/src/main/java/Listener"));
 
-        commands.put("userCommands", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\UserCommands"));
+//        commands.put("userCommands", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\UserCommands"));
 //        commands.put("adminCommands", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\AdminCommands"));
-        commands.put("listener", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\Listener"));
+//        commands.put("listener", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\Listener"));
 //        commands.put("userMentions", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\UserMentions"));
 
 
@@ -70,6 +69,50 @@ public class GaizaMain {
         }
     }
 
+    private static void createAdminSlashCommands(DiscordApi api) {
+//        SlashCommand welcome = SlashCommand.with("welcome", "Welcome channel management",
+//                Arrays.asList(
+//                        SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND_GROUP,"enable", "Enable or disable the welcome module for the server",
+//                                Arrays.asList(
+//                                        SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND, "active", "Active the welcome module for the bot",
+//                                                Arrays.asList(
+//                                                        SlashCommandOption.createWithChoices(SlashCommandOptionType.DECIMAL, "permission", "The permission to enable or disable the module", true,
+//                                                                Arrays.asList(
+//                                                                        SlashCommandOptionChoice.create("disable", 0),
+//                                                                        SlashCommandOptionChoice.create("enable", 1)))
+//
+//
+//                                )))),
+//                        SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND_GROUP, "message", "Add or modify the welcome message for the server",
+//                                Arrays.asList(
+//                                        SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND, "set", "Set the welcome message of the server",
+//                                                Arrays.asList(
+//                                                        SlashCommandOption.create(SlashCommandOptionType.STRING, "text", "Add welcome message text. Use <<mention>> to mention the new member", true))),
+//                                        SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND, "get", "Show the welcome message of the server")
+//                                )),
+//                        SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND_GROUP, "info", "Check the information of the welcome module",
+//                                Arrays.asList(
+//                                        SlashCommandOption.create(SlashCommandOptionType.SUB_COMMAND, "show", "Gets all the information for the welcome message module")
+//                                )),
+//                        SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND_GROUP, "channel", "Add or modify the welcome message channel",
+//                                Arrays.asList(
+//                                        SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND, "set", "Set the welcome channel of the server",
+//                                                Arrays.asList(
+//                                                        SlashCommandOption.create(SlashCommandOptionType.CHANNEL, "name", "Send the channel name", true)
+//                                                )),
+//                                        SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND, "show", "Show the channel for welcome messages")
+//                                )),
+//                        SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND, "embedded", "Choose whether to embed the welcome message or not",
+//                                Arrays.asList(
+//                                SlashCommandOption.createWithChoices(SlashCommandOptionType.DECIMAL, "enabled", "Change the status of the welcome message embed", true,
+//                                        Arrays.asList(
+//                                                SlashCommandOptionChoice.create("disable", 0),
+//                                                SlashCommandOptionChoice.create("enable", 1)))
+//                                        ))))
+//                .createGlobal(api)
+//                .join();
+    }
+
     private static void createSlashCommands(DiscordApi api) {
 //        SlashCommand avatar = SlashCommand.with("avatar", "Return image of mentioned users avatar",
 //                        Collections.singletonList(SlashCommandOption.create(SlashCommandOptionType.USER, "user", "Image of user avatar you would like to see", false))
@@ -78,7 +121,6 @@ public class GaizaMain {
 //                .createGlobal(api)
 //                .join();
 //
-        Set<SlashCommand> commands = api.getGlobalSlashCommands().join();
 //
 //        SlashCommand define = SlashCommand.with("define", "Return urban dictionary definition",
 //                        Collections.singletonList(SlashCommandOption.create(SlashCommandOptionType.STRING, "term", "Term you would like to search in urban dictionary", true))

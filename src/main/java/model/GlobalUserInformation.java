@@ -14,8 +14,8 @@ import org.json.simple.JSONObject;
 import management.BotInfo;
 
 public class GlobalUserInformation extends Command {
-//	public static String filePath = "/home/kanra/projects/data/userData/";
-	public static String filePath = "C:\\Users\\joelm\\Documents\\JavaProjects\\Hidden\\userData\\";
+	public static String filePath = "/home/kanra/projects/data/userData/";
+//	public static String filePath = "C:\\Users\\joelm\\Documents\\JavaProjects\\Hidden\\userData\\";
 	private final String fineTag = "Fine Amount";
 	
 	public GlobalUserInformation(DiscordApi api) {
