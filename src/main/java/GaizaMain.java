@@ -43,9 +43,9 @@ public class GaizaMain {
         System.out.println("--------------------------------\n");
 
         Map<String, File> commands = new HashMap<>();
-		commands.put("userCommands", new File("/home/kanra/projects/Gaiza/src/main/java/UserCommands"));
+		commands.put("userCommands", new File("/home/kanra/projects/Gaiza/src/main/java/userCommands"));
 //		commands.put("AdminCommands", new File("/home/kanra/projects/Gaiza/src/main/java/AdminCommands"));
-		commands.put("listener", new File("/home/kanra/projects/Gaiza/src/main/java/Listener"));
+		commands.put("listener", new File("/home/kanra/projects/Gaiza/src/main/java/listener"));
 
 //        commands.put("userCommands", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\UserCommands"));
 //        commands.put("adminCommands", new File("C:\\Users\\joelm\\IdeaProjects\\Gaiza\\src\\main\\java\\AdminCommands"));

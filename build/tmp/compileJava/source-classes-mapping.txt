@@ -59,8 +59,8 @@ command/Command.java
  command.Command
 fixThese/UwuListener.java
  fixThese.UwuListener
-GaizaMain.java
- GaizaMain
+userCommands/Github.java
+ userCommands.Github
 adminCommands/Welcome.java
  adminCommands.Welcome
 fixThese/Fines.java
@@ -88,5 +88,5 @@ userCommands/Define.java
 fixThese/Sound.java
  fixThese.Sound
  fixThese.Sound$1
-userCommands/Github.java
- userCommands.Github
+GaizaMain.java
+ GaizaMain

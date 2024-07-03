@@ -55,6 +55,6 @@ dependencies {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'Gaiza.Library'
+        attributes 'Main-Class': 'GaizaMain'
     }
 }
