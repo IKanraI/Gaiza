@@ -69,8 +69,8 @@ fixThese/Disconnect.java
  fixThese.Disconnect
 userCommands/Invite.java
  userCommands.Invite
-userCommands/UserMentions.java
- userCommands.UserMentions
+userCommands/Define.java
+ userCommands.Define
 model/InitDatabase.java
  model.InitDatabase
 listener/MicrowaveResponse.java
@@ -83,5 +83,5 @@ listener/BoredResponse.java
  listener.BoredResponse
 listener/MarcoPolo.java
  listener.MarcoPolo
-userCommands/Define.java
- userCommands.Define
+userCommands/UserMentions.java
+ userCommands.UserMentions

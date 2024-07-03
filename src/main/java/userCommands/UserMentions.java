@@ -63,7 +63,7 @@ public class UserMentions implements SlashCommandCreateListener {
         else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getInstance().getBotId()))
             message = ":eyes:";
         else
-            message = user.getName() + " you are being stared at by " + interaction.getUser().getName();
+            message = user.getMentionTag() + " you are being stared at by " + interaction.getUser().getName();
 
         respondToInteraction(interaction, "stare", message);
     }
@@ -77,7 +77,7 @@ public class UserMentions implements SlashCommandCreateListener {
         else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getInstance().getBotId()))
             message = "Oh you want to snuggle me? Thank you so much <3";
         else
-            message = user.getName() + " you are being cuddled by " + interaction.getUser().getName();
+            message = user.getMentionTag() + " you are being cuddled by " + interaction.getUser().getName();
 
         respondToInteraction(interaction, "cuddle", message);
     }
@@ -91,7 +91,7 @@ public class UserMentions implements SlashCommandCreateListener {
         else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getInstance().getBotId()))
             message = "What... did you... do?";
         else
-            message = user.getName() + " you are being looked at smugly by " + interaction.getUser().getName();
+            message = user.getMentionTag() + " you are being looked at smugly by " + interaction.getUser().getName();
 
         respondToInteraction(interaction, "smug", message);
     }
@@ -108,7 +108,7 @@ public class UserMentions implements SlashCommandCreateListener {
                     .respond();
             return;
         } else
-            message = user.getName() + " you have been slapped by " + interaction.getUser().getName();
+            message = user.getMentionTag() + " you have been slapped by " + interaction.getUser().getName();
 
         respondToInteraction(interaction, "slap", message);
     }
@@ -122,7 +122,7 @@ public class UserMentions implements SlashCommandCreateListener {
         else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getInstance().getBotId()))
             message = "Hello :) How may I help you?";
         else
-            message = user.getName() + " you have been poked by " + interaction.getUser().getName();
+            message = user.getMentionTag() + " you have been poked by " + interaction.getUser().getName();
 
         respondToInteraction(interaction, "poke", message);
     }
@@ -136,7 +136,7 @@ public class UserMentions implements SlashCommandCreateListener {
         else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getInstance().getBotId()))
             message = "Nya!";
         else
-            message = user.getName() + " you have been meowed at by " + interaction.getUser().getName();
+            message = user.getMentionTag() + " you have been meowed at by " + interaction.getUser().getName();
 
         respondToInteraction(interaction, "meow", message);
     }
@@ -150,7 +150,7 @@ public class UserMentions implements SlashCommandCreateListener {
         else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getInstance().getBotId()))
             message = ":( why are you laughing at me? I.. I'm sorry :(";
         else
-            message = user.getName() + " you have been mocked by " + interaction.getUser().getName();
+            message = user.getMentionTag() + " you have been mocked by " + interaction.getUser().getName();
 
         respondToInteraction(interaction, "laugh", message);
     }
@@ -164,7 +164,7 @@ public class UserMentions implements SlashCommandCreateListener {
         else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getInstance().getBotId()))
             message = "Oh you want to give me a kiss? Thank you so much <3";
         else
-            message = user.getName() + " you have been kissed by " + interaction.getUser().getName();
+            message = user.getMentionTag() + " you have been kissed by " + interaction.getUser().getName();
 
         respondToInteraction(interaction, "kiss", message);
     }
@@ -178,7 +178,7 @@ public class UserMentions implements SlashCommandCreateListener {
         else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getInstance().getBotId()))
             message = "Oh you want to give me a hug? Thank you so much <3";
         else
-            message = user.getName() + " you have been hugged by " + interaction.getUser().getName();
+            message = user.getMentionTag() + " you have been hugged by " + interaction.getUser().getName();
 
         respondToInteraction(interaction, "hug", message);
     }
@@ -192,7 +192,7 @@ public class UserMentions implements SlashCommandCreateListener {
         else if (StringUtils.equalsIgnoreCase(user.getIdAsString(), BotInfo.getInstance().getBotId()))
             message = "Oh you want to give me a headpat? Thank you so much <3";
         else
-            message = user.getName() + " you have been patted by " + interaction.getUser().getName();
+            message = user.getMentionTag() + " you have been patted by " + interaction.getUser().getName();
 
         respondToInteraction(interaction, "pat", message);
     }
@@ -212,7 +212,7 @@ public class UserMentions implements SlashCommandCreateListener {
     private void respondToInteraction(SlashCommandInteraction interaction, String term, String message) {
         interaction.createImmediateResponder()
                 .setContent(message)
-                .addEmbed(buildEmbed(Gif.searchGif("Anime-" + term), message))
+                .addEmbed(buildEmbed(Gif.searchGif("Anime-" + term)))
                 .respond()
                 .exceptionally(e -> {
                     interaction.createImmediateResponder()
@@ -223,9 +223,8 @@ public class UserMentions implements SlashCommandCreateListener {
                 });
     }
 
-    public static EmbedBuilder buildEmbed(String gif, String message) {
+    public static EmbedBuilder buildEmbed(String gif) {
         return new EmbedBuilder()
-                .setTitle(message)
                 .setImage(gif)
                 .setFooter(BotInfo.getInstance().getBotName(), BotInfo.getInstance().getBotImage())
                 .setColor(Color.MAGENTA)
