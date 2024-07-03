@@ -3,7 +3,6 @@ package userCommands;
 import management.BotInfo;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.javacord.api.entity.message.MessageFlag;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.entity.user.User;
 import org.javacord.api.event.interaction.SlashCommandCreateEvent;
@@ -66,16 +65,7 @@ public class UserMentions implements SlashCommandCreateListener {
         else
             message = user.getName() + " you are being stared at by " + interaction.getUser().getName();
 
-        interaction.createImmediateResponder()
-                .addEmbed(buildEmbed(Gif.searchGif("Anime-stare"), message))
-                .respond()
-                .exceptionally(e -> {
-                    interaction.createImmediateResponder()
-                            .setContent("Algo anda mal")
-                            .respond();
-
-                    return null;
-                });
+        respondToInteraction(interaction, "stare", message);
     }
 
     private void cuddleMentionedUser(SlashCommandInteraction interaction) {
@@ -89,16 +79,7 @@ public class UserMentions implements SlashCommandCreateListener {
         else
             message = user.getName() + " you are being cuddled by " + interaction.getUser().getName();
 
-        interaction.createImmediateResponder()
-                .addEmbed(buildEmbed(Gif.searchGif("Anime-cuddle"), message))
-                .respond()
-                .exceptionally(e -> {
-                    interaction.createImmediateResponder()
-                            .setContent("Algo anda mal")
-                            .respond();
-
-                    return null;
-                });
+        respondToInteraction(interaction, "cuddle", message);
     }
 
     private void smugMentionedUser(SlashCommandInteraction interaction) {
@@ -112,16 +93,7 @@ public class UserMentions implements SlashCommandCreateListener {
         else
             message = user.getName() + " you are being looked at smugly by " + interaction.getUser().getName();
 
-        interaction.createImmediateResponder()
-                .addEmbed(buildEmbed(Gif.searchGif("Anime-smug"), message))
-                .respond()
-                .exceptionally(e -> {
-                    interaction.createImmediateResponder()
-                            .setContent("Algo anda mal")
-                            .respond();
-
-                    return null;
-                });
+        respondToInteraction(interaction, "smug", message);
     }
 
     private void slapMentionedUser(SlashCommandInteraction interaction) {
@@ -138,16 +110,7 @@ public class UserMentions implements SlashCommandCreateListener {
         } else
             message = user.getName() + " you have been slapped by " + interaction.getUser().getName();
 
-        interaction.createImmediateResponder()
-                .addEmbed(buildEmbed(Gif.searchGif("Anime-slap"), message))
-                .respond()
-                .exceptionally(e -> {
-                    interaction.createImmediateResponder()
-                            .setContent("Algo anda mal")
-                            .respond();
-
-                    return null;
-                });
+        respondToInteraction(interaction, "slap", message);
     }
 
     private void pokeMentionedUser(SlashCommandInteraction interaction) {
@@ -161,16 +124,7 @@ public class UserMentions implements SlashCommandCreateListener {
         else
             message = user.getName() + " you have been poked by " + interaction.getUser().getName();
 
-        interaction.createImmediateResponder()
-                .addEmbed(buildEmbed(Gif.searchGif("Anime-poke"), message))
-                .respond()
-                .exceptionally(e -> {
-                    interaction.createImmediateResponder()
-                            .setContent("Algo anda mal")
-                            .respond();
-
-                    return null;
-                });
+        respondToInteraction(interaction, "poke", message);
     }
 
     private void meowMentionedUser(SlashCommandInteraction interaction) {
@@ -184,16 +138,7 @@ public class UserMentions implements SlashCommandCreateListener {
         else
             message = user.getName() + " you have been meowed at by " + interaction.getUser().getName();
 
-        interaction.createImmediateResponder()
-                .addEmbed(buildEmbed(Gif.searchGif("Anime-meow"), message))
-                .respond()
-                .exceptionally(e -> {
-                    interaction.createImmediateResponder()
-                            .setContent("Algo anda mal")
-                            .respond();
-
-                    return null;
-                });
+        respondToInteraction(interaction, "meow", message);
     }
 
     private void laughMentionedUser(SlashCommandInteraction interaction) {
@@ -207,16 +152,7 @@ public class UserMentions implements SlashCommandCreateListener {
         else
             message = user.getName() + " you have been mocked by " + interaction.getUser().getName();
 
-        interaction.createImmediateResponder()
-                .addEmbed(buildEmbed(Gif.searchGif("Anime-laugh"), message))
-                .respond()
-                .exceptionally(e -> {
-                    interaction.createImmediateResponder()
-                            .setContent("Algo anda mal")
-                            .respond();
-
-                    return null;
-                });
+        respondToInteraction(interaction, "laugh", message);
     }
 
     private void kissMentionedUser(SlashCommandInteraction interaction) {
@@ -230,16 +166,7 @@ public class UserMentions implements SlashCommandCreateListener {
         else
             message = user.getName() + " you have been kissed by " + interaction.getUser().getName();
 
-        interaction.createImmediateResponder()
-                .addEmbed(buildEmbed(Gif.searchGif("Anime-kiss"), message))
-                .respond()
-                .exceptionally(e -> {
-                    interaction.createImmediateResponder()
-                            .setContent("Algo anda mal")
-                            .respond();
-
-                    return null;
-                });
+        respondToInteraction(interaction, "kiss", message);
     }
 
     private void hugMentionedUser(SlashCommandInteraction interaction) {
@@ -253,16 +180,7 @@ public class UserMentions implements SlashCommandCreateListener {
         else
             message = user.getName() + " you have been hugged by " + interaction.getUser().getName();
 
-        interaction.createImmediateResponder()
-                .addEmbed(buildEmbed(Gif.searchGif("Anime-hug"), message))
-                .respond()
-                .exceptionally(e -> {
-                    interaction.createImmediateResponder()
-                            .setContent("Algo anda mal")
-                            .respond();
-
-                    return null;
-                });
+        respondToInteraction(interaction, "hug", message);
     }
 
     private void patMentionedUser(SlashCommandInteraction interaction) {
@@ -276,16 +194,7 @@ public class UserMentions implements SlashCommandCreateListener {
         else
             message = user.getName() + " you have been patted by " + interaction.getUser().getName();
 
-        interaction.createImmediateResponder()
-                .addEmbed(buildEmbed(Gif.searchGif("Anime-pat"), message))
-                .respond()
-                .exceptionally(e -> {
-                    interaction.createImmediateResponder()
-                            .setContent("Algo anda mal")
-                            .respond();
-
-                    return null;
-                });
+        respondToInteraction(interaction, "pat", message);
     }
 
     private User checkForMentionedUser(SlashCommandInteraction interaction) {
@@ -298,6 +207,20 @@ public class UserMentions implements SlashCommandCreateListener {
         }
 
         return user;
+    }
+
+    private void respondToInteraction(SlashCommandInteraction interaction, String term, String message) {
+        interaction.createImmediateResponder()
+                .setContent(message)
+                .addEmbed(buildEmbed(Gif.searchGif("Anime-" + term), message))
+                .respond()
+                .exceptionally(e -> {
+                    interaction.createImmediateResponder()
+                            .setContent("Algo anda mal")
+                            .respond();
+
+                    return null;
+                });
     }
 
     public static EmbedBuilder buildEmbed(String gif, String message) {

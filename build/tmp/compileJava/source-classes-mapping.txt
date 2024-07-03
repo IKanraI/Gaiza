@@ -79,8 +79,8 @@ listener/Yare.java
  listener.Yare
 userCommands/Invite.java
  userCommands.Invite
-userCommands/UserMentions.java
- userCommands.UserMentions
+GaizaMain.java
+ GaizaMain
 model/InitDatabase.java
  model.InitDatabase
 userCommands/Define.java
@@ -88,5 +88,5 @@ userCommands/Define.java
 fixThese/Sound.java
  fixThese.Sound
  fixThese.Sound$1
-GaizaMain.java
- GaizaMain
+userCommands/UserMentions.java
+ userCommands.UserMentions
